@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import Divider from "@mui/material/Divider";
+import ResortHeader from "./components/ResortHeader";
+import ResortDetails from "./components/ResortDetails";
+import ResortPicturesInfo from "./components/ResortPicturesInfo";
+import ResortMoreToDo from "./components/ResortMoreToDo";
 
 const DUMMY_RESORT = {
   name: "resort name",
   description:
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, consequatur rem amet perferendis fuga nobis dignissimos minima voluptatem doloremque maxime.",
+  exstraDetails:
+    " Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptatibus iusto, soluta libero maiores ipsa consequuntur asperiores deserunt perferendis eum explicabo, laborum culpa voluptas. Libero placeat ratione repellendus accusamus ipsam.",
   liveCam:
     "https://www.skylinewebcams.com/en/webcam/italia/veneto/belluno/cortina-d-ampezzo.html",
   location: "google location",
+  pictures: [
+    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
+    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
+    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
+  ],
   city: "resort city",
   country: "resort country",
   price: "3",
@@ -57,37 +70,18 @@ const ResortPage = () => {
   }, []);
 
   return (
-    <main className="flex flex-col w-full h-full px-12">
+    <main className="flex flex-col gap-10 w-full h-full px-12">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
-          <div className="flex justify-between">
-            <div className="flex flex-col">
-              <header>{resortData?.name}</header>
-              <p>{resortData?.description}</p>
-            </div>
-            <iframe
-              src={resortData.liveCam}
-              frameborder="0"
-              alt="iframe"
-            ></iframe>
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <span>KM of Tracks {resortData.kmOfTracks}</span>
-            <span>Green Tracks {resortData.greenTrack}</span>
-            <span>blue Tracks {resortData.blueTrack}</span>
-            <span>Red Tracks {resortData.redTrack}</span>
-            <span>Black Tracks {resortData.blackTrack}</span>
-            <span>Black2X Tracks {resortData.blackTrack2X}</span>
-            <span>Solo Tracks {resortData.soloTrack}</span>
-            <span>Site Height {resortData.siteHiegt}</span>
-            <span>Beginner Friendly {resortData.beginnerFriendly}</span>
-            <span>Lift Waiting Time {resortData.liftWaitingTime}</span>
-            <span>Artificial Snow{resortData.artificialSnow}</span>
-            <span>Off Season{resortData.offSeason}</span>
-            <span>Hiking Tracks{resortData.hikingTracks}</span>
-          </div>
+          <ResortHeader resortData={resortData} />
+          <Divider />
+          <ResortDetails resortData={resortData} />
+          <Divider />
+          <ResortPicturesInfo resortData={resortData} />
+          <Divider />
+          <ResortMoreToDo resortData={resortData} />
         </>
       )}
     </main>

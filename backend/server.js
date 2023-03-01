@@ -13,9 +13,9 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/", queryRouter);
-app.use("/resort", resortRouter);
-app.use("/user", userRouter);
+app.use("/api/", queryRouter);
+app.use("/api/resort", resortRouter);
+app.use("/api/user", userRouter);
 
 app.listen(PORT, () => {
   console.log("listening on port", PORT);
