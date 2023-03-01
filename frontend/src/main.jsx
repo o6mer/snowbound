@@ -11,7 +11,6 @@ import ResortPage from "./resort/ResortPage";
 import AdminPage from "./admin/AdminPage";
 import LoginPage from "./userAuth/LoginPage";
 import SignupPage from "./userAuth/SignupPage";
-
 const router = createBrowserRouter([
   {
     path: "/",
