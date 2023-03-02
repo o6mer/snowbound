@@ -13,7 +13,7 @@ function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <NavLink to="/" className="text-blue-600 font-large">
+                <NavLink to="/HomePage" className="text-blue-600 font-large">
                   SnowBound
                   <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
                 </NavLink>

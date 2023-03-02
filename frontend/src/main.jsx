@@ -11,6 +11,7 @@ import ResortPage from "./resort/ResortPage";
 import AdminPage from "./admin/AdminPage";
 import LoginPage from "./userAuth/LoginPage";
 import SignupPage from "./userAuth/SignupPage";
+import HomePage from "./home/HomePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/HomePage",
+    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
 ]);
