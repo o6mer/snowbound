@@ -5,6 +5,7 @@ import SearchModel from "../general/SearchModel";
 import CompareTable from "./components/CompareTable";
 import CompareFilter from "./components/CompareFilter";
 import Footer from "../general/Footer";
+import Navbar from "../general/Navbar";
 
 const ComparePage = () => {
   const DUMMY_RESORT = [
@@ -111,30 +112,24 @@ const ComparePage = () => {
   // }, []);
 
   const getFilterResorts = (filterKeys) => {
-    //   axios
-    //     .post(`http://localhost:8000/api/compare`, filterKeys)
-    //     .then((res) => {
-    //       setCompareData([]);
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // };
+    if (!filterKeys.length) {
+      setCompareData(DUMMY_RESORT);
+    } else {
+      const temp = DUMMY_RESORT.map((resort) => {
+        const entries = Object.entries(resort);
+        const obj = {};
 
-    const temp = DUMMY_RESORT.map((resort) => {
-      const entries = Object.entries(resort);
-      const obj = {};
-
-      entries.forEach((entry) => {
-        const [key, value] = entry;
-        if (filterKeys.find((filter) => filter === key)) obj[key] = value;
+        obj.name = resort.name;
+        entries.forEach((entry) => {
+          const [key, value] = entry;
+          if (filterKeys.find((filter) => filter === key)) obj[key] = value;
+        });
+        return obj;
       });
 
-      return obj;
-    });
-    console.log(temp);
-    setCompareData(temp);
+      console.log(temp);
+      setCompareData(temp);
+    }
   };
   const resetFilterResorts = () => {
     //full array
@@ -142,16 +137,19 @@ const ComparePage = () => {
   };
 
   return (
-    <div className="px-[10vw]">
-      <SearchModel />
-      <CompareFilter
-        DUMMY_RESORT={DUMMY_RESORT}
-        getFilterResorts={getFilterResorts}
-        resetFilterResorts={resetFilterResorts}
-      />
-      <CompareTable DUMMY_RESORT={compareData} />
-      <Footer />
-    </div>
+    <>
+      <Navbar />
+      <div className="px-[10vw]">
+        <SearchModel />
+        <CompareFilter
+          DUMMY_RESORT={DUMMY_RESORT}
+          getFilterResorts={getFilterResorts}
+          resetFilterResorts={resetFilterResorts}
+        />
+        <CompareTable DUMMY_RESORT={compareData} />
+        <Footer />
+      </div>
+    </>
   );
 };
 
