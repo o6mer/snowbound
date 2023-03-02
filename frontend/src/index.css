@@ -9,9 +9,8 @@
 }
 /* width */
 ::-webkit-scrollbar {
-      width: 44px;
-      border-radius: 10px;
-         
+  width: 44px;
+  background-color: rgb(31 41 55);
 }
 
 /* Track */
@@ -21,8 +20,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-image: url('./assets/snowboard.png');
+  background-image: url("./assets/snowboard.png");
   background-repeat: no-repeat;
   background-position: 35% 5%;
 }
-

@@ -7,6 +7,7 @@ import ResortHeader from "./components/ResortHeader";
 import ResortDetails from "./components/ResortDetails";
 import ResortPicturesInfo from "./components/ResortPicturesInfo";
 import ResortMoreToDo from "./components/ResortMoreToDo";
+import Navbar from "../general/Navbar";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -70,21 +71,24 @@ const ResortPage = () => {
   }, []);
 
   return (
-    <main className="flex flex-col gap-10 w-full h-full px-12">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <ResortHeader resortData={resortData} />
-          <Divider />
-          <ResortDetails resortData={resortData} />
-          <Divider />
-          <ResortPicturesInfo resortData={resortData} />
-          <Divider />
-          <ResortMoreToDo resortData={resortData} />
-        </>
-      )}
-    </main>
+    <>
+      <Navbar />
+      <main className="flex flex-col gap-10 w-full h-full px-12">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <ResortHeader resortData={resortData} />
+            <Divider />
+            <ResortDetails resortData={resortData} />
+            <Divider />
+            <ResortPicturesInfo resortData={resortData} />
+            <Divider />
+            <ResortMoreToDo resortData={resortData} />
+          </>
+        )}
+      </main>
+    </>
   );
 };
 
