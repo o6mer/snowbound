@@ -7,6 +7,9 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { IconButton } from "@mui/material";
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -67,7 +70,7 @@ const CompareFilter = ({
           ))}
         </Select>
       </FormControl>
-      <button
+      {/* <button
         className="bg-blue-500 p-1 rounded-sm "
         onClick={() => getFilterResorts(filterKeys)}
       >
@@ -80,8 +83,25 @@ const CompareFilter = ({
           setFilterKeys([]);
         }}
       >
-        Reset
-      </button>
+        <RestartAltIcon />
+      </button> */}
+      <IconButton
+        color="danger"
+        aria-label="add an alarm"
+        onClick={() => getFilterResorts(filterKeys)}
+      >
+        <TuneOutlinedIcon />
+      </IconButton>
+      <IconButton
+        color="danger"
+        aria-label="add an alarm"
+        onClick={() => {
+          resetFilterResorts();
+          setFilterKeys([]);
+        }}
+      >
+        <RestartAltIcon />
+      </IconButton>
       <div className=" flex ml-auto gap-3 ">
         {filterKeys.map((key, index) => (
           <div key={index} className="text-sm bg-gray-200 p-1 rounded-lg">
