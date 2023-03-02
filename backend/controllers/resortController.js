@@ -86,39 +86,21 @@ const createResort = (req, res) => {
     res.status(404).json({ message: err.message });
   }
 }
-// const updateResort = (req, res) => {
-//   console.log("this is:", req.body.name)
-//   const resort = req.body.values;
-//   qName = req.body.name.name;
-//   if (!resort) return res.status(400).json({ message: "names not provided" });
-//   try {
-//     const { rows } = db.query(format(`UPDATE resort SET (%I) VALUES (%L) WHERE name=${qName}`, Object.keys(resort), Object.values(resort)));
-//     console.log(rows);
-//     res.status(200).json(rows);
 
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).json({ message: err.message });
-//   }
-// }
 const updateResort = async (req, res) => {
-  console.log("this is:", req.body.name)
-  const resort = req.body.values;
-  const qName = req.body.name.name;
-  if (!resort) return res.status(400).json({ message: "names not provided" });
+  const { name: { name: qName }, values: resort } = req.body;
+  if (!resort) return res.status(400).json({ message: "values not provided" });
   try {
-    const keys = Object.keys(resort);
-    const values = Object.values(resort);
-    const columns = keys.map((key) => format("%I = %L", key, resort[key])).join(", ");
-    const query = format(`UPDATE resort SET ${columns} WHERE name = %L RETURNING *`, qName);
-    const { rows } = await db.query(query);
-    console.log(rows);
+    const setValues = Object.keys(resort).map(key => format('%I=%L', key, resort[key])).join(", ");
+    const { rows } = await db.query(format(`UPDATE resort SET ${setValues} WHERE name = %L RETURNING *`, qName));
     res.status(200).json(rows);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
-}
+};
+
+
 
 
 module.exports = {
