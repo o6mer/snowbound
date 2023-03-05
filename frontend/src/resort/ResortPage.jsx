@@ -8,6 +8,7 @@ import ResortDetails from "./components/ResortDetails";
 import ResortPicturesInfo from "./components/ResortPicturesInfo";
 import ResortMoreToDo from "./components/ResortMoreToDo";
 import Navbar from "../general/Navbar";
+import Footer from "../general/Footer";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -43,6 +44,7 @@ const DUMMY_RESORT = {
   artificialSnow: true,
   offSeason: false,
   hikingTracks: "10",
+  location: "-33.8670522,151.1957362",
 };
 
 const ResortPage = () => {
@@ -85,6 +87,7 @@ const ResortPage = () => {
             <ResortPicturesInfo resortData={resortData} />
             <Divider />
             <ResortMoreToDo resortData={resortData} />
+            <Footer />
           </>
         )}
       </main>

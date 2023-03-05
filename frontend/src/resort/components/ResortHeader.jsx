@@ -7,12 +7,12 @@ const ResortHeader = ({ resortData }) => {
         <header className="text-4xl font-bold">{resortData?.name}</header>
         <p className="text-xl">{resortData?.description}</p>
       </div>
-      <iframe
+      {/* <iframe
         className="w-full"
         src="https://appskimtn.com/live-cams"
         frameBorder="0"
         alt="iframe"
-      ></iframe>
+      ></iframe> */}
     </section>
   );
 };
