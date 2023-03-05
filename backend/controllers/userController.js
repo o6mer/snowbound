@@ -23,12 +23,20 @@ const createUser = async (req, res) => {
                 hashedPassword
             )
         );
+        // Insert email into checklist table as owner
+        await db.query(
+            format(
+                "INSERT INTO checklist (owner) VALUES (%L)",
+                email
+            )
+        );
         return res.status(201).json({ user: rows[0] });
     } catch (err) {
         console.log(err);
         return res.status(500).json({ message: "Error creating user" });
     }
 };
+
 
 
 const updateChecklist = async (req, res) => {
@@ -65,12 +73,6 @@ const login = async (req, res) => {
         return res.status(404).json({ message: err.message });
     }
 };
-
-
-
-
-
-
 
 
 module.exports = {
