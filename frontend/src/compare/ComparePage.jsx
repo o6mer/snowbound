@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import SearchModel from "../general/SearchModel";
+import FindModel from "../general/Modals/FindModal";
 import CompareTable from "./components/CompareTable";
 import CompareFilter from "./components/CompareFilter";
 import Footer from "../general/Footer";
@@ -141,7 +141,7 @@ const ComparePage = () => {
     <>
       <Navbar />
       <div className="px-[10vw]">
-        <SearchModel />
+        <FindModel />
         <CompareFilter
           DUMMY_RESORT={DUMMY_RESORT}
           getFilterResorts={getFilterResorts}
