@@ -3,14 +3,14 @@ import React from 'react'
 const SearchHero = () => {
   return (
     <header className="w-full h-96  bg-[url('./assets/HeroSearch1.jpg')] bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center">
-      <div className="flex flex-col justify-center items-center">
-        <h1 className=" text-center text-3xl text-white font-bold drop-shadow-lg">
+      <div className="flex flex-col justify-center items-center ">
+        <h1 className=" text-center text-4xl text-white font-bold drop-shadow-xl">
           Here you can search for your the
           <br /> best vecation that suits for you
           <br />
           <span className="text-blue-500">Feel free</span>
         </h1>
-        <p className="mt-5 text-center text-lg text-orange-600	 font-normal		">
+        <p className="mt-5 text-center text-xl font-semibold	text-sky-600">
           Please choose the country you want to visit
         </p>
         <form className="flex items-center">
@@ -36,7 +36,7 @@ const SearchHero = () => {
             <input
               type="text"
               id="simple-search"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  "
               placeholder="Search"
               required
             />
