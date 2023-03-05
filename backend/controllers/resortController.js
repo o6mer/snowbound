@@ -73,19 +73,24 @@ const deleteResortByBame = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-const createResort = (req, res) => {
-  const resort = req.body;
+const createResort = async (req, res) => {
+  const resort = req.body.resort;
+  const imgs = req.body.img;
   if (!resort) return res.status(400).json({ message: "names not provided" });
   try {
-    const { rows } = db.query(format("INSERT INTO resort (%I) VALUES (%L)", Object.keys(resort), Object.values(resort)));
+    const { rows } = await db.query(format("INSERT INTO resort (%I) VALUES (%L)", Object.keys(resort), Object.values(resort)));
     console.log(rows);
+    const promises = imgs.map((link) => {
+      return db.query(format("INSERT INTO img (link, owner) VALUES (%L, %L)", link, resort.name));
+    });
+    await Promise.all(promises);
     res.status(200).json(rows);
-
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
 }
+
 
 const updateResort = async (req, res) => {
   const { name: qName, values: resort } = req.body;
