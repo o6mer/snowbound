@@ -11,7 +11,7 @@ const RecomendedResorts = ({place,resortImage}) => {
         />
 
         <div className="relative px-4 -mt-16">
-          <button className="w-full bg-white p-6 rounded-lg shadow-lg hover:bg-blue-300 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
+          <button className="w-full bg-white p-6 rounded-lg shadow-lg  transition ease-in-out delay-150  hover:-translate-y-2 hover:scale-100 duration-300">
             <div className="flex items-baseline">
               <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
                 New
