@@ -35,10 +35,13 @@ const CompareFilter = ({
     const {
       target: { value },
     } = event;
+    const tempArr = typeof value === "string" ? value.split(",") : value;
+    console.log(tempArr);
     setFilterKeys(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    getFilterResorts(tempArr);
   };
   const removeKeyFilter = (i) => {
     const temp = filterKeys.filter((key, index) => {
@@ -46,6 +49,7 @@ const CompareFilter = ({
     });
     console.log(temp);
     setFilterKeys([...temp]);
+    getFilterResorts(temp);
   };
   return (
     <div className="flex  items-center">
@@ -100,15 +104,29 @@ const CompareFilter = ({
           setFilterKeys([]);
         }}
       >
+        {/* <span className="text-[14px]">reset</span> */}
         <RestartAltIcon />
       </IconButton>
-      <div className=" flex ml-auto gap-3 ">
+      <div className=" flex  ml-auto gap-3 ">
         {filterKeys.map((key, index) => (
-          <div key={index} className="text-sm bg-gray-200 p-1 rounded-lg">
-            <span className="mr-2">{key}</span>
-            <button onClick={() => removeKeyFilter(index)}>
+          <div
+            key={index}
+            className="text-md capitalize bg-gray-200 pr-1 rounded-lg flex items-center justify-center"
+          >
+            <IconButton
+              color="danger"
+              aria-label="add an alarm"
+              onClick={() => removeKeyFilter(index)}
+            >
               <HighlightOffIcon fontSize="small" />
-            </button>
+            </IconButton>
+            <span className="mr-2">{key}</span>
+            {/* <button
+              className="hover:bg-slate-500"
+              onClick={() => removeKeyFilter(index)}
+            >
+              <HighlightOffIcon fontSize="small" />
+            </button> */}
           </div>
         ))}
       </div>

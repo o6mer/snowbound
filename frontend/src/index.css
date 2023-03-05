@@ -27,3 +27,11 @@ body {
   background-repeat: no-repeat;
   background-position: 35% 5%;
 }
+.table-body > tr:nth-child(even) > th {
+  background-color: rgb(65, 76, 95);
+  color: white;
+}
+.table-body > tr:nth-child(odd) > th {
+  background-color: rgb(101, 114, 135);
+  color: white;
+}

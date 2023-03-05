@@ -129,6 +129,7 @@ const ComparePage = () => {
 
       console.log(temp);
       setCompareData(temp);
+      return temp;
     }
   };
   const resetFilterResorts = () => {
