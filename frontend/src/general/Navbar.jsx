@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [token, setToken] = useState(false);
   return (
     <>
       <nav className="bg-gray-800 ">
@@ -13,10 +14,10 @@ function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <NavLink to="/HomePage" className="text-blue-600 font-large">
-                  SnowBound
-                  <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
-                </NavLink>
+                  <NavLink to="/HomePage" className="flex items-center text-blue-600 font-large">
+          <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
+          <span className="ml-2">SnowBound</span>
+        </NavLink>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -43,12 +44,16 @@ function Navbar() {
                     Country 1
                   </NavLink>
 
-                  <NavLink
-                    to="/Login"
-                    className="absolute  right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    LogIn
-                  </NavLink>
+                  {!token ? (
+                    <NavLink
+                      to="/Login"
+                      className="absolute  right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      LogIn
+                    </NavLink>
+                  ) : (
+                    <div className="absolute  right-2"></div>
+                  )}
                 </div>
               </div>
             </div>

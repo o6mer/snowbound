@@ -2,12 +2,12 @@ import React from 'react'
 
 const ResortsCard = () => {
   return (
-    <div className="flex flex-col h-50 my-5">
-      <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-        <div className="w-full md:w-1/3 bg-white grid place-items-center">
+    <div className="flex flex-col h-50 my-5 cursor-pointer	 drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
+      <div className="relative  flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
+        <div className="w-full md:w-1/3 bg-white grid place-items-center ">
           <img
             src="https://www.travelandleisure.com/thmb/YGFnMAv7N2jGOzplCFi52LMJII4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/valle-nevado-chile-ski_HERO_ALLINSKI0822-2b6415f7a0c444d3961e5c647cf4938f.jpg"
-            alt="tailwind logo"
+            alt="resort "
             className="rounded-xl"
           />
         </div>

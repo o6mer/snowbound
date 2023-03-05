@@ -6,6 +6,7 @@ import ResortsCard from "./components/ResortsCard";
 import SearchHero from "./components/SearchHero";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Footer from "../general/Footer";
 const SearchPage = () => {
  const [resortData, setResortData] = useState();
  const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,7 @@ const SearchPage = () => {
       <ResortsCard />
       <ResortsCard />
       <ResortsCard />
+      <Footer/>
     </div>
   );
 };

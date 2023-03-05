@@ -15,29 +15,17 @@ const HomeHero = () => {
       </div>
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
-          <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-blue-400 sm:text-4xl sm:leading-none">
-            Welcome to SnowBound
-            <br className="hidden md:block" />
-            We are here for you to give you
-            <br className="hidden md:block" />
-            any information you need{" "}
-            <span className="relative inline-block">
-              about ski vecation.{" "}
-              <div className="w-full h-3 -mt-3 bg-deep-purple-accent-400" />
-            </span>
-          </h2>
-          <p className="mb-6 text-base font-semibold tracking-wide text-black-300 md:text-lg">
-            Certainly! At our ski resort website, we strive to provide you with
-            comprehensive and informative comparisons between various ski
-            resorts in the area, helping you make an informed decision when
-            planning your next ski vacation.
-          </p>
-          <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
+          <h1 className="mb-4 text-3xl text-center font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+            <span className=" text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+              Welcome to SnowBound
+            </span>{" "}
+          </h1>
+          <form className="flex flex-col mt-10 items-center w-full mb-4 md:flex-row md:px-16">
             <input
               placeholder="Search for a resort..."
               required
               type="text"
-              className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+              className="flex-grow w-full h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
             />
             <button
               type="submit"
@@ -50,20 +38,20 @@ const HomeHero = () => {
             placeholder="Comapre"
             required
             type="text"
-            className="flex-grow  h-12 px-4 mb-3 text-white transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+            className="flex-grow  h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
           />
           <input
             placeholder="Find"
             required
             type="text"
-            className="flex-grow h-12 px-4 mb-3 text-white transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+            className="flex-grow h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
           />
           <br />
           <button className="text-blue-700  hover:text-blue-900">
             Need help?
           </button>
           <a
-            href="#recomendedImg"
+            href="#recomendedResorts"
             aria-label="Scroll down"
             className="flex items-center justify-center my-10	 bg-blue-500 hover:bg-blue-700 w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
           >

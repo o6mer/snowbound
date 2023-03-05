@@ -1,20 +1,17 @@
 import React from 'react'
 
-const RecomendedResorts = ({place}) => {
+const RecomendedResorts = ({place,resortImage}) => {
   return (
-    <div
-      id="recomendedImg"
-      className={`flex justify-${place} m-20 antialiased text-gray-900`}
-    >
+    <div id="recomendedImg" className={` m-10 antialiased text-gray-900`}>
       <div>
         <img
-          src="https://source.unsplash.com/random/350x350"
+          src={resortImage}
           alt=" random imgee"
           className="w-full object-cover object-center rounded-lg shadow-md"
         />
 
-        <div className="relative px-4 -mt-16  ">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="relative px-4 -mt-16">
+          <button className="w-full bg-white p-6 rounded-lg shadow-lg hover:bg-blue-300 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
             <div className="flex items-baseline">
               <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
                 New
@@ -40,7 +37,7 @@ const RecomendedResorts = ({place}) => {
                 (based on 234 ratings)
               </span>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
