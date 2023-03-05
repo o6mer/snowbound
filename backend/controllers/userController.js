@@ -23,7 +23,6 @@ const createUser = async (req, res) => {
                 hashedPassword
             )
         );
-        // Insert email into checklist table as owner
         await db.query(
             format(
                 "INSERT INTO checklist (owner) VALUES (%L)",
@@ -36,22 +35,6 @@ const createUser = async (req, res) => {
         return res.status(500).json({ message: "Error creating user" });
     }
 };
-
-
-
-const updateChecklist = async (req, res) => {
-    const { owner: owner, values: values } = req.body;
-    if (!values) return res.status(400).json({ message: "values not provided" });
-    try {
-        const setValues = Object.keys(values).map(key => format('%I=%L', key, values[key])).join(", ");
-        const { rows } = await db.query(format(`UPDATE checklist SET ${setValues} WHERE owner = %L RETURNING *`, owner));
-        res.status(200).json(rows);
-    } catch (err) {
-        console.log(err);
-        res.status(404).json({ message: err.message });
-    }
-};
-
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -74,6 +57,18 @@ const login = async (req, res) => {
     }
 };
 
+const updateChecklist = async (req, res) => {
+    const { owner: owner, values: values } = req.body;
+    if (!values) return res.status(400).json({ message: "values not provided" });
+    try {
+        const setValues = Object.keys(values).map(key => format('%I=%L', key, values[key])).join(", ");
+        const { rows } = await db.query(format(`UPDATE checklist SET ${setValues} WHERE owner = %L RETURNING *`, owner));
+        res.status(200).json(rows);
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({ message: err.message });
+    }
+};
 
 module.exports = {
     createUser,
