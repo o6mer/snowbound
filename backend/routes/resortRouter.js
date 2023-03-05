@@ -5,7 +5,7 @@ const { getResortByBame, updateResort, getMultipleResortByBame, getResortByCount
 resortRouter.get("/find/:name", getResortByBame);
 resortRouter.get("/find/country/:country", getResortByCountry);
 resortRouter.get("/compare", getMultipleResortByBame);
-resortRouter.get("/delete/:name", deleteResortByBame);
+resortRouter.delete("/delete/:name", deleteResortByBame);
 resortRouter.post("/create", createResort);
 resortRouter.post("/update", updateResort);
 

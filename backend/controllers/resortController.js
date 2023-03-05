@@ -88,7 +88,7 @@ const createResort = (req, res) => {
 }
 
 const updateResort = async (req, res) => {
-  const { name: { name: qName }, values: resort } = req.body;
+  const { name: qName, values: resort } = req.body;
   if (!resort) return res.status(400).json({ message: "values not provided" });
   try {
     const setValues = Object.keys(resort).map(key => format('%I=%L', key, resort[key])).join(", ");
