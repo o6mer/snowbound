@@ -7,9 +7,11 @@ export default function CompareModal(props) {
   }
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto animated fadeIn faster">
+    <div
+      className=" fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10  animated fadeIn faster"
+    >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="px-4 pt-5 pb-4 overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+        <div className="px-4 pt-5 pb-4  transform transition-all sm:max-w-lg sm:w-full">
           <main
             id="content"
             role="main"

@@ -1,16 +1,16 @@
 import React from "react";
+import { useEffect,useState } from "react";
 import "./Modal.css"
 export default function FindModal(props) {
   if (!props.open) {
     return null;
   }
-
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto animated fadeIn faster shadow-2xl">
+    <div
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 modal animated 
+      ${props.open ? 'fadeIn' : 'fadeOut faster'}  shadow-2xl`}
+    >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="">
-          <div className=""></div>
-        </div>
         <div className="px-4 pt-5 pb-4 overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
           <main
             id="content"

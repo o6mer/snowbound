@@ -7,22 +7,28 @@ const HomeHero = () => {
 
    const handleOpenModal = () => {
      setModalOpen(true);
+    document.body.style.overflow = "hidden";
    };
 
    const handleCloseModal = () => {
      setModalOpen(false);
+     document.body.style.overflow = "auto";
    };
 
    const handleOpencompareModal = () => {
      setcompareModalOpen(true);
+        document.body.style.overflow = "hidden";
    };
 
    const handleClosecompareModal = () => {
      setcompareModalOpen(false);
+         document.body.style.overflow = "auto";
    };
 
   return (
-    <div className={`relative bg-[url('./assets/HeroHome.jpg')]  bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center`}>
+    <div
+      className={` relative bg-[url('./assets/HeroHome.jpg')]  bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center`}
+    >
       <div className="absolute inset-x-0 bottom-0">
         <svg
           viewBox="0 0 224 12"

@@ -1,43 +1,33 @@
-	.animated {
-	    -webkit-animation-duration: 1s;
-	    animation-duration: 1s;
-	    -webkit-animation-fill-mode: both;
-	    animation-fill-mode: both;
+.animated {
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+}
+
+.fadeOut {
+	animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
 	}
 
-	.animated.faster {
-	    -webkit-animation-duration: 500ms;
-	    animation-duration: 500ms;
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
 	}
 
-	.fadeIn {
-	    -webkit-animation-name: fadeIn;
-	    animation-name: fadeIn;
+	to {
+		opacity: 0;
 	}
+}
 
-	.fadeOut {
-	    -webkit-animation-name: fadeOut;
-	    animation-name: fadeOut;
-	}
-
-	@keyframes fadeIn {
-	    from {
-	        opacity: 0;
-	    }
-
-	    to {
-	        opacity: 1;
-	    }
-	}
-
-	@keyframes fadeOut {
-	    from {
-	        opacity: 1;
-	    }
-
-	    to {
-	        opacity: 0;
-	    }
-	}
-
-    
