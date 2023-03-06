@@ -8,6 +8,7 @@ import ResortDetails from "./components/ResortDetails";
 import ResortPicturesInfo from "./components/ResortPicturesInfo";
 import ResortMoreToDo from "./components/ResortMoreToDo";
 import Navbar from "../general/Navbar";
+import Footer from "../general/Footer";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -17,7 +18,6 @@ const DUMMY_RESORT = {
     " Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptatibus iusto, soluta libero maiores ipsa consequuntur asperiores deserunt perferendis eum explicabo, laborum culpa voluptas. Libero placeat ratione repellendus accusamus ipsam.",
   liveCam:
     "https://www.skylinewebcams.com/en/webcam/italia/veneto/belluno/cortina-d-ampezzo.html",
-  location: "google location",
   pictures: [
     "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
     "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
@@ -43,6 +43,7 @@ const DUMMY_RESORT = {
   artificialSnow: true,
   offSeason: false,
   hikingTracks: "10",
+  location: "-33.8670522,151.1957362",
 };
 
 const ResortPage = () => {
@@ -85,6 +86,7 @@ const ResortPage = () => {
             <ResortPicturesInfo resortData={resortData} />
             <Divider />
             <ResortMoreToDo resortData={resortData} />
+            <Footer />
           </>
         )}
       </main>

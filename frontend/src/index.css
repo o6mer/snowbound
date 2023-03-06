@@ -10,22 +10,22 @@
 body {
   overflow-y: scroll;
 }
-html{
+html {
   scroll-behavior: smooth;
 }
 /* width */
-::-webkit-scrollbar {
+.snowboard::-webkit-scrollbar {
   width: 44px;
   background-color: rgb(31 41 55);
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.snowboard::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.snowboard::-webkit-scrollbar-thumb {
   background-image: url("./assets/snowboard.png");
   background-repeat: no-repeat;
   background-position: 35% 5%;
