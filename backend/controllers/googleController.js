@@ -1,17 +1,23 @@
 const axios = require("axios");
 
 const findNearBy = async (req, res) => {
-  const { location, category } = req.body;
-  const apiKey = process.env.GOOGLE_MAP_API_KEY;
-  console.log(category);
+  let { location, category } = req.body;
+
+  if (!location || !category)
+    return res
+      .status(404)
+      .json({ message: "No location or category provided" });
+
   try {
+    const apiKey = process.env.GOOGLE_MAP_API_KEY;
+    location = location.replace(", ", "%2C");
+    console.log({ location, category, apiKey });
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.replace(
-        ",",
-        "%2C"
-      )}&radius=1500&keyword=${category}&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=20000&keyword=${category}&key=${apiKey}
+`
     );
-    // console.log(data.results);
+
+    console.log(data);
 
     res.status(200).json({ results: data.results });
   } catch (err) {
