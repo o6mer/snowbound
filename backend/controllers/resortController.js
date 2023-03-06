@@ -113,6 +113,7 @@ const updateResort = async (req, res) => {
 
 
 
+
 module.exports = {
   getResortByCountry,
   getMultipleResortByBame,
