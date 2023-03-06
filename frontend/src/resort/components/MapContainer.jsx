@@ -90,7 +90,7 @@ const Map = ({ location, places, name, selected, setSelected }) => {
         <MarkerF
           onClick={() => setSelected(place)}
           position={place.geometry.location}
-          key={place.place_id + place.name}
+          key={place?.place_id + place?.name}
         />
       ))}
     </GoogleMap>
@@ -100,7 +100,7 @@ const Map = ({ location, places, name, selected, setSelected }) => {
 const MarkerPopup = ({ location, place }) => {
   return (
     <div className="bg-white">
-      <p>{place.name}</p>
+      <p>{place?.name}</p>
     </div>
   );
 };

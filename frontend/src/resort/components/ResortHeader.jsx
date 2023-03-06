@@ -11,8 +11,6 @@ const ResortHeader = ({ resortData }) => {
         width="560"
         height="315"
         src="//www.youtube.com/embed/EmwRY2ZVwwk?rel=0;autoplay=1"
-        frameborder="0"
-        allowfullscreen=""
       ></iframe>
     </section>
   );
