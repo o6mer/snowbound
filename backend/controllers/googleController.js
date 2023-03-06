@@ -6,7 +6,10 @@ const findNearBy = async (req, res) => {
   console.log(category);
   try {
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=1500&type=${category}&keyword=cruise&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.replace(
+        ",",
+        "%2C"
+      )}&radius=1500&keyword=${category}&key=${apiKey}`
     );
     // console.log(data.results);
 

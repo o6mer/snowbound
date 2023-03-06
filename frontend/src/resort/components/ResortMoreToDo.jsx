@@ -24,7 +24,7 @@ const ResortMoreToDo = ({ resortData }) => {
         <Button
           category="equipment"
           onClick={(e) => {
-            setSelected("equipment");
+            setSelected("ski-equipment");
           }}
         >
           Equipment
