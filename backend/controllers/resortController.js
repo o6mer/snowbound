@@ -29,7 +29,7 @@ const getMultipleResortByBame = async (req, res) => {
   try {
     const { rows } = await db.query(format(`SELECT * FROM resort WHERE name in %L`, [names]))
     const { rows: rows2 } = await db.query(format('select * from img where owner in %L', [names]));
-    const answer = [rows2, rows]
+    const answer = [rows, rows2]
     console.log(rows);
     console.log(rows2);
     res.status(200).json(answer);
@@ -134,7 +134,15 @@ const getAllResorts = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-
+const getAllCountry = async (req, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM country")
+    res.status(200).json(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+};
 
 
 module.exports = {
@@ -144,6 +152,7 @@ module.exports = {
   deleteResortByBame,
   createResort,
   updateResort,
-  getAllResorts
+  getAllResorts,
+  getAllCountry
 };
 

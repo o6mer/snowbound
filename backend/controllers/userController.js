@@ -69,7 +69,6 @@ const updateChecklist = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 };
-
 module.exports = {
     createUser,
     updateChecklist,
