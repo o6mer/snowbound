@@ -10,14 +10,17 @@ function Navbar() {
   return (
     <>
       <nav className="bg-gray-800 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                  <NavLink to="/HomePage" className="flex items-center text-blue-600 font-large">
-          <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
-          <span className="ml-2">SnowBound</span>
-        </NavLink>
+                <NavLink
+                  to="/HomePage"
+                  className="flex items-center text-blue-600 font-large"
+                >
+                  <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
+                  <span className="ml-2">SnowBound</span>
+                </NavLink>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">

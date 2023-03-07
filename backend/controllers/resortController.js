@@ -1,5 +1,5 @@
 const db = require("../models/dbModel");
-const format = require('pg-format');
+const format = require("pg-format");
 
 const getResortByBame = async (req, res) => {
   const { name } = req.params;
@@ -24,7 +24,6 @@ const getResortByBame = async (req, res) => {
 const getMultipleResortByBame = async (req, res) => {
   const { names } = req.body;
 
-
   if (!names) return res.status(400).json({ message: "names not provided" });
 
   try {
@@ -43,15 +42,13 @@ const getResortByCountry = async (req, res) => {
   const country = req.params.country;
   console.log(country);
 
-
   if (!country) return res.status(400).json({ message: "name not provided" });
 
   try {
-
-
-    const { rows } = await db.query("SELECT * FROM resort WHERE country_id = $1", [
-      country,
-    ]);
+    const { rows } = await db.query(
+      "SELECT * FROM resort WHERE country_id = $1",
+      [country]
+    );
 
     console.log("Rows:", rows);
     res.status(200).json(rows);
@@ -82,10 +79,22 @@ const createResort = async (req, res) => {
   const imgs = req.body.img;
   if (!resort) return res.status(400).json({ message: "names not provided" });
   try {
-    const { rows } = await db.query(format("INSERT INTO resort (%I) VALUES (%L)", Object.keys(resort), Object.values(resort)));
+    const { rows } = await db.query(
+      format(
+        "INSERT INTO resort (%I) VALUES (%L)",
+        Object.keys(resort),
+        Object.values(resort)
+      )
+    );
     console.log(rows);
     const promises = imgs.map((link) => {
-      return db.query(format("INSERT INTO img (link, owner) VALUES (%L, %L)", link, resort.name));
+      return db.query(
+        format(
+          "INSERT INTO img (link, owner) VALUES (%L, %L)",
+          link,
+          resort.name
+        )
+      );
     });
     await Promise.all(promises);
     res.status(200).json(rows);
@@ -94,18 +103,27 @@ const createResort = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 }
+
 const updateResort = async (req, res) => {
   const { name: qName, values: resort } = req.body;
   if (!resort) return res.status(400).json({ message: "values not provided" });
   try {
-    const setValues = Object.keys(resort).map(key => format('%I=%L', key, resort[key])).join(", ");
-    const { rows } = await db.query(format(`UPDATE resort SET ${setValues} WHERE name = %L RETURNING *`, qName));
+    const setValues = Object.keys(resort)
+      .map((key) => format("%I=%L", key, resort[key]))
+      .join(", ");
+    const { rows } = await db.query(
+      format(
+        `UPDATE resort SET ${setValues} WHERE name = %L RETURNING *`,
+        qName
+      )
+    );
     res.status(200).json(rows);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
 };
+
 
 const getAllResorts = async (req, res) => {
   try {
@@ -118,6 +136,7 @@ const getAllResorts = async (req, res) => {
 };
 
 
+
 module.exports = {
   getResortByCountry,
   getMultipleResortByBame,
@@ -127,3 +146,4 @@ module.exports = {
   updateResort,
   getAllResorts
 };
+
