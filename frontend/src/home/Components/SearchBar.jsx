@@ -6,25 +6,23 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
 export default function SearchBar() {
-  //const [allResorts, setAllResorts] = useState([]);
-  const [resortName, setResortName] = useState("");
+    const [resortName, setResortName] = useState("");
+    const [allResorts, setAllResorts] = useState([]);
   const [toast, setToast] = useState(false);
   const navigate = useNavigate();
-//   useEffect(() => {
-//   axios.get("http://localhost:5000/api/resort/getAllResorts")
-//   .then((res) => {
-//     console.log(res);
-//     setAllResorts(res.data)
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-//   }, [])
-  const allResorts=[
- "jnjnjnjn"
-    ,
-  "Bangalore"
-]
+  useEffect(() => {
+    const getAllResorts = async () => {
+ await axios.get("http://localhost:8000/api/resort/get")
+  .then((res) => {
+    console.log(res.data);
+    setAllResorts(res.data)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+    getAllResorts();
+  }, [])
   const handleSelect = (event, value) => {
     if (value) {
       setResortName(value);
@@ -35,7 +33,7 @@ export default function SearchBar() {
     console.log(resortName);
     if (
       allResorts.find((resort) =>
-        resort === resortName
+        resort.name === resortName
       )
     ) {
       navigate(`/resort/${resortName}`);
@@ -52,7 +50,7 @@ export default function SearchBar() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={allResorts}
+          options={allResorts.map((resort) => resort.name)}
           value={resortName}
           onChange={handleSelect}
           sx={{
