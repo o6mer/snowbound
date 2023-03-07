@@ -47,7 +47,7 @@ const DUMMY_RESORT = {
 };
 
 const ResortPage = () => {
-  const [resortData, setResortData] = useState(DUMMY_RESORT);
+  const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { name } = useParams();
@@ -57,12 +57,14 @@ const ResortPage = () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/resort/${name}`
+          `http://localhost:8000/api/resort/find/${name}`
         );
 
         if (!data) return;
-        setIsLoading(false);
+
+        console.log(data);
         setResortData({ ...data });
+        setIsLoading(false);
       } catch (err) {
         console.log(err.meessage);
         setIsLoading(false);
@@ -74,7 +76,7 @@ const ResortPage = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col gap-10 w-full h-full px-12">
+      <main className="flex flex-col gap-10 w-full h-full px-24">
         {isLoading ? (
           <div>Loading...</div>
         ) : (
@@ -83,9 +85,9 @@ const ResortPage = () => {
             <Divider />
             <ResortDetails resortData={resortData} />
             <Divider />
-            <ResortPicturesInfo resortData={resortData} />
-            <Divider />
             <ResortMoreToDo resortData={resortData} />
+            <Divider />
+            <ResortPicturesInfo resortData={resortData} />
             <Footer />
           </>
         )}

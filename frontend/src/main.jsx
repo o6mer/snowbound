@@ -15,7 +15,7 @@ import HomePage from "./home/HomePage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -46,11 +46,6 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/HomePage",
-    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
 ]);
