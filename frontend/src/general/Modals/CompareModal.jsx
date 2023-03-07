@@ -1,11 +1,15 @@
 import React from "react";
+import { useState,useEffect } from "react";
 import { Dialog } from "@mui/material";
+import axios from "axios";
 import "./Modal.css";
 export default function CompareModal(props) {
   if (!props.open) {
     return null;
   }
-
+const [Resort1,setResort1] =useState("");
+const [Resort2,setResort2] =useState("");
+const [Resort3,setResort3] =useState("");
   return (
     <div
       className=" fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10  animated fadeIn faster"
@@ -56,16 +60,19 @@ export default function CompareModal(props) {
                             placeholder="Resort 1"
                             className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                             required
+                            onChange={(e)=>setResort1(e.target.value)}
                           />
                           <input
                             placeholder="Resort 2"
                             className="mt-4 py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                             required
+                            onChange={(e)=>setResort2(e.target.value)}
                           />
                           <input
                             placeholder="Resort 3"
                             className="mt-4 py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
                             required
+                            onChange={(e)=>setResort3(e.target.value)}
                           />
                         </div>
                       </div>
