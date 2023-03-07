@@ -10,7 +10,10 @@ const ResortHeader = ({ resortData }) => {
       <iframe
         width="560"
         height="315"
-        src="//www.youtube.com/embed/EmwRY2ZVwwk?rel=0;autoplay=1"
+        src={
+          resortData?.livecam ||
+          "//www.youtube.com/embed/EmwRY2ZVwwk?rel=0;autoplay=1"
+        }
       ></iframe>
     </section>
   );

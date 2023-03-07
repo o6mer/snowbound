@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const RecomendedResorts = ({place,resortImage}) => {
+const RecomendedResorts = ({ resortData }) => {
   return (
-    <div id="recomendedImg" className={` m-10 antialiased text-gray-900`}>
+    <div
+      id="recomendedImg"
+      className={`max-w-md w-full m-10 antialiased text-gray-900`}
+    >
       <div>
         <img
-          src={resortImage}
+          src={resortData?.picture}
           alt=" random imgee"
           className="w-full object-cover object-center rounded-lg shadow-md"
         />
@@ -17,18 +20,15 @@ const RecomendedResorts = ({place,resortImage}) => {
                 New
               </span>
               <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                2 baths &bull; 3 rooms
+                {resortData?.kmOfTracks} &bull; 3 rooms
               </div>
             </div>
 
             <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">
-              A random Title
+              {resortData?.name}
             </h4>
 
-            <div className="mt-1">
-              $1800
-              <span className="text-gray-600 text-sm"> /wk</span>
-            </div>
+            <div className="mt-1">{resortData?.price}$</div>
             <div className="mt-4">
               <span className="text-teal-600 text-md font-semibold">
                 4/5 ratings{" "}
@@ -42,6 +42,6 @@ const RecomendedResorts = ({place,resortImage}) => {
       </div>
     </div>
   );
-}
+};
 
-export default RecomendedResorts
+export default RecomendedResorts;
