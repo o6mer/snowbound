@@ -4,14 +4,17 @@ const format = require("pg-format");
 const getResortByBame = async (req, res) => {
   const { name } = req.params;
 
+
   if (!name) return res.status(400).json({ message: "name not provided" });
 
   try {
     const { rows } = await db.query("SELECT * FROM resort WHERE name = $1", [
       name,
-    ]);
-
-    res.status(200).json(rows[0]);
+    ])
+    const { rows: rows2 } = await db.query(format('select * from img where owner = %L', name));
+    const answer = [rows2, rows]
+    console.log(rows, rows2);
+    res.status(200).json(answer);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
@@ -24,11 +27,12 @@ const getMultipleResortByBame = async (req, res) => {
   if (!names) return res.status(400).json({ message: "names not provided" });
 
   try {
-    const { rows } = await db.query(
-      format(`SELECT * FROM resort WHERE name in %L`, [names])
-    );
+    const { rows } = await db.query(format(`SELECT * FROM resort WHERE name in %L`, [names]))
+    const { rows: rows2 } = await db.query(format('select * from img where owner in %L', [names]));
+    const answer = [rows2, rows]
     console.log(rows);
-    res.status(200).json(rows);
+    console.log(rows2);
+    res.status(200).json(answer);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });

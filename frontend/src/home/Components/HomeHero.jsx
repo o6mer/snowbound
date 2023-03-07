@@ -1,8 +1,34 @@
-import React from "react";
-
+import {React,useState} from "react";
+import CompareModal from "../../general/Modals/CompareModal";
+import FindModal from "../../general/Modals/FindModal";
 const HomeHero = () => {
+   const [modalOpen, setModalOpen] = useState(false);
+   const [compareModalOpen, setcompareModalOpen] = useState(false);
+
+   const handleOpenModal = () => {
+     setModalOpen(true);
+    document.body.style.overflow = "hidden";
+   };
+
+   const handleCloseModal = () => {
+     setModalOpen(false);
+     document.body.style.overflow = "auto";
+   };
+
+   const handleOpencompareModal = () => {
+     setcompareModalOpen(true);
+        document.body.style.overflow = "hidden";
+   };
+
+   const handleClosecompareModal = () => {
+     setcompareModalOpen(false);
+         document.body.style.overflow = "auto";
+   };
+
   return (
-    <div className="relative bg-[url('./assets/HeroHome.jpg')] bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center">
+    <div
+      className={` relative bg-[url('./assets/HeroHome.jpg')]  bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center`}
+    >
       <div className="absolute inset-x-0 bottom-0">
         <svg
           viewBox="0 0 224 12"
@@ -27,6 +53,7 @@ const HomeHero = () => {
               type="text"
               className="flex-grow w-full h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
             />
+
             <button
               type="submit"
               className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
@@ -39,13 +66,23 @@ const HomeHero = () => {
             required
             type="text"
             className="flex-grow  h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+            onClick={handleOpenModal}
           />
+          <CompareModal
+            open={modalOpen}
+            onClose={handleCloseModal}
+          ></CompareModal>
           <input
             placeholder="Find"
             required
             type="text"
             className="flex-grow h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+            onClick={handleOpencompareModal}
           />
+          <FindModal
+            open={compareModalOpen}
+            onClose={handleClosecompareModal}
+          ></FindModal>
           <br />
           <button className="text-blue-700  hover:text-blue-900">
             Need help?
