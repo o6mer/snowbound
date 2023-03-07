@@ -39,7 +39,6 @@ const getMultipleResortByBame = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-
 const getResortByCountry = async (req, res) => {
   const country = req.params.country;
   console.log(country);
@@ -95,8 +94,6 @@ const createResort = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 }
-
-
 const updateResort = async (req, res) => {
   const { name: qName, values: resort } = req.body;
   if (!resort) return res.status(400).json({ message: "values not provided" });
@@ -110,8 +107,15 @@ const updateResort = async (req, res) => {
   }
 };
 
-
-
+const getAllResorts = async (req, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM resort")
+    res.status(200).json(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+};
 
 
 module.exports = {
@@ -120,5 +124,6 @@ module.exports = {
   getResortByBame,
   deleteResortByBame,
   createResort,
-  updateResort
+  updateResort,
+  getAllResorts
 };
