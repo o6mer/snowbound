@@ -1,6 +1,7 @@
 import {React,useState} from "react";
 import CompareModal from "../../general/Modals/CompareModal";
 import FindModal from "../../general/Modals/FindModal";
+import SearchBar from "./SearchBar";
 const HomeHero = () => {
    const [modalOpen, setModalOpen] = useState(false);
    const [compareModalOpen, setcompareModalOpen] = useState(false);
@@ -27,7 +28,7 @@ const HomeHero = () => {
 
   return (
     <div
-      className={` relative bg-[url('./assets/HeroHome.jpg')]  bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center`}
+      className={`relative bg-[url('./assets/HeroHome.jpg')]  bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center`}
     >
       <div className="absolute inset-x-0 bottom-0">
         <svg
@@ -42,25 +43,11 @@ const HomeHero = () => {
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
           <h1 className="mb-4 text-3xl text-center font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-            <span className=" text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               Welcome to SnowBound
             </span>{" "}
           </h1>
-          <form className="flex flex-col mt-10 items-center w-full mb-4 md:flex-row md:px-16">
-            <input
-              placeholder="Search for a resort..."
-              required
-              type="text"
-              className="flex-grow w-full h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
-            />
-
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
-            >
-              Search
-            </button>
-          </form>
+          <SearchBar />
           <input
             placeholder="Comapre"
             required
@@ -90,7 +77,7 @@ const HomeHero = () => {
           <a
             href="#recomendedResorts"
             aria-label="Scroll down"
-            className="flex items-center justify-center my-10	 bg-blue-500 hover:bg-blue-700 w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
+            className="flex items-center justify-center animate-bounce my-10	 bg-blue-500 hover:bg-blue-700 w-10 h-10 mx-auto text-white duration-300 transform border border-gray-400 rounded-full hover:text-teal-accent-400 hover:border-teal-accent-400 hover:shadow hover:scale-110"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
