@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loader from "../../general/Loader";
-import RecomendedResorts from "../../home/Components/RecomendedResorts";
+import RecomendedResorts from "../../general/RecomendedResorts";
 import Carousel from "react-grid-carousel";
 import { Divider } from "@mui/material";
 

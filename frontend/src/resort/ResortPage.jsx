@@ -50,7 +50,7 @@ const DUMMY_RESORT = {
 
 const ResortPage = () => {
   const [resortData, setResortData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { name } = useParams();
 
@@ -65,7 +65,7 @@ const ResortPage = () => {
           `http://localhost:8000/api/resort/find/${transFormedName}`
         );
 
-        if (!data) return;
+        if (!data[0].length || !data[1].length) return setIsLoading();
 
         console.log(data);
 
