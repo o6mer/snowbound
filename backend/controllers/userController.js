@@ -1,9 +1,7 @@
 const db = require("../models/dbModel");
 const format = require('pg-format');
 const bcrypt = require('bcrypt');
-
 const saltRounds = 10;
-
 const createUser = async (req, res) => {
     const { email, firstname, lastname, username, password } = req.body;
     if (!email || !password) {
@@ -35,7 +33,6 @@ const createUser = async (req, res) => {
         return res.status(500).json({ message: "Error creating user" });
     }
 };
-
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -56,7 +53,6 @@ const login = async (req, res) => {
         return res.status(404).json({ message: err.message });
     }
 };
-
 const updateChecklist = async (req, res) => {
     const { owner: owner, values: values } = req.body;
     if (!values) return res.status(400).json({ message: "values not provided" });

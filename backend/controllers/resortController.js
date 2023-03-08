@@ -1,6 +1,5 @@
 const db = require("../models/dbModel");
 const format = require("pg-format");
-
 const getResortByBame = async (req, res) => {
   const { name } = req.params;
 
@@ -20,7 +19,6 @@ const getResortByBame = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-
 const getMultipleResortByBame = async (req, res) => {
   const { names } = req.body;
 
@@ -66,6 +64,7 @@ const deleteResortByBame = async (req, res) => {
     const { rows } = await db.query("DELETE FROM resort WHERE name = $1", [
       name,
     ]);
+    const { rows: rows2 } = await db.query("DELETE FROM img WHERE owner = $1", [name]);
 
     console.log(rows);
     res.status(200).json("DELETED", rows);
@@ -103,9 +102,8 @@ const createResort = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 }
-
 const updateResort = async (req, res) => {
-  const { name: qName, values: resort } = req.body;
+  const { name: qName, values: resort, images } = req.body;
   if (!resort) return res.status(400).json({ message: "values not provided" });
   try {
     const setValues = Object.keys(resort)
@@ -117,14 +115,23 @@ const updateResort = async (req, res) => {
         qName
       )
     );
+    await db.query('DELETE  from img where owner = $1', [qName]);
+    const promises = images.map((link) => {
+      return db.query(
+        format(
+          "INSERT INTO img (link, owner) VALUES (%L, %L)",
+          link,
+          qName
+        )
+      );
+    });
+    await Promise.all(promises);
     res.status(200).json(rows);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
 };
-
-
 const getAllResorts = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM resort")
@@ -143,7 +150,17 @@ const getAllCountry = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-
+const getCountryByContinent = async (req, res) => {
+  const { continent } = req.body;
+  console.log(continent);
+  try {
+    const { rows } = await db.query("SELECT * FROM country where continent_id = $1", [continent])
+    res.status(200).json(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+};
 
 module.exports = {
   getResortByCountry,
@@ -153,6 +170,8 @@ module.exports = {
   createResort,
   updateResort,
   getAllResorts,
-  getAllCountry
+  getAllCountry,
+  getCountryByContinent,
+
 };
 
