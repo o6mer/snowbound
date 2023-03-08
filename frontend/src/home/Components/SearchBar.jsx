@@ -4,8 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ClearIcon from "@mui/icons-material/Clear";
-
 import axios from "axios";
 
 export default function SearchBar({ handleSearch, isToast }) {
@@ -52,7 +50,7 @@ export default function SearchBar({ handleSearch, isToast }) {
   }, [isToast]);
   return (
     <div className="relative">
-      <form className="mt-14 flex flex-col mt-10 items-center w-full mb-4 md:flex-row md:px-16">
+      <form className="flex flex-col mt-10 items-center w-full mb-4 md:flex-row md:px-16">
         <Autocomplete
           disablePortal
           id="combo-box-demo"
