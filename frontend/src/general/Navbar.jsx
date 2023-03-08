@@ -15,7 +15,7 @@ function Navbar() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <NavLink
-                  to="/HomePage"
+                  to="/"
                   className="flex items-center text-blue-600 font-large"
                 >
                   <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
@@ -25,7 +25,7 @@ function Navbar() {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink
-                    to="/search/:query"
+                    to="/search/:continent/:country/:resort"
                     className="text-gray-300 hover:bg-gray-700 
                     hover:text-white
                     focus:bg-gray-700

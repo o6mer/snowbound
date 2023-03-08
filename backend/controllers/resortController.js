@@ -3,15 +3,16 @@ const format = require("pg-format");
 const getResortByBame = async (req, res) => {
   const { name } = req.params;
 
-
   if (!name) return res.status(400).json({ message: "name not provided" });
 
   try {
     const { rows } = await db.query("SELECT * FROM resort WHERE name = $1", [
       name,
-    ])
-    const { rows: rows2 } = await db.query(format('select * from img where owner = %L', name));
-    const answer = [rows2, rows]
+    ]);
+    const { rows: rows2 } = await db.query(
+      format("select * from img where owner = %L", name)
+    );
+    const answer = [rows, rows2];
     console.log(rows, rows2);
     res.status(200).json(answer);
   } catch (err) {
@@ -25,9 +26,13 @@ const getMultipleResortByBame = async (req, res) => {
   if (!names) return res.status(400).json({ message: "names not provided" });
 
   try {
-    const { rows } = await db.query(format(`SELECT * FROM resort WHERE name in %L`, [names]))
-    const { rows: rows2 } = await db.query(format('select * from img where owner in %L', [names]));
-    const answer = [rows, rows2]
+    const { rows } = await db.query(
+      format(`SELECT * FROM resort WHERE name in %L`, [names])
+    );
+    const { rows: rows2 } = await db.query(
+      format("select * from img where owner in %L", [names])
+    );
+    const answer = [rows2, rows];
     console.log(rows);
     console.log(rows2);
     res.status(200).json(answer);
@@ -101,7 +106,9 @@ const createResort = async (req, res) => {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
+
 }
+
 const updateResort = async (req, res) => {
   const { name: qName, values: resort, images } = req.body;
   if (!resort) return res.status(400).json({ message: "values not provided" });
@@ -132,15 +139,17 @@ const updateResort = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 const getAllResorts = async (req, res) => {
   try {
-    const { rows } = await db.query("SELECT * FROM resort")
+    const { rows } = await db.query("SELECT * FROM resort");
     res.status(200).json(rows);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
   }
 };
+
 const getAllCountry = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM country")
@@ -150,6 +159,7 @@ const getAllCountry = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 const getCountryByContinent = async (req, res) => {
   const { continent } = req.body;
   console.log(continent);
@@ -161,6 +171,7 @@ const getCountryByContinent = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 module.exports = {
   getResortByCountry,
@@ -174,4 +185,3 @@ module.exports = {
   getCountryByContinent,
 
 };
-
