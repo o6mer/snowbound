@@ -1,29 +1,30 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CloseIcon from "@mui/icons-material/Close";
-import ClearIcon from "@mui/icons-material/Clear";
+
 export default function SearchBar({ handleSearch, isToast }) {
-    const [resortName, setResortName] = useState("");
-    const [allResorts, setAllResorts] = useState([]);
+  const [resortName, setResortName] = useState("");
+  const [allResorts, setAllResorts] = useState([]);
   const [toast, setToast] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const getAllResorts = async () => {
- await axios.get("http://localhost:8000/api/resort/get")
-  .then((res) => {
-    console.log(res.data);
-    setAllResorts(res.data)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
+      await axios
+        .get("http://localhost:8000/api/resort/get")
+        .then((res) => {
+          console.log(res.data);
+          setAllResorts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     getAllResorts();
-  }, [])
+  }, []);
   const handleSelect = (event, value) => {
     if (value) {
       setResortName(value);
@@ -33,12 +34,7 @@ export default function SearchBar({ handleSearch, isToast }) {
     e.preventDefault();
     console.log(resortName);
 
-    if (
-      allResorts.find((resort) =>
-        resort.name === resortName
-      )
-    ) {
-
+    if (allResorts.find((resort) => resort.name === resortName)) {
       navigate(`/resort/${resortName}`);
     } else {
       setToast(true);

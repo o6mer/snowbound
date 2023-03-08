@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   GoogleMap,
   Marker,
   MarkerF,
   useLoadScript,
+  InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
 import Rating from "@mui/material/Rating";
+import Loader from "../../general/Loader";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
+const libraries = ["places"];
 
 const MapContainer = ({ location, name, category }) => {
   const [places, setPlaces] = useState([]);
@@ -27,6 +30,7 @@ const MapContainer = ({ location, name, category }) => {
 
         if (!data) return;
 
+        setSelected();
         setPlaces(data.results);
         setIsloading(false);
       } catch (err) {
@@ -38,24 +42,29 @@ const MapContainer = ({ location, name, category }) => {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
-    libraries: ["places"],
+    libraries,
   });
 
-  if (!isLoaded || isLoading) return <div>Loading...</div>;
   return (
-    <div className="flex w-full justify-center gap-2 max-h-[80vh] ">
-      <PlacesList
-        places={places}
-        selected={selected}
-        setSelected={setSelected}
-      />
-      <Map
-        location={location}
-        places={places}
-        name={name}
-        selected={selected}
-        setSelected={setSelected}
-      />
+    <div className="flex w-full justify-center gap-2 h-[80vh] ">
+      {!isLoaded || isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <PlacesList
+            places={places}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <Map
+            location={location}
+            places={places}
+            name={name}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        </>
+      )}
     </div>
   );
 };
@@ -63,6 +72,20 @@ const MapContainer = ({ location, name, category }) => {
 const Map = ({ location, places, name, selected, setSelected }) => {
   const [lat, lng] = location?.split(",");
   const calcCenter = { lat: Number(lat), lng: Number(lng) };
+  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(false);
+  // const [map, setMap] = useState();
+
+  useEffect(() => {
+    if (!selected) return;
+
+    setIsInfoWindowOpen(true);
+  }, [selected]);
+
+  const handleMarkerClicked = (place) => {
+    if (!place) return;
+
+    setSelected(place);
+  };
 
   return (
     <GoogleMap
@@ -71,12 +94,31 @@ const Map = ({ location, places, name, selected, setSelected }) => {
       mapContainerStyle={{
         width: "70%",
       }}
+      // onLoad={(map) => setMap(map)}
     >
-      <MarkerF label={name} position={calcCenter} />
-      <MarkerPopup />
+      <MarkerF
+        label={name}
+        position={calcCenter}
+        icon={{
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 12,
+          fillColor: "green",
+          strokeColor: "green",
+        }}
+      />
+      {isInfoWindowOpen && (
+        <InfoWindow
+          position={selected?.geometry.location}
+          onCloseClick={() => setIsInfoWindowOpen(false)}
+          zIndex={999}
+        >
+          <PlaceInfowWindow placeData={selected} />
+        </InfoWindow>
+      )}
       {places?.map((place) => (
         <MarkerF
-          onClick={() => setSelected(place)}
+          label={place.name}
+          onClick={() => handleMarkerClicked(place)}
           position={place.geometry.location}
           key={place?.place_id + place?.name}
         />
@@ -85,10 +127,10 @@ const Map = ({ location, places, name, selected, setSelected }) => {
   );
 };
 
-const MarkerPopup = ({ location, place }) => {
+const PlaceInfowWindow = ({ placeData }) => {
   return (
-    <div className="bg-white">
-      <p>{place?.name}</p>
+    <div className="">
+      <p>{placeData?.name}</p>
     </div>
   );
 };
