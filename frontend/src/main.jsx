@@ -19,12 +19,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/search/:query",
+    path: "/search/:continent/:country/:resort",
     element: <SearchPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/compare/:query",
+    path: "/compare/:resort1/:resort2/:resort3",
     element: <ComparePage />,
     errorElement: <ErrorPage />,
   },

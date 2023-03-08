@@ -139,6 +139,16 @@ const getAllResorts = async (req, res) => {
   }
 };
 
+const getAllCountry = async (req, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM country")
+    res.status(200).json(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getResortByCountry,
   getMultipleResortByBame,
@@ -147,4 +157,5 @@ module.exports = {
   createResort,
   updateResort,
   getAllResorts,
+  getAllCountry
 };

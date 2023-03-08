@@ -1,20 +1,16 @@
 import React from 'react'
 
-const ResortsCard = () => {
+const ResortsCard = ({resort}) => {
   return (
-    <div className="flex flex-col h-50 my-5 cursor-pointer	 drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-105 duration-300">
+    <div className="flex flex-col h-50 my-5 cursor-pointer	 drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-100 duration-300">
       <div className="relative  flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
         <div className="w-full md:w-1/3 bg-white grid place-items-center ">
-          <img
-            src="https://www.travelandleisure.com/thmb/YGFnMAv7N2jGOzplCFi52LMJII4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/valle-nevado-chile-ski_HERO_ALLINSKI0822-2b6415f7a0c444d3961e5c647cf4938f.jpg"
-            alt="resort "
-            className="rounded-xl"
-          />
+          <img src={resort.image} alt="resort " className="rounded-xl h-56 " />
         </div>
         <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
           <div className="flex justify-between item-center">
             <p className="text-gray-500 font-medium hidden md:block">
-              Vacations
+              {resort?.country_id}
             </p>
             <div className="flex items-center">
               <svg
@@ -49,16 +45,19 @@ const ResortsCard = () => {
             </div>
           </div>
           <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-            The Majestic and Wonderful Bahamas
+            {resort?.name}
           </h3>
           <p className="md:text-lg text-gray-500 text-base">
-            The best kept secret of The Bahamas is the country’s sheer size and
-            diversity. With 16 major islands, The Bahamas is an unmatched
-            destination
+            {resort?.description}
           </p>
           <p className="text-xl font-black text-gray-800">
-            $110
-            <span className="font-normal text-gray-600 text-base">/night</span>
+            ${resort?.skiPass}
+            <span className="font-normal text-gray-600 text-base">
+              /Ski pass per day
+            </span>
+            <button className="absolute  right-8 bg-teal-200 hover:bg-teal-400 px-4 py-2 rounded-full text-xs font-medium text-gray-800   ">
+              Learn more
+            </button>
           </p>
         </div>
       </div>
