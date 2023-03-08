@@ -12,7 +12,8 @@ const getResortByBame = async (req, res) => {
     const { rows: rows2 } = await db.query(
       format("select * from img where owner = %L", name)
     );
-    const answer = [rows, rows2];
+
+    const answer = { resort: rows, imgs: rows2 };
     console.log(rows, rows2);
     res.status(200).json(answer);
   } catch (err) {
@@ -32,7 +33,7 @@ const getMultipleResortByBame = async (req, res) => {
     const { rows: rows2 } = await db.query(
       format("select * from img where owner in %L", [names])
     );
-    const answer = [rows2, rows];
+    const answer = { resort: rows, img: rows2, };
     console.log(rows);
     console.log(rows2);
     res.status(200).json(answer);
