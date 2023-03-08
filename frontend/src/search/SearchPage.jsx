@@ -1,5 +1,5 @@
 import React from "react";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../general/Navbar";
 import CustomizedBreadcrumbs from "./components/CustomizedBreadcrumbs";
@@ -9,44 +9,46 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../general/Footer";
 const SearchPage = () => {
- const [resortData, setResortData] = useState();
- const [isLoading, setIsLoading] = useState(false);
+  const [resortData, setResortData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
- const { continent,country,resort } = useParams();
+  const { continent, country, resort } = useParams();
 
- useEffect(() => {
-  console.log(country);
-   const fetchData = async () => {
-     setIsLoading(true);
-     if(resort==="none"){
-     try {
-       const { data } = await axios.get(
-         `http://localhost:8000/api/resort/find/country/${country}`
-       );
-       if (!data) return;
-       setIsLoading(false);
-       console.log(data);
-       setResortData(data);
-     } catch (err) {
-       console.log(err.meessage);
-       setIsLoading(false);
-     }
-    }else{
-      try {
-        const { data } = await axios.get(
-          `http://localhost:8000/api/resort/find/${resort}`
-        );
-        if (!data) return;
-        setIsLoading(false);
-        setResortData(data.resort);
-      } catch (err) {
-        console.log(err.meessage);
-        setIsLoading(false);
+  useEffect(() => {
+    console.log(country);
+    const fetchData = async () => {
+      setIsLoading(true);
+      if (resort === "none") {
+        try {
+          const { data } = await axios.get(
+            `http://localhost:8000/api/resort/find/country/${country}`
+          );
+          if (!data) return;
+          setIsLoading(false);
+          console.log(data);
+          setResortData(data);
+        } catch (err) {
+          console.log(err.meessage);
+          setIsLoading(false);
+        }
+      } else {
+        try {
+          const { data } = await axios.get(
+            `http://localhost:8000/api/resort/find/${resort}`
+          );
+          if (!data) return;
+
+          console.log(data);
+          setIsLoading(false);
+          setResortData([data.resort]);
+        } catch (err) {
+          console.log(err.meessage);
+          setIsLoading(false);
+        }
       }
-    }
-   };
-   fetchData();
- }, []);
+    };
+    fetchData();
+  }, []);
   return (
     <div>
       <Navbar />
@@ -58,7 +60,7 @@ const SearchPage = () => {
       />
 
       {resortData &&
-        resortData.map((resort, index) => (
+        resortData?.map((resort, index) => (
           <Link to={`/resort/${resort.name}`}>
             <ResortsCard key={index} resort={resort} />
           </Link>
