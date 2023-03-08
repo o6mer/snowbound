@@ -65,13 +65,13 @@ const ResortPage = () => {
           `http://localhost:8000/api/resort/find/${transFormedName}`
         );
 
-        if (!data[0].length || !data[1].length) return setIsLoading();
+        if (!data.resort || !data.images) return setIsLoading(false);
 
         console.log(data);
 
         setResortData({
-          ...data[0][0],
-          pictures: data[1].map((picture) => picture.link),
+          ...data.resort,
+          images: data.images.map((picture) => picture.link),
         });
         setIsLoading(false);
       } catch (err) {

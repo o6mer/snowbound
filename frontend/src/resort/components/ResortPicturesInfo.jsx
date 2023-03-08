@@ -15,7 +15,7 @@ const ResortPicturesInfo = ({ resortData }) => {
         autoPlay
         swipeable
       >
-        {resortData?.pictures?.map((picture) => (
+        {resortData?.images?.map((picture) => (
           <img
             key={picture}
             src={picture}
