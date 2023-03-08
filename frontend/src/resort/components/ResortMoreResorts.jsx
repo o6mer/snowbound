@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../general/Loader";
 import RecomendedResorts from "../../home/Components/RecomendedResorts";
 import Carousel from "react-grid-carousel";
+import { Divider } from "@mui/material";
 
 const ResortMoreResorts = ({ resortData }) => {
   const [resorts, setResorts] = useState();
@@ -17,7 +18,10 @@ const ResortMoreResorts = ({ resortData }) => {
         const { data } = await axios.get(
           `http://localhost:8000/api/resort/find/country/${resortData?.country_id}`
         );
-        setResorts([...data]);
+        console.log("moreeeee:", data);
+        setResorts([
+          ...data?.filter((resort) => resort.name !== resortData.name),
+        ]);
       } catch (err) {
         console.log(err);
       }
@@ -27,24 +31,36 @@ const ResortMoreResorts = ({ resortData }) => {
   }, []);
 
   return (
-    <section>
+    <>
       {isLoading ? (
         <Loader />
-      ) : (
-        <Carousel cols={4} rows={1} gap={10} loop>
-          {resorts
-            ?.filter((resort) => resort.name !== resortData.name)
-            ?.map((resort) => (
-              <Carousel.Item>
-                <RecomendedResorts
-                  resortData={resort}
-                  key={`${resort?.name}from${resort?.country}`}
-                />
-              </Carousel.Item>
-            ))}
-        </Carousel>
-      )}
-    </section>
+      ) : resorts?.length ? (
+        <>
+          <Divider />
+          <section section className="">
+            <p className="text-center text-2xl font-bold">
+              More From {resortData?.country_id}
+            </p>
+            <Carousel
+              cols={4}
+              rows={1}
+              gap={10}
+              loop
+              hideArrow={resorts?.length <= 4}
+            >
+              {resorts?.map((resort) => (
+                <Carousel.Item>
+                  <RecomendedResorts
+                    resortData={resort}
+                    key={`${resort?.name}from${resort?.country}`}
+                  />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </section>
+        </>
+      ) : null}
+    </>
   );
 };
 

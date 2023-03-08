@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import Rating from "@mui/material/Rating";
 import Loader from "../../general/Loader";
+
 const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 const libraries = ["places"];
 
@@ -29,6 +30,7 @@ const MapContainer = ({ location, name, category }) => {
 
         if (!data) return;
 
+        setSelected();
         setPlaces(data.results);
         setIsloading(false);
       } catch (err) {
@@ -71,13 +73,18 @@ const Map = ({ location, places, name, selected, setSelected }) => {
   const [lat, lng] = location?.split(",");
   const calcCenter = { lat: Number(lat), lng: Number(lng) };
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(false);
-  const [map, setMap] = useState();
+  // const [map, setMap] = useState();
+
+  useEffect(() => {
+    if (!selected) return;
+
+    setIsInfoWindowOpen(true);
+  }, [selected]);
 
   const handleMarkerClicked = (place) => {
     if (!place) return;
 
     setSelected(place);
-    setIsInfoWindowOpen(true);
   };
 
   return (
@@ -87,9 +94,18 @@ const Map = ({ location, places, name, selected, setSelected }) => {
       mapContainerStyle={{
         width: "70%",
       }}
-      onLoad={(map) => setMap(map)}
+      // onLoad={(map) => setMap(map)}
     >
-      <MarkerF label={name} position={calcCenter} />
+      <MarkerF
+        label={name}
+        position={calcCenter}
+        icon={{
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 12,
+          fillColor: "green",
+          strokeColor: "green",
+        }}
+      />
       {isInfoWindowOpen && (
         <InfoWindow
           position={selected?.geometry.location}

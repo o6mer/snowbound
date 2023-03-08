@@ -11,6 +11,7 @@ import Navbar from "../general/Navbar";
 import Footer from "../general/Footer";
 import ResortMoreResorts from "./components/ResortMoreResorts";
 import Loader from "../general/Loader";
+import ResortNotFound from "./components/ResortNotFound";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -85,24 +86,38 @@ const ResortPage = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col gap-10 w-full h-full px-24">
-        {isLoading ? (
+      {isLoading ? (
+        <div className="h-screen">
           <Loader />
-        ) : (
-          <>
-            <ResortHeader resortData={resortData} />
-            <Divider />
-            <ResortDetails resortData={resortData} />
-            <Divider />
-            <ResortMoreToDo resortData={resortData} />
-            <Divider />
-            <ResortPicturesInfo resortData={resortData} />
-            <Divider />
-            <ResortMoreResorts resortData={resortData} />
-            <Footer />
-          </>
-        )}
-      </main>
+        </div>
+      ) : (
+        <>
+          {resortData ? (
+            <>
+              <div className="w-full h-[50vh] relative">
+                <img
+                  src={resortData?.image}
+                  alt=""
+                  className="-z-10 w-full h-full object-cover "
+                />
+              </div>
+              <main className="flex flex-col gap-10 w-full h-full px-24 ">
+                <ResortHeader resortData={resortData} />
+                <Divider />
+                <ResortDetails resortData={resortData} />
+                <Divider />
+                <ResortMoreToDo resortData={resortData} />
+                <Divider />
+                <ResortPicturesInfo resortData={resortData} />
+                <ResortMoreResorts resortData={resortData} />
+                <Footer />
+              </main>
+            </>
+          ) : (
+            <ResortNotFound />
+          )}
+        </>
+      )}
     </>
   );
 };

@@ -45,7 +45,7 @@ const ResortDetails = ({ resortData }) => {
       </span>
       <span>
         <LandscapeIcon fontSize="small" />
-        Site Height {resortData?.siteHiegt}
+        Site Height {resortData?.siteHeight}m
       </span>
       <span>
         <FamilyRestroomIcon fontSize="small" />
