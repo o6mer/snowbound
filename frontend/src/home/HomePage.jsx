@@ -44,9 +44,11 @@ const HomePage = () => {
           Recomended resorts
         </span>{" "}
       </h1>
-      <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+      <div className=" gap-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
         {resortData?.map((resort) => (
-          <RecomendedResorts resortData={resort} />
+          <RecomendedResorts
+            resortData={resort}
+          />
         ))}
       </div>
       <Footer />

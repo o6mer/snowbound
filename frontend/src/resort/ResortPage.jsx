@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Divider from "@mui/material/Divider";
 import ResortHeader from "./components/ResortHeader";
 import ResortDetails from "./components/ResortDetails";

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate} from "react-router-dom";
+import LoginPage from "../userAuth/LoginPage";
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [token, setToken] = useState(false);
+ 
   return (
     <>
       <nav className="bg-gray-800 ">
@@ -47,16 +48,7 @@ function Navbar() {
                     Country 1
                   </NavLink>
 
-                  {!token ? (
-                    <NavLink
-                      to="/Login"
-                      className="absolute  right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      LogIn
-                    </NavLink>
-                  ) : (
-                    <div className="absolute  right-2"></div>
-                  )}
+               
                 </div>
               </div>
             </div>
