@@ -110,8 +110,8 @@ const ResortPage = () => {
                 <Divider />
                 <ResortPicturesInfo resortData={resortData} />
                 <ResortMoreResorts resortData={resortData} />
-                <Footer />
               </main>
+              <Footer />
             </>
           ) : (
             <ResortNotFound />
