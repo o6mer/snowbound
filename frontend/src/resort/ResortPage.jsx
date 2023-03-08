@@ -9,6 +9,9 @@ import ResortPicturesInfo from "./components/ResortPicturesInfo";
 import ResortMoreToDo from "./components/ResortMoreToDo";
 import Navbar from "../general/Navbar";
 import Footer from "../general/Footer";
+import ResortMoreResorts from "./components/ResortMoreResorts";
+import Loader from "../general/Loader";
+import ResortNotFound from "./components/ResortNotFound";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -55,15 +58,22 @@ const ResortPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+
       try {
+        const transFormedName = name.charAt(0).toUpperCase() + name.slice(1);
+
         const { data } = await axios.get(
-          `http://localhost:8000/api/resort/find/${name}`
+          `http://localhost:8000/api/resort/find/${transFormedName}`
         );
 
         if (!data) return;
 
         console.log(data);
-        setResortData({ ...data });
+
+        setResortData({
+          ...data[0][0],
+          pictures: data[1].map((picture) => picture.link),
+        });
         setIsLoading(false);
       } catch (err) {
         console.log(err.meessage);
@@ -76,22 +86,38 @@ const ResortPage = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col gap-10 w-full h-full px-24">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <ResortHeader resortData={resortData} />
-            <Divider />
-            <ResortDetails resortData={resortData} />
-            <Divider />
-            <ResortMoreToDo resortData={resortData} />
-            <Divider />
-            <ResortPicturesInfo resortData={resortData} />
-            <Footer />
-          </>
-        )}
-      </main>
+      {isLoading ? (
+        <div className="h-screen">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {resortData ? (
+            <>
+              <div className="w-full h-[50vh] relative">
+                <img
+                  src={resortData?.image}
+                  alt=""
+                  className="-z-10 w-full h-full object-cover "
+                />
+              </div>
+              <main className="flex flex-col gap-10 w-full h-full px-24 ">
+                <ResortHeader resortData={resortData} />
+                <Divider />
+                <ResortDetails resortData={resortData} />
+                <Divider />
+                <ResortMoreToDo resortData={resortData} />
+                <Divider />
+                <ResortPicturesInfo resortData={resortData} />
+                <ResortMoreResorts resortData={resortData} />
+                <Footer />
+              </main>
+            </>
+          ) : (
+            <ResortNotFound />
+          )}
+        </>
+      )}
     </>
   );
 };
