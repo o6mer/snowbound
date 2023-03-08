@@ -1,9 +1,20 @@
-import React from 'react'
+import {React,useState} from 'react'
+import FindModal from '../../general/Modals/FindModal';
 
 const SearchHero = () => {
+     const [modalOpen, setModalOpen] = useState(false);
+const handleOpenModal = () => {
+  setModalOpen(true);
+  document.body.style.overflow = "hidden";
+};
+
+const handleCloseModal = () => {
+  setModalOpen(false);
+  document.body.style.overflow = "auto";
+};
   return (
     <header className="w-full h-96  bg-[url('./assets/HeroSearch1.jpg')] bg-cover bg-[0px_-100px] bg-no-repeat  flex justify-center items-center">
-      <div className="flex flex-col justify-center items-center ">
+      <div className="flex flex-col  justify-center items-center ">
         <h1 className=" text-center text-4xl text-white font-bold drop-shadow-xl">
           Here you can search for your the
           <br /> best vecation that suits for you
@@ -19,30 +30,22 @@ const SearchHero = () => {
           </label>
           <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+             
             </div>
             <input
-              type="text"
-              id="simple-search"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  "
               placeholder="Search"
               required
+              type="text"
+              className="flex-grow  h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
+              onClick={handleOpenModal}
             />
+            <FindModal
+              open={modalOpen}
+              onClose={handleCloseModal}
+            ></FindModal>
           </div>
           <button
-            type="submit"
+            type="button"
             className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg

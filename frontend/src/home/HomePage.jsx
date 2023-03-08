@@ -2,9 +2,36 @@ import React from "react";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
 import HomeHero from "./Components/HomeHero";
+import { useParams, Link } from "react-router-dom";
 import RecomendedResorts from "./Components/RecomendedResorts";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 const HomePage = () => {
+  const [resortData, setResortData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { continent, country, resort } = useParams();
+
+  useEffect(() => {
+    console.log(country);
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8000/api/resort/get`
+        );
+
+        if (!data) return;
+        setIsLoading(false);
+        console.log(data);
+        setResortData(data);
+      } catch (err) {
+        console.log(err.meessage);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="w-full h-full">
       <Navbar />
@@ -17,16 +44,10 @@ const HomePage = () => {
           Recomended resorts
         </span>{" "}
       </h1>
-
-      <div className="md:flex">
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
-      </div>
-      <div className="md:flex">
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
-        <RecomendedResorts resortImage={"./src/assets/resort.jpg"} />
+      <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+        {resortData?.map((resort) => (
+          <RecomendedResorts resortData={resort} />
+        ))}
       </div>
       <Footer />
     </div>
@@ -34,3 +55,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
