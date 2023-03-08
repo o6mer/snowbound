@@ -12,6 +12,7 @@ import AdminPage from "./admin/AdminPage";
 import LoginPage from "./userAuth/LoginPage";
 import SignupPage from "./userAuth/SignupPage";
 import HomePage from "./home/HomePage";
+import EditAddResort from "./admin/components/EditAddResort";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/edit&addresort/:resortName",
+    element: <EditAddResort />,
     errorElement: <ErrorPage />,
   },
   {

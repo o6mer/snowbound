@@ -9,18 +9,33 @@ const AdminHome = () => {
   //   .then((res) => {})
   //   .catch((err) => {})
   // }, [])
-
-  const allResorts = ["jnjnjnjn", "Bangalore"];
+  //   let allResorts = []
+  const [allResorts, setAllResorts] = useState([]);
   const [adminResorts, setAdminResorts] = useState([]);
   const [isToast, setIsToast] = useState(false);
+
   useEffect(() => {
-    setAdminResorts(allResorts);
+    const getAllResorts = async () => {
+      await axios
+        .get("http://localhost:8000/api/resort/get")
+        .then((res) => {
+          console.log(res.data);
+          setAllResorts(res.data);
+          //   console.log(allResorts, " hiii");
+          setAdminResorts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getAllResorts();
   }, []);
 
   const handleSearch = (e, resortName) => {
     console.log(resortName);
+    console.log(allResorts);
     const filterResort = allResorts.filter((res) => {
-      return res === resortName;
+      return res.name === resortName;
     });
     if (resortName) {
       console.log(filterResort);
@@ -31,12 +46,26 @@ const AdminHome = () => {
       setAdminResorts(allResorts);
     }
   };
-
+  const deleteResort = (resortName) => {
+    axios
+      .delete(`http://localhost:8000/api/resort/${resortName}`)
+      .then((res) => {
+        alert("deleted");
+        console.log(res);
+        const temp = allResorts.filter((res) => res.name !== resortName);
+        setAllResorts(temp);
+        setAdminResorts(temp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // alert(resortName);
+  };
   return (
     <>
       <h1>Admin Home</h1>
       <SearchBar handleSearch={handleSearch} isToast={isToast} />
-      <AdminResorts adminResorts={adminResorts} />
+      <AdminResorts adminResorts={adminResorts} deleteResort={deleteResort} />
     </>
   );
 };
