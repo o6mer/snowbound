@@ -27,7 +27,7 @@ const AdminNavBar = () => {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink
-                    to="/search/:query"
+                    to="/admin"
                     className="text-gray-300 hover:bg-gray-700 
                     hover:text-white
                     focus:bg-gray-700
@@ -36,7 +36,7 @@ const AdminNavBar = () => {
                     All Resorts
                   </NavLink>
                   <NavLink
-                    to="/"
+                    to="/admin/edit&addresort/new"
                     className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring focus:ring-white-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Add Resort

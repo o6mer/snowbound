@@ -13,6 +13,7 @@ import LoginPage from "./userAuth/LoginPage";
 import SignupPage from "./userAuth/SignupPage";
 import HomePage from "./home/HomePage";
 import EditAddResort from "./admin/components/EditAddResort";
+import EditPage from "./admin/components/EditPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/edit&addresort/:resortName",
-    element: <EditAddResort />,
+    element: <EditPage />,
     errorElement: <ErrorPage />,
   },
   {
