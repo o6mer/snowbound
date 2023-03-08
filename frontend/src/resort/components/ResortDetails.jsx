@@ -14,8 +14,7 @@ const ResortDetails = ({ resortData }) => {
   return (
     <section className="flex flex-wrap gap-4 justify-center [&>span]:flex [&>span]:items-center text-lg">
       <span>
-        <StraightenIcon fontSize="small" /> KM of Tracks{" "}
-        {resortData?.kmOfTracks}
+        <StraightenIcon fontSize="small" /> KM of Tracks {resortData?.kmTrack}
       </span>
       <span>
         <CircleIcon sx={{ color: "green" }} fontSize="small" />
@@ -38,10 +37,6 @@ const ResortDetails = ({ resortData }) => {
         <CircleIcon fontSize="small" />
         <CircleIcon fontSize="small" />
         Black2X Tracks {resortData?.blackTrackX2}
-      </span>
-      <span>
-        <DownhillSkiingIcon fontSize="small" />
-        Solo Tracks {resortData?.soloTrack}{" "}
       </span>
       <span>
         <LandscapeIcon fontSize="small" />

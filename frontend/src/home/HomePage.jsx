@@ -3,7 +3,7 @@ import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
 import HomeHero from "./Components/HomeHero";
 import { useParams, Link } from "react-router-dom";
-import RecomendedResorts from "./Components/RecomendedResorts";
+import RecomendedResorts from "../general/RecomendedResorts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const HomePage = () => {
@@ -46,9 +46,7 @@ const HomePage = () => {
       </h1>
       <div className=" gap-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
         {resortData?.map((resort) => (
-          <RecomendedResorts
-            resortData={resort}
-          />
+          <RecomendedResorts resortData={resort} />
         ))}
       </div>
       <Footer />
@@ -57,4 +55,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

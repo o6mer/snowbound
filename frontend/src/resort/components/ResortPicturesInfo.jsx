@@ -16,7 +16,11 @@ const ResortPicturesInfo = ({ resortData }) => {
         swipeable
       >
         {resortData?.pictures?.map((picture) => (
-          <img key={picture} src={picture} />
+          <img
+            key={picture}
+            src={picture}
+            className="max-h-[50vh] object-cover"
+          />
         ))}
       </Carousel>
       <div>
