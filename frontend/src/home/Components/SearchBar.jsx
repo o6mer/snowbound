@@ -1,11 +1,13 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 
 import axios from "axios";
+
 export default function SearchBar({ handleSearch, isToast }) {
   const [resortName, setResortName] = useState("");
   const [allResorts, setAllResorts] = useState([]);
