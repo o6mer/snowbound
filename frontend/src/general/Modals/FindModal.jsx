@@ -1,17 +1,95 @@
 import React from "react";
-import { useEffect,useState } from "react";
-import "./Modal.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import "./Modal.css";
+import { useNavigate } from "react-router-dom";
 export default function FindModal(props) {
   if (!props.open) {
     return null;
   }
+  const [allContries, setAllContries] = useState([]);
+  const [allResorts, setAllResorts] = useState([]);
+  const [continent, setContinent] = useState("");
+  const [country, setCountry] = useState("");
+  const [resort, setResort] = useState("none");
+  const [toast, setToast] = useState(false);
+  const navigate = useNavigate();
+  const allContinent = [
+    "Europe",
+    "Asia",
+    "Africa",
+    "North America",
+    "South America",
+  ];
+  useEffect(() => {
+    const getAllCountries = async () => {
+      await axios
+        .post("http://localhost:8000/api/resort/getcountry")
+        .then((res) => {
+          console.log(res.data);
+          setAllContries(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getAllCountries();
+  }, []);
+  const handleSelect1 = (event, value) => {
+    if (value) {
+      setContinent(value);
+    }
+  };
+  const handleSelect2 = (event, value) => {
+    if (value) {
+      setCountry(value);
+      const getAllResorts = async () => {
+        await axios
+          .get(`http://localhost:8000/api/resort/find/country/${value}`)
+          .then((res) => {
+            console.log(res.data);
+            setAllResorts(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      getAllResorts();
+    }
+  };
+  const handleSelect3 = (event, value) => {
+    if (value) {
+      setResort(value);
+    }
+  };
+  const Find = (e) => {
+    e.preventDefault();
+
+    if (
+      allContinent.find((theContinent) => theContinent === continent) &&
+      allContries.find((theCountry) => theCountry.name === country)
+    ) {
+      console.log(country);
+      document.body.style.overflow = "auto";
+      navigate(`/search/${continent}/${country}/${resort}`);
+      window.location.reload(false);
+    } else {
+      setToast(true);
+    }
+  };
+  const closeToast = () => {
+    setToast(false);
+  };
+
   return (
     <div
       className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 modal animated 
-      ${props.open ? 'fadeIn' : 'fadeOut faster'}  shadow-2xl`}
+      ${props.open ? "fadeIn" : "fadeOut faster"}  shadow-2xl`}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="px-4 pt-5 pb-4 overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+        <div className="px-4 pt-5 pb-4  transform transition-all sm:max-w-lg sm:w-full">
           <main
             id="content"
             role="main"
@@ -52,28 +130,88 @@ export default function FindModal(props) {
                     <div className="grid gap-y-4">
                       <div>
                         <div className="relative">
-                          <input
-                            placeholder="Continent"
-                            className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                            required
+                          <Autocomplete
+                            options={allContinent}
+                            value={continent}
+                            onChange={handleSelect1}
+                            sx={{
+                              marginTop: "1rem",
+                              background: "white",
+                              opacity: 0.8,
+                              border: "5px  gray",
+                              width: "100%",
+                            }}
+                            renderInput={(params) =>
+                              !toast ? (
+                                <TextField {...params} label="Continent" />
+                              ) : (
+                                <TextField
+                                  onClick={closeToast}
+                                  error
+                                  {...params}
+                                  id="outlined-error-helper-text"
+                                  label="Continent"
+                                />
+                              )
+                            }
                           />
-                          <input
-                            placeholder="Country"
-                            className="mt-4 py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                            required
+                          <Autocomplete
+                            options={allContries.map((country) => country.name)}
+                            value={country}
+                            onChange={handleSelect2}
+                            sx={{
+                              marginTop: "1rem",
+                              background: "white",
+                              opacity: 0.8,
+                              border: "5px  gray",
+                              width: "100%",
+                            }}
+                            renderInput={(params) =>
+                              !toast ? (
+                                <TextField {...params} label="Country" />
+                              ) : (
+                                <TextField
+                                  onClick={closeToast}
+                                  error
+                                  {...params}
+                                  id="outlined-error-helper-text"
+                                  label="Country"
+                                />
+                              )
+                            }
                           />
-                          <input
-                            placeholder="Resort"
-                            className="mt-4 py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
-                            required
+                          <Autocomplete
+                            options={allResorts.map((resort) => resort.name)}
+                            onChange={handleSelect3}
+                            sx={{
+                              marginTop: "1rem",
+                              background: "white",
+                              opacity: 0.8,
+                              border: "5px  gray",
+                              width: "100%",
+                            }}
+                            renderInput={(params) =>
+                              !toast ? (
+                                <TextField {...params} label="Resort" />
+                              ) : (
+                                <TextField
+                                  onClick={closeToast}
+                                  error
+                                  {...params}
+                                  id="outlined-error-helper-text"
+                                  label="Resort"
+                                />
+                              )
+                            }
                           />
                         </div>
                       </div>
                       <button
-                        type="submit"
+                        onClick={Find}
+                        type="button"
                         className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
                       >
-                        Find
+                        Search
                       </button>
                     </div>
 

@@ -52,6 +52,7 @@ const Compare = (e) => {
     )
     && resort1!== resort2 && resort1!== resort3 
   ) {
+    document.body.style.overflow = "auto";
     navigate(`/compare/${resort1}/${resort2}/${resort3}`);
   } else {
     setToast(true);
