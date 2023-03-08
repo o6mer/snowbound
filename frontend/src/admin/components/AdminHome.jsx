@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loader from "../../general/Loader";
 import SearchBar from "../../home/Components/SearchBar";
 import AdminResorts from "./AdminResorts";
 
@@ -13,9 +14,11 @@ const AdminHome = () => {
   const [allResorts, setAllResorts] = useState([]);
   const [adminResorts, setAdminResorts] = useState([]);
   const [isToast, setIsToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getAllResorts = async () => {
+      setIsLoading(true);
       await axios
         .get("http://localhost:8000/api/resort/get")
         .then((res) => {
@@ -23,6 +26,7 @@ const AdminHome = () => {
           setAllResorts(res.data);
           //   console.log(allResorts, " hiii");
           setAdminResorts(res.data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -47,8 +51,9 @@ const AdminHome = () => {
     }
   };
   const deleteResort = (resortName) => {
+    console.log(resortName);
     axios
-      .delete(`http://localhost:8000/api/resort/${resortName}`)
+      .delete(`http://localhost:8000/api/resort/delete/${resortName}`)
       .then((res) => {
         alert("deleted");
         console.log(res);
@@ -63,9 +68,19 @@ const AdminHome = () => {
   };
   return (
     <>
-      <h1>Admin Home</h1>
       <SearchBar handleSearch={handleSearch} isToast={isToast} />
-      <AdminResorts adminResorts={adminResorts} deleteResort={deleteResort} />
+      <>
+        {isLoading ? (
+          <div className="h-[50vh]">
+            <Loader />
+          </div>
+        ) : (
+          <AdminResorts
+            adminResorts={adminResorts}
+            deleteResort={deleteResort}
+          />
+        )}
+      </>
     </>
   );
 };

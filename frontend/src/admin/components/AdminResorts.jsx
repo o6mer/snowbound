@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -11,23 +11,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import AdminDeleteModal from "./AdminDeleteModal";
 const AdminResorts = ({ adminResorts, deleteResort }) => {
   const navigate = useNavigate();
-  //   const deleteResort = (resortName) => {
-  //     axios
-  //       .delete(`http://localhost:8000/api/resort/${resortName}`)
-  //       .then((res) => {
-  //         alert("deleted");
-  //         console.log(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //     // alert(resortName);
-  //   };
+  const [modalOpen, setModalOpen] = useState(false);
+  const [deleteResortName, setDeleteResortName] = useState("");
+  // const deleteResort = (resortName) => {
+  //   axios
+  //     .delete(`http://localhost:8000/api/resort/${resortName}`)
+  //     .then((res) => {
+  //       alert("deleted");
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   // alert(resortName);
+  // };
   return (
     <>
-      <div className=" flex flex-col gap-5">
+      <div className=" flex flex-col gap-5 py-10">
         {adminResorts.map((resort, index) => {
           return (
             <div
@@ -59,7 +62,11 @@ const AdminResorts = ({ adminResorts, deleteResort }) => {
                   variant="outlined"
                   color="error"
                   startIcon={<DeleteIcon />}
-                  onClick={() => deleteResort(resort.name)}
+                  onClick={() => {
+                    setDeleteResortName(resort.name);
+                    setModalOpen(true);
+                    //  deleteResort(resort.name)
+                  }}
                 >
                   Delete
                 </Button>
@@ -67,134 +74,13 @@ const AdminResorts = ({ adminResorts, deleteResort }) => {
             </div>
           );
         })}
+        <AdminDeleteModal
+          setModalOpen={setModalOpen}
+          modalOpen={modalOpen}
+          deleteResortName={deleteResortName}
+          deleteResort={deleteResort}
+        />
       </div>
-      <List>
-        {adminResorts.map((resort, index) => {
-          return (
-            <ListItem key={index}>
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src={resort.avatar} />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: "3",
-                  WebkitBoxOrient: "vertical",
-                }}
-                primary={resort.name}
-                secondary={
-                  <>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      {resort.country_id}
-                    </Typography>
-                    <Typography component="span">{` — ${resort.description}`}</Typography>
-                  </>
-                }
-              />
-              <ListItemButton>adasdas</ListItemButton>
-              <Divider />
-            </ListItem>
-          );
-        })}
-      </List>
-      {/* <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Brunch this weekend?"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-      </List> */}
-
-      {/* <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Brunch this weekend?"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Summer BBQ"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Sandra Adams
-                </Typography>
-                {" — Do you have Paris recommendations? Have you ever…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-      </List> */}
     </>
   );
 };

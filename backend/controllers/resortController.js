@@ -79,6 +79,7 @@ const deleteResortByBame = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
+    alert("Error deleting resort");
   }
 };
 const createResort = async (req, res) => {
