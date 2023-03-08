@@ -13,7 +13,7 @@ export default function IconBreadcrumbs({resort,country,continent}) {
   return (
     <div className="m-5" role="presentation">
       <Breadcrumbs separator="›" aria-label="breadcrumb">
-        {continent && (
+        {continent!=="none" && (
           <Link
             href=""
             underline="hover"
@@ -24,7 +24,7 @@ export default function IconBreadcrumbs({resort,country,continent}) {
             {continent}
           </Link>
         )}
-        {country && (
+        {country!=="none" && (
           <a
             className=" hover:underline"
             href={`/search/${continent}/${country}/none`}

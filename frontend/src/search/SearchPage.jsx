@@ -38,8 +38,7 @@ const SearchPage = () => {
         );
         if (!data) return;
         setIsLoading(false);
-        console.log(data[1]);
-        setResortData(data[1]);
+        setResortData(data.resort);
       } catch (err) {
         console.log(err.meessage);
         setIsLoading(false);
