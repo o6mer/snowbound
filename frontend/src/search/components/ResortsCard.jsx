@@ -10,7 +10,7 @@ const ResortsCard = ({resort}) => {
         <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
           <div className="flex justify-between item-center">
             <p className="text-gray-500 font-medium hidden md:block">
-              {resort?.country_id}
+            {resort?.country_id}
             </p>
             <div className="flex items-center">
               <svg
@@ -63,6 +63,6 @@ const ResortsCard = ({resort}) => {
       </div>
     </div>
   );
-}
+};
 
 export default ResortsCard

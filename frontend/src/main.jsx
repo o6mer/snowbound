@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/compare/:resort1/:resort2/:resort3",
+    path: "/compare/:resortCompare",
     element: <ComparePage />,
     errorElement: <ErrorPage />,
   },

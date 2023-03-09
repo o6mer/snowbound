@@ -47,13 +47,13 @@ const handleSelect3 = (event, value) => {
 const Compare = (e) => {
   e.preventDefault();
   if (
-    [resort1, resort2, resort3].every((resortName) =>
+    [resort1, resort2].every((resortName) =>
       allResorts.some((resort) => resort.name === resortName)
     )
     && resort1!== resort2 && resort1!== resort3 
   ) {
     document.body.style.overflow = "auto";
-    navigate(`/compare/${resort1}/${resort2}/${resort3}`);
+    navigate(`/compare/${resort1}&${resort2}&${resort3}`);
   } else {
     setToast(true);
   }

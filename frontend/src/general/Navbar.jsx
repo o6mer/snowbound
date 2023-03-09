@@ -3,12 +3,33 @@ import { Transition } from "@headlessui/react";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
 import { NavLink, useNavigate } from "react-router-dom";
 import LoginPage from "../userAuth/LoginPage";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 import { UserContext } from "../contexts/UserContextProvider";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+
+   const [anchorEl, setAnchorEl] = useState(null);
+   const open = Boolean(anchorEl);
+   const handleClick = (event) => {
+     setAnchorEl(event.currentTarget);
+   };
+   const handleClose = () => {
+     setAnchorEl(null);
+   };
 
   const { user } = useContext(UserContext);
 
@@ -21,9 +42,10 @@ function Navbar() {
     setModalOpen(false);
     document.body.style.overflow = "auto";
   };
+console.log(openProfile);
   return (
     <>
-      <nav className="bg-gray-800 ">
+      <nav className="bg-clip-content bg-gradient-to-r to-sky-300 from-sky-100">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -38,28 +60,40 @@ function Navbar() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <NavLink
-                    to="/search/:continent/:country/:resort"
-                    className="text-gray-300 hover:bg-gray-700 
+                  <a
+                    href="/search/Europe/France/none"
+                    className=" hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-gray-700
+                    focus:bg-sky-400 
                    focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Country 1
-                  </NavLink>
-                  <NavLink
-                    to="/"
-                    className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring focus:ring-white-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    France
+                  </a>
+                  <a
+                    href="/search/Europe/Switzerland/none"
+                    className=" hover:bg-sky-400  
+                    hover:text-white
+                    focus:bg-sky-400  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Country 1
-                  </NavLink>
+                    Switzerland
+                  </a>
 
-                  <NavLink
-                    to="/"
-                    className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                  <a
+                    href="/search/Europe/Italy/none"
+                    className=" hover:bg-sky-400 
+                    hover:text-white
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Country 1
-                  </NavLink>
+                    Italy
+                  </a>
+                  <a
+                    href="/search/North America/Canada/none"
+                    className=" hover:bg-sky-400 
+                    hover:text-white
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Canada
+                  </a>
 
                   {user?.admin && (
                     <NavLink
@@ -73,7 +107,11 @@ function Navbar() {
                   {!user ? (
                     <div>
                       <NavLink
-                        className="absolute top-4 right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+
+                        className="absolute top-4 right-2  hover:bg-sky-500 
+                    hover:text-white
+                    focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                      
                         onClick={handleOpenModal}
                       >
                         LogIn
@@ -84,9 +122,86 @@ function Navbar() {
                       ></LoginPage>
                     </div>
                   ) : (
-                    <div className="absolute  right-2 text-white">
-                      Hello, {user.username}
-                    </div>
+
+                    <div className="absolute top-3 left-[93vw]">
+                      <Tooltip title="Account settings">
+                        <IconButton
+                          onClick={handleClick}
+                          size="small"
+                          aria-controls={open ? "account-menu" : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                        >
+                          <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={open}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                          elevation: 0,
+                          sx: {
+                            overflow: "visible",
+                            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                            mt: 1.5,
+                            "& .MuiAvatar-root": {
+                              width: 32,
+                              height: 32,
+                              ml: -0.5,
+                              mr: 1,
+                            },
+                            "&:before": {
+                              content: '""',
+                              display: "block",
+                              position: "absolute",
+                              top: 0,
+                              right: 14,
+                              width: 10,
+                              height: 10,
+                              bgcolor: "background.paper",
+                              transform: "translateY(-50%) rotate(45deg)",
+                              zIndex: 0,
+                            },
+                          },
+                        }}
+                        transformOrigin={{
+                          horizontal: "right",
+                          vertical: "top",
+                        }}
+                        anchorOrigin={{
+                          horizontal: "right",
+                          vertical: "bottom",
+                        }}
+                      >
+                        <MenuItem onClick={handleClose}>
+                          <Avatar /> Profile
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <Avatar /> My account
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <PersonAdd fontSize="small" />
+                          </ListItemIcon>
+                          Add another account
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Settings
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <Logout fontSize="small" color="error" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </Menu>      
                   )}
                 </div>
               </div>
@@ -95,7 +210,7 @@ function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                className="bg-sky-200 text white inline-flex items-center justify-center p-2 rounded-md text-white-400 hover:text-black hover:bg-sky-500 focus:outline-none "
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -181,11 +296,17 @@ function Navbar() {
                 )}
 
                 <NavLink
-                  to="/"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                  className="absolute top-4 right-2  hover:bg-sky-500 
+                    hover:text-white
+                    focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                  onClick={handleOpenModal}
                 >
-                  Log In
+                  LogIn
                 </NavLink>
+                <LoginPage
+                  open={modalOpen}
+                  onClose={handleCloseModal}
+                ></LoginPage>
               </div>
             </div>
           )}
