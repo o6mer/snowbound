@@ -1,13 +1,15 @@
 import React from "react";
 import Navbar from "../general/Navbar";
 import "./Login.css";
+import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 const LoginPage = (props) => {
   if (!props.open) {
     return null;
   } 
-  const switchers = [...document.querySelectorAll(".switcher")];
+  useEffect(() => {
+   const switchers = [...document.querySelectorAll(".switcher")];
 
   switchers.forEach((item) => {
     item.addEventListener("click", function () {
@@ -17,6 +19,8 @@ const LoginPage = (props) => {
       this.parentElement.classList.add("is-active");
     });
   });
+  }, [])
+ 
   return (
     <section
       className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 modal animated 
