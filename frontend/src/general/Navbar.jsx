@@ -22,14 +22,14 @@ function Navbar() {
   const [modalOpen, setModalOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
 
-   const [anchorEl, setAnchorEl] = useState(null);
-   const open = Boolean(anchorEl);
-   const handleClick = (event) => {
-     setAnchorEl(event.currentTarget);
-   };
-   const handleClose = () => {
-     setAnchorEl(null);
-   };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const { user } = useContext(UserContext);
 
@@ -42,7 +42,7 @@ function Navbar() {
     setModalOpen(false);
     document.body.style.overflow = "auto";
   };
-console.log(openProfile);
+  console.log(openProfile);
   return (
     <>
       <nav className="bg-clip-content bg-gradient-to-r to-sky-300 from-sky-100">
@@ -95,10 +95,12 @@ console.log(openProfile);
                     Canada
                   </a>
 
-                  {user?.admin && (
+                  {user.admin && (
                     <NavLink
                       to="/admin"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                      className=" hover:bg-sky-400 
+                    hover:text-white
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       admin
                     </NavLink>
@@ -107,11 +109,9 @@ console.log(openProfile);
                   {!user ? (
                     <div>
                       <NavLink
-
                         className="absolute top-4 right-2  hover:bg-sky-500 
                     hover:text-white
                     focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                      
                         onClick={handleOpenModal}
                       >
                         LogIn
@@ -122,7 +122,6 @@ console.log(openProfile);
                       ></LoginPage>
                     </div>
                   ) : (
-
                     <div className="absolute top-3 left-[93vw]">
                       <Tooltip title="Account settings">
                         <IconButton
@@ -201,7 +200,8 @@ console.log(openProfile);
                           </ListItemIcon>
                           Logout
                         </MenuItem>
-                      </Menu>      
+                      </Menu>
+                    </div>
                   )}
                 </div>
               </div>
@@ -288,7 +288,7 @@ console.log(openProfile);
 
                 {user.admin && (
                   <NavLink
-                    to="/admin"
+                    to="/"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
                   >
                     admin
