@@ -8,11 +8,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
+import { useAuth } from "../hooks/useAuth";
 const HomePage = () => {
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { continent, country, resort } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     console.log(country);

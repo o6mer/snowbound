@@ -10,11 +10,14 @@ import axios from "axios";
 import Footer from "../general/Footer";
 import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
+import { useAuth } from "../hooks/useAuth";
 const SearchPage = () => {
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { continent, country, resort } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     console.log(country);

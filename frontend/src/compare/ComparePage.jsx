@@ -6,6 +6,7 @@ import CompareTable from "./components/CompareTable";
 import CompareFilter from "./components/CompareFilter";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
+import { useAuth } from "../hooks/useAuth";
 
 const ComparePage = () => {
   const DUMMY_RESORT = [
@@ -110,6 +111,8 @@ const ComparePage = () => {
   //       console.log(err);
   //     });
   // }, []);
+
+  useAuth();
 
   const getFilterResorts = (filterKeys) => {
     if (!filterKeys.length) {

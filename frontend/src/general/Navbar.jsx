@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Transition } from "@headlessui/react";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
-import { NavLink,useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LoginPage from "../userAuth/LoginPage";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -14,10 +14,11 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { UserContext } from "../contexts/UserContextProvider";
+
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
 
@@ -29,6 +30,8 @@ function Navbar() {
    const handleClose = () => {
      setAnchorEl(null);
    };
+
+  const { user } = useContext(UserContext);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -92,12 +95,23 @@ console.log(openProfile);
                     Canada
                   </a>
 
-                  {!token ? (
+                  {user?.admin && (
+                    <NavLink
+                      to="/admin"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      admin
+                    </NavLink>
+                  )}
+
+                  {!user ? (
                     <div>
                       <NavLink
+
                         className="absolute top-4 right-2  hover:bg-sky-500 
                     hover:text-white
                     focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                      
                         onClick={handleOpenModal}
                       >
                         LogIn
@@ -108,6 +122,7 @@ console.log(openProfile);
                       ></LoginPage>
                     </div>
                   ) : (
+
                     <div className="absolute top-3 left-[93vw]">
                       <Tooltip title="Account settings">
                         <IconButton
@@ -186,8 +201,7 @@ console.log(openProfile);
                           </ListItemIcon>
                           Logout
                         </MenuItem>
-                      </Menu>
-                    </div>
+                      </Menu>      
                   )}
                 </div>
               </div>
@@ -271,6 +285,15 @@ console.log(openProfile);
                 >
                   Country 1
                 </NavLink>
+
+                {user.admin && (
+                  <NavLink
+                    to="/admin"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    admin
+                  </NavLink>
+                )}
 
                 <NavLink
                   className="absolute top-4 right-2  hover:bg-sky-500 

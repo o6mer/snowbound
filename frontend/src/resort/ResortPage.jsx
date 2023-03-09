@@ -12,6 +12,8 @@ import ResortMoreResorts from "./components/ResortMoreResorts";
 import Loader from "../general/Loader";
 import ResortNotFound from "./components/ResortNotFound";
 import CustomizedBreadcrumbs from "../general/CustomizedBreadcrumbs";
+import { useAuth } from "../hooks/useAuth";
+
 const DUMMY_RESORT = {
   name: "resort name",
   description:
@@ -53,6 +55,8 @@ const ResortPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { name } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
