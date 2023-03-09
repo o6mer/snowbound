@@ -11,6 +11,7 @@ import Footer from "../general/Footer";
 import ResortMoreResorts from "./components/ResortMoreResorts";
 import Loader from "../general/Loader";
 import ResortNotFound from "./components/ResortNotFound";
+import { useAuth } from "../hooks/useAuth";
 
 const DUMMY_RESORT = {
   name: "resort name",
@@ -53,6 +54,8 @@ const ResortPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { name } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     const fetchData = async () => {

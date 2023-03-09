@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Transition } from "@headlessui/react";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
-import { NavLink,useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LoginPage from "../userAuth/LoginPage";
+import { UserContext } from "../contexts/UserContextProvider";
+
 function Navbar() {
-  
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const { user } = useContext(UserContext);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -59,9 +61,18 @@ function Navbar() {
                     Country 1
                   </NavLink>
 
-                  {!token ? (
+                  {user?.admin && (
+                    <NavLink
+                      to="/admin"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      admin
+                    </NavLink>
+                  )}
+
+                  {!user ? (
                     <div>
-                      <NavLink                        
+                      <NavLink
                         className="absolute top-4 right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
                         onClick={handleOpenModal}
                       >
@@ -73,7 +84,9 @@ function Navbar() {
                       ></LoginPage>
                     </div>
                   ) : (
-                    <div className="absolute  right-2"></div>
+                    <div className="absolute  right-2 text-white">
+                      Hello, {user.username}
+                    </div>
                   )}
                 </div>
               </div>
@@ -157,6 +170,15 @@ function Navbar() {
                 >
                   Country 1
                 </NavLink>
+
+                {user.admin && (
+                  <NavLink
+                    to="/admin"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    admin
+                  </NavLink>
+                )}
 
                 <NavLink
                   to="/"

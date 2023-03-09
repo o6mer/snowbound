@@ -14,8 +14,8 @@ import SignupPage from "./userAuth/SignupPage";
 import HomePage from "./home/HomePage";
 import EditAddResort from "./admin/components/EditAddResort";
 import EditPage from "./admin/components/EditPage";
+import ProtectedRoutes from "./general/ProtectedRoutes";
 import EasterEgg from "./general/easteregg";
-
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminPage />,
+    element: (
+      <ProtectedRoutes>
+        <AdminPage />
+      </ProtectedRoutes>
+    ),
     errorElement: <ErrorPage />,
   },
   {
