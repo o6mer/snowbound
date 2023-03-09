@@ -62,9 +62,9 @@ const EditAddResort = () => {
         .get(`http://localhost:8000/api/resort/find/${resortName}`)
         .then((res) => {
           if (res.data) {
-            setResort(res.data[0][0]);
+            setResort(res.data.resort);
             setDefaultResort(res.data);
-            setResortImages(res.data[1]);
+            setResortImages(res.data.images);
             setIsNewResort(false);
             setIsLoading(false);
 
@@ -407,7 +407,7 @@ const EditAddResort = () => {
                       color="warning"
                       endIcon={<RestartAltIcon />}
                       onClick={() => {
-                        setResortImages([...defaultResort[0]]);
+                        setResortImages([...defaultResort.images]);
                       }}
                     >
                       Reset Images
@@ -487,7 +487,7 @@ const EditAddResort = () => {
                     variant="outlined"
                     color="info"
                     endIcon={<RestartAltIcon />}
-                    onClick={() => setResort({ ...defaultResort[0][0] })}
+                    onClick={() => setResort({ ...defaultResort.resort })}
                   >
                     Restore
                   </Button>

@@ -35,12 +35,12 @@ const AdminNavBar = () => {
                   >
                     All Resorts
                   </NavLink>
-                  <NavLink
-                    to="/admin/edit&addresort/new"
+                  <a
                     className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring focus:ring-white-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    href="/admin/edit&addresort/new"
                   >
                     Add Resort
-                  </NavLink>
+                  </a>
 
                   {/* <NavLink
                     to="/"
