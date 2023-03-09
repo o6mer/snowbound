@@ -11,7 +11,7 @@ import Footer from "../general/Footer";
 import ResortMoreResorts from "./components/ResortMoreResorts";
 import Loader from "../general/Loader";
 import ResortNotFound from "./components/ResortNotFound";
-
+import CustomizedBreadcrumbs from "../general/CustomizedBreadcrumbs";
 const DUMMY_RESORT = {
   name: "resort name",
   description:
@@ -101,8 +101,10 @@ const ResortPage = () => {
                 />
               </div>
               <main className="flex flex-col gap-10 w-full h-full px-24 ">
+                
                 <ResortHeader resortData={resortData} />
                 <Divider />
+
                 <ResortDetails resortData={resortData} />
                 <Divider />
                 <ResortMoreToDo resortData={resortData} />
