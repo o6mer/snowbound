@@ -95,7 +95,7 @@ function Navbar() {
                     Canada
                   </a>
 
-                  {user.admin && (
+                  {user?.admin && (
                     <NavLink
                       to="/admin"
                       className=" hover:bg-sky-400 
@@ -286,7 +286,7 @@ function Navbar() {
                   Country 1
                 </NavLink>
 
-                {user.admin && (
+                {user?.admin && (
                   <NavLink
                     to="/"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
