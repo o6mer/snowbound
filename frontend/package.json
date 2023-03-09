@@ -24,6 +24,7 @@
     "react-hot-toast": "^2.4.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.8.2",
+    "universal-cookie": "^4.0.4",
     "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {

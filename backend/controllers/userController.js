@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 
 const createUser = async (req, res) => {
-  const { email, firstname, lastname, username, password } = req.body;
+  const { email, firstname, lastname, password, username } = req.body;
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
@@ -26,19 +26,21 @@ const createUser = async (req, res) => {
     );
     await db.query(format("INSERT INTO checklist (owner) VALUES (%L)", email));
 
-    const user = rows[0];
+    const { admin } = rows[0];
 
     const token = jwt.sign(
       {
-        email: user.email,
-        username: user.username,
+        email,
+        username,
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "12h",
+        expiresIn: "1h",
       }
     );
-    return res.status(201).json({ token, message: "User Created" });
+    return res
+      .status(201)
+      .json({ user: { admin, username }, token, message: "User Created" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Error creating user" });
@@ -66,10 +68,14 @@ const login = async (req, res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "12h",
+        expiresIn: "1h",
       }
     );
-    return res.status(200).json({ token, message: "Logged in successfully" });
+    return res.status(200).json({
+      user: { admin: user.admin, username: user.username },
+      token,
+      message: "Logged in successfully",
+    });
   } catch (err) {
     console.log(err);
     return res.status(404).json({ message: err.message });
@@ -94,8 +100,58 @@ const updateChecklist = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+const auth = async (req, res) => {
+  const authorizationHeader = req.headers.authorization;
+
+  if (!authorizationHeader) {
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+
+  const token = authorizationHeader.split(" ")[1];
+
+  try {
+    const user = await checkToken(token);
+
+    // If the user is not found, return a 401 status
+    if (!user) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+
+    // If the user is found, return the user data
+    const { username, admin } = user;
+
+    res.status(200).json({ user: { username, admin } });
+  } catch (error) {
+    // If the token is invalid, return a 401 status
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+};
+
+const checkToken = async (token) => {
+  try {
+    if (!token) return;
+
+    const { email } = jwt.verify(token, process.env.JWT_SECRET);
+
+    const { rows } = await db.query(`SELECT * FROM users WHERE email = $1`, [
+      email,
+    ]);
+    const user = rows[0];
+
+    return user;
+  } catch (err) {
+    if (err.name === "TokenExpiredError") {
+      console.log("Token expired");
+    } else {
+      console.error(err);
+    }
+  }
+};
+
 module.exports = {
   createUser,
   updateChecklist,
   login,
+  auth,
 };
