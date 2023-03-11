@@ -38,3 +38,7 @@ html {
   background-color: rgb(101, 114, 135);
   color: white;
 }
+
+/* .keys > *:nth-child(odd) {
+  background-color: rgb(218, 213, 213);
+} */

@@ -39,6 +39,7 @@ const getMultipleResortByBame = async (req, res) => {
     res.status(200).json(answer);
   } catch (err) {
     console.log(err);
+    console.log(names);
     res.status(404).json({ message: err.message });
   }
 };

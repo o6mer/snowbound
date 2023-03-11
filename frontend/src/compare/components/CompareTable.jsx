@@ -1,8 +1,17 @@
 import React from "react";
+import ResortDetails from "./ResortDetails";
 
 const CompareTable = ({ DUMMY_RESORT }) => {
   return (
-    <div className="p-0 overflow-x-auto shadow-md sm:rounded-lg w-full flex justify-center ">
+    <>
+      <div className="flex p-5 gap-5 ">
+        {DUMMY_RESORT.map((resort) => {
+          return <ResortDetails key={resort.id} resortData={resort} />;
+        })}
+      </div>
+      {/* <ResortDetails resortData={DUMMY_RESORT[0]} /> */}
+
+      {/* <div className="p-0 overflow-x-auto shadow-md sm:rounded-lg w-full flex justify-center my-[10vh] ">
       <table className=" text-sm text-left text-gray-500 dark:text-gray-400 overflow-scroll w-full">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -12,7 +21,7 @@ const CompareTable = ({ DUMMY_RESORT }) => {
                 key={index}
                 scope="col"
                 className="px-6 py-3 bg-gray-700 text-white"
-              >
+                >
                 {resurt.name}
               </th>
             ))}
@@ -30,14 +39,23 @@ const CompareTable = ({ DUMMY_RESORT }) => {
                 </th>
 
                 {DUMMY_RESORT.map((rs) => (
-                  <td className="px-6 py-4 w-fit ">{rs[key]}</td>
+                  <>
+                    {typeof rs[key] == "boolean" ? (
+                      <td className="px-6 py-4 w-fit ">
+                        {rs[key] ? "Yes" : "No"}
+                      </td>
+                    ) : (
+                      <td className="px-6 py-4 w-fit ">{rs[key]}</td>
+                    )}
+                  </>
                 ))}
               </tr>
             );
           })}
         </tbody>
       </table>
-    </div>
+    </div> */}
+    </>
   );
 };
 export default CompareTable;

@@ -6,7 +6,9 @@ import CompareTable from "./components/CompareTable";
 import CompareFilter from "./components/CompareFilter";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
-
+import ResortNotFound from "../admin/components/ResortNotFound";
+import Loader from "../general/Loader";
+let dummyResorts = [];
 const ComparePage = () => {
   const DUMMY_RESORT = [
     {
@@ -96,26 +98,35 @@ const ComparePage = () => {
   ];
 
   const [compareData, setCompareData] = useState(DUMMY_RESORT);
-  // const { query } = useParams();
-  // useEffect(() => {
-  //   console.log(query);
-
-  //   axios
-  //     .get(`http://localhost:8000/api/compare/${query}`)
-  //     .then((res) => {
-  //       setCompareData([]);
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  const { resortCompare } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // console.log(query);
+    const queryNames = resortCompare.split("&");
+    console.log(queryNames);
+    axios
+      .post(`http://localhost:8000/api/resort/compare`, { names: queryNames })
+      .then((res) => {
+        const resorts = res.data.resort;
+        resorts.map((res) => {
+          delete res.image;
+          return res;
+        });
+        setCompareData([...resorts]);
+        dummyResorts = [...resorts];
+        console.log(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const getFilterResorts = (filterKeys) => {
     if (!filterKeys.length) {
-      setCompareData(DUMMY_RESORT);
+      setCompareData([...dummyResorts]);
     } else {
-      const temp = DUMMY_RESORT.map((resort) => {
+      const temp = dummyResorts?.map((resort) => {
         const entries = Object.entries(resort);
         const obj = {};
 
@@ -128,28 +139,42 @@ const ComparePage = () => {
       });
 
       console.log(temp);
-      setCompareData(temp);
+      setCompareData([...temp]);
       return temp;
     }
   };
   const resetFilterResorts = () => {
     //full array
-    setCompareData(DUMMY_RESORT);
+    setCompareData(dummyResorts);
   };
 
   return (
     <>
       <Navbar />
-      <div className="px-[10vw]">
-        <FindModel />
-        <CompareFilter
-          DUMMY_RESORT={DUMMY_RESORT}
-          getFilterResorts={getFilterResorts}
-          resetFilterResorts={resetFilterResorts}
-        />
-        <CompareTable DUMMY_RESORT={compareData} />
-        <Footer />
-      </div>
+      {isLoading ? (
+        <div>
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {compareData.length !== 2 ? (
+            <div>
+              <ResortNotFound />
+            </div>
+          ) : (
+            <div className="px-[10vw]">
+              <FindModel />
+              <CompareFilter
+                DUMMY_RESORT={dummyResorts}
+                getFilterResorts={getFilterResorts}
+                resetFilterResorts={resetFilterResorts}
+              />
+              <CompareTable DUMMY_RESORT={compareData} />
+            </div>
+          )}
+        </>
+      )}
+      <Footer />
     </>
   );
 };
