@@ -1,7 +1,7 @@
 import {React,useState} from 'react'
 import FindModal from '../../general/Modals/FindModal';
 
-const SearchHero = () => {
+const SearchHero = ({continent,country,resort}) => {
      const [modalOpen, setModalOpen] = useState(false);
 const handleOpenModal = () => {
   setModalOpen(true);
@@ -29,9 +29,7 @@ const handleCloseModal = () => {
             Search
           </label>
           <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-             
-            </div>
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
             <input
               placeholder="Search"
               required
@@ -40,6 +38,9 @@ const handleCloseModal = () => {
               onClick={handleOpenModal}
             />
             <FindModal
+              continent={continent}
+              country={country}
+              resort={resort}
               open={modalOpen}
               onClose={handleCloseModal}
             ></FindModal>

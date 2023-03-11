@@ -17,7 +17,7 @@ const AdminNavBar = () => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <NavLink
-                  to="/HomePage"
+                  to="/"
                   className="flex items-center text-blue-600 font-large"
                 >
                   <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />

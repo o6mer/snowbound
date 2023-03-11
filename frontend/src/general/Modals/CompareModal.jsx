@@ -62,6 +62,42 @@ export default function CompareModal(props) {
   const closeToast = () => {
     setToast(false);
   };
+
+  getAllResorts();
+}, []);
+const handleSelect1 = (event, value) => {
+  if (value) {
+    setResort1(value);
+  }
+};
+const handleSelect2 = (event, value) => {
+  if (value) {
+    setResort2(value);
+  }
+};
+const handleSelect3 = (event, value) => {
+  if (value) {
+    setResort3(value);
+  }
+};
+const Compare = (e) => {
+  e.preventDefault();
+  if (
+    [resort1, resort2].every((resortName) =>
+      allResorts.some((resort) => resort.name === resortName)
+    )
+    && resort1!== resort2 && resort1!== resort3 
+  ) {
+    document.body.style.overflow = "auto";
+    navigate(`/compare/${resort1}&${resort2}&${resort3}`);
+  } else {
+    setToast(true);
+  }
+};
+const closeToast = () => {
+  setToast(false);
+};
+
   return (
     <div className=" fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10  animated fadeIn faster">
       <div className="flex items-center justify-center min-h-screen">

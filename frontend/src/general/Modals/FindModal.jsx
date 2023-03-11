@@ -11,50 +11,55 @@ export default function FindModal(props) {
   }
   const [allContries, setAllContries] = useState([]);
   const [allResorts, setAllResorts] = useState([]);
-  const [continent, setContinent] = useState("");
-  const [country, setCountry] = useState("");
+  const [continent, setContinent] = useState(props.continent);
+  const [country, setCountry] = useState(props.country);
   const [resort, setResort] = useState("none");
   const [toast, setToast] = useState(false);
   const navigate = useNavigate();
   const allContinent = [
     "Europe",
-    "Asia",
-    "Africa",
     "North America",
     "South America",
   ];
+  
+  useEffect(() => {
+    setContinent(props.continent);
+    setCountry(props.country);
+   getAllResorts(props.country);
+   getAllCountries(props.continent)
+},[])
+   const getAllCountries = async (continent) => {
+     await axios
+       .post("http://localhost:8000/api/resort/countrybycont", { continent })
+       .then((res) => {
+         console.log(res.data);
+         setAllContries(res.data);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   };
+    const getAllResorts = async (country) => {
+          await axios
+            .get(`http://localhost:8000/api/resort/find/country/${country}`)
+            .then((res) => {
+              console.log(res.data);
+              setAllResorts(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        };
   const handleSelect1 = (event, value) => {
     if (value) {
-      setContinent(value);
-       const getAllCountries = async () => {
-      await axios                                             
-        .post("http://localhost:8000/api/resort/countrybycont",{continent:value})
-        .then((res) => {
-          console.log(res.data);
-          setAllContries(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getAllCountries();
+      setContinent(value);      
+      getAllCountries(value);
     }
   };
   const handleSelect2 = (event, value) => {
     if (value) {
-      setCountry(value);
-      const getAllResorts = async () => {
-        await axios
-          .get(`http://localhost:8000/api/resort/find/country/${value}`)
-          .then((res) => {
-            console.log(res.data);
-            setAllResorts(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-      getAllResorts();
+      setCountry(value);    
+      getAllResorts(value);
     }
   };
   const handleSelect3 = (event, value) => {
@@ -64,12 +69,10 @@ export default function FindModal(props) {
   };
   const Find = (e) => {
     e.preventDefault();
-
     if (
       allContinent.find((theContinent) => theContinent === continent) &&
       allContries.find((theCountry) => theCountry.name === country)
     ) {
-      console.log(country);
       document.body.style.overflow = "auto";
       navigate(`/search/${continent}/${country}/${resort}`);
       window.location.reload(false);

@@ -1,17 +1,35 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { UserContext } from "../contexts/UserContextProvider";
+import { Navigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const ProtectedRoutes = ({ children }) => {
-  const { token } = useContext(UserContext);
-
-  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const { auth } = useAuth();
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
-    if (!token) navigate("/");
-  }, [token]);
+    (async function () {
+      setIsloading(true);
+      await auth();
+      setIsloading(false);
+    })();
+  }, []);
 
-  return <div>ProtectedRoutes</div>;
+  return (
+    <>
+      {isLoading ? (
+        <div className="w-full h-screen">
+          {" "}
+          <Loader />{" "}
+        </div>
+      ) : user?.admin ? (
+        children
+      ) : (
+        <div>no auth</div>
+      )}
+    </>
+  );
 };
-
 export default ProtectedRoutes;

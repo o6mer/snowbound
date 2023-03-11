@@ -6,11 +6,16 @@ import { useParams, Link } from "react-router-dom";
 import RecomendedResorts from "../general/RecomendedResorts";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../general/Loader";
+import ResortNotFound from "../resort/components/ResortNotFound";
+import { useAuth } from "../hooks/useAuth";
 const HomePage = () => {
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { continent, country, resort } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     console.log(country);
@@ -31,26 +36,41 @@ const HomePage = () => {
       }
     };
     fetchData();
+    console.log(resortData);
   }, []);
   return (
-    <div className="w-full h-full">
+    <>
       <Navbar />
-      <HomeHero />
-      <h1
-        id="recomendedResorts"
-        className="mb-4 text-2xl text-center font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-5xl"
-      >
-        <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-black">
-          Recomended resorts
-        </span>{" "}
-      </h1>
-      <div className=" gap-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-        {resortData?.map((resort) => (
-          <RecomendedResorts resortData={resort} />
-        ))}
-      </div>
-      <Footer />
-    </div>
+      {isLoading ? (
+        <div className="h-screen">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {resortData ? (
+            <>
+              <HomeHero />
+              <h1
+                id="recomendedResorts"
+                className="mb-4 text-2xl text-center font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-5xl"
+              >
+                <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-black">
+                  Recomended resorts
+                </span>{" "}
+              </h1>
+              <div className=" gap-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+                {resortData?.map((resort) => (
+                  <RecomendedResorts resortData={resort} />
+                ))}
+              </div>
+              <Footer />
+            </>
+          ) : (
+            <ResortNotFound />
+          )}
+        </>
+      )}
+    </>
   );
 };
 

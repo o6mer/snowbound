@@ -6,9 +6,15 @@ import CompareTable from "./components/CompareTable";
 import CompareFilter from "./components/CompareFilter";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
+
 import ResortNotFound from "../admin/components/ResortNotFound";
 import Loader from "../general/Loader";
+import { useAuth } from "../hooks/useAuth";
 let dummyResorts = [];
+
+
+
+
 const ComparePage = () => {
   const DUMMY_RESORT = [
     {
@@ -121,6 +127,8 @@ const ComparePage = () => {
         console.log(err);
       });
   }, []);
+
+  useAuth();
 
   const getFilterResorts = (filterKeys) => {
     if (!filterKeys.length) {

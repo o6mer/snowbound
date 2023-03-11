@@ -2,17 +2,22 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../general/Navbar";
-import CustomizedBreadcrumbs from "./components/CustomizedBreadcrumbs";
+import CustomizedBreadcrumbs from "../general/CustomizedBreadcrumbs";
 import ResortsCard from "./components/ResortsCard";
 import SearchHero from "./components/SearchHero";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../general/Footer";
+import Loader from "../general/Loader";
+import ResortNotFound from "../resort/components/ResortNotFound";
+import { useAuth } from "../hooks/useAuth";
 const SearchPage = () => {
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const { continent, country, resort } = useParams();
+
+  useAuth();
 
   useEffect(() => {
     console.log(country);
@@ -50,24 +55,44 @@ const SearchPage = () => {
     fetchData();
   }, []);
   return (
-    <div>
+    <>
       <Navbar />
-      <SearchHero />
-      <CustomizedBreadcrumbs
-        continent={continent}
-        country={country}
-        resort={resort}
-      />
+      {isLoading ? (
+        <div className="h-screen">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {resortData ? (
+            <>
+              <SearchHero
+                continent={continent}
+                country={country}
+                resort={resort}
+              />
+              <CustomizedBreadcrumbs
+                continent={continent}
+                country={country}
+                resort={resort}
+              />
+              {resortData &&
+                resortData?.map((resort, index) => (
+                  <Link to={`/resort/${resort.name}`}>
+                    <ResortsCard
+                      key={index}
+                      resort={resort}
+                    />
+                  </Link>
+                ))}
 
-      {resortData &&
-        resortData?.map((resort, index) => (
-          <Link to={`/resort/${resort.name}`}>
-            <ResortsCard key={index} resort={resort} />
-          </Link>
-        ))}
-
-      <Footer />
-    </div>
+              <Footer />
+            </>
+          ) : (
+            <ResortNotFound />
+          )}
+        </>
+      )}
+    </>
   );
 };
 
