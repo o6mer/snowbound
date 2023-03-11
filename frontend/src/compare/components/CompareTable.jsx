@@ -1,14 +1,20 @@
 import React from "react";
+import RecomendedResorts from "../../general/RecomendedResorts";
 import ResortDetails from "./ResortDetails";
+import SvgPaths from "./svg/SvgPaths";
 
 const CompareTable = ({ DUMMY_RESORT }) => {
   return (
     <>
-      <div className="flex p-5 gap-5 ">
-        {DUMMY_RESORT.map((resort) => {
-          return <ResortDetails key={resort.id} resortData={resort} />;
-        })}
+      <div className="w-full">
+        <div className="flex p-5 gap-5    ">
+          {DUMMY_RESORT.map((resort) => {
+            return <ResortDetails key={resort?.id} resortData={resort} />;
+          })}
+        </div>
+        <SvgPaths />
       </div>
+      {/* <RecomendedResorts /> */}
       {/* <ResortDetails resortData={DUMMY_RESORT[0]} /> */}
 
       {/* <div className="p-0 overflow-x-auto shadow-md sm:rounded-lg w-full flex justify-center my-[10vh] ">

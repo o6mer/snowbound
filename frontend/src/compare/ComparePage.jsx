@@ -108,10 +108,10 @@ const ComparePage = () => {
       .post(`http://localhost:8000/api/resort/compare`, { names: queryNames })
       .then((res) => {
         const resorts = res.data.resort;
-        resorts.map((res) => {
-          delete res.image;
-          return res;
-        });
+        // resorts.map((res) => {
+        //   delete res.image;
+        //   return res;
+        // });
         setCompareData([...resorts]);
         dummyResorts = [...resorts];
         console.log(res.data);
@@ -157,12 +157,12 @@ const ComparePage = () => {
         </div>
       ) : (
         <>
-          {compareData.length !== 2 ? (
+          {compareData?.length !== 2 && compareData?.length !== 3 ? (
             <div>
               <ResortNotFound />
             </div>
           ) : (
-            <div className="px-[10vw]">
+            <div className="px-[5vw] ">
               <FindModel />
               <CompareFilter
                 DUMMY_RESORT={dummyResorts}
@@ -170,6 +170,7 @@ const ComparePage = () => {
                 resetFilterResorts={resetFilterResorts}
               />
               <CompareTable DUMMY_RESORT={compareData} />
+              {/* <h1>more to see</h1> */}
             </div>
           )}
         </>
