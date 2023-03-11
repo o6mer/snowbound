@@ -1,7 +1,7 @@
 import React from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Modal.css";
@@ -9,24 +9,60 @@ export default function CompareModal(props) {
   if (!props.open) {
     return null;
   }
-const [resort1,setResort1] =useState("");
-const [resort2,setResort2] =useState("");
-const [resort3,setResort3] =useState("");
-const[allResorts, setAllResorts] = useState([]);
-const [toast, setToast] = useState(false);
-const navigate = useNavigate();
-useEffect(() => {
-  const getAllResorts = async () => {
-    await axios
-      .get("http://localhost:8000/api/resort/get")
-      .then((res) => {
-        console.log(res.data);
-        setAllResorts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const [resort1, setResort1] = useState("");
+  const [resort2, setResort2] = useState("");
+  const [resort3, setResort3] = useState("");
+  const [allResorts, setAllResorts] = useState([]);
+  const [toast, setToast] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const getAllResorts = async () => {
+      await axios
+        .get("http://localhost:8000/api/resort/get")
+        .then((res) => {
+          console.log(res.data);
+          setAllResorts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getAllResorts();
+  }, []);
+  const handleSelect1 = (event, value) => {
+    if (value) {
+      setResort1(value);
+    }
   };
+  const handleSelect2 = (event, value) => {
+    if (value) {
+      setResort2(value);
+    }
+  };
+  const handleSelect3 = (event, value) => {
+    if (value) {
+      setResort3(value);
+    }
+  };
+  const Compare = (e) => {
+    e.preventDefault();
+    if (
+      [resort1, resort2, resort3].every((resortName) =>
+        allResorts.some((resort) => resort.name === resortName)
+      ) &&
+      resort1 !== resort2 &&
+      resort1 !== resort3
+    ) {
+      document.body.style.overflow = "auto";
+      navigate(`/compare/${resort1}&${resort2}&${resort3}`);
+    } else {
+      setToast(true);
+    }
+  };
+  const closeToast = () => {
+    setToast(false);
+  };
+
   getAllResorts();
 }, []);
 const handleSelect1 = (event, value) => {
@@ -61,6 +97,7 @@ const Compare = (e) => {
 const closeToast = () => {
   setToast(false);
 };
+
   return (
     <div className=" fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10  animated fadeIn faster">
       <div className="flex items-center justify-center min-h-screen">
@@ -189,7 +226,7 @@ const closeToast = () => {
                         </div>
                       </div>
                       <button
-                      onClick={Compare}
+                        onClick={Compare}
                         type="button"
                         className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm "
                       >

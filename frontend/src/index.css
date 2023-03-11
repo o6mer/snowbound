@@ -38,3 +38,10 @@ html {
   background-color: rgb(101, 114, 135);
   color: white;
 }
+
+.keys > div > span:first-child {
+  /* background-color: rgb(218, 213, 213); */
+  @apply text-xl;
+  @apply font-semibold;
+  @apply mb-2;
+}
