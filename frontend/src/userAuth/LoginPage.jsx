@@ -45,6 +45,7 @@ const LoginPage = (props) => {
       console.log(err);
     }
     setIsLoading(false);
+    document.body.style.overflow = "auto";
   };
 
   const handleChange = (e) => {
