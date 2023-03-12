@@ -1,6 +1,6 @@
 const db = require("../models/dbModel");
 const format = require("pg-format");
-const getResortByBame = async (req, res) => {
+const getResortByName = async (req, res) => {
   const { name } = req.params;
 
   if (!name) return res.status(400).json({ message: "name not provided" });
@@ -10,10 +10,27 @@ const getResortByBame = async (req, res) => {
       name,
     ]);
     const { rows: rows2 } = await db.query(
-      format("select * from img where owner = %L", name)
+      format("SELECT * FROM img WHERE owner = %L", name)
     );
-
-    const answer = { resort: rows[0], images: rows2 };
+    const { rows: rows3 } = await db.query(
+      format("SELECT * FROM review WHERE resort_id = %L ", name)
+    );
+    const promises = rows3.map((review) =>
+      db.query(
+        format("SELECT * FROM reviewimg WHERE review = %L", review.id)
+      ).then(({ rows: reviewimgRows }) => {
+        return {
+          ...review,
+          reviewimg: reviewimgRows,
+        };
+      })
+    );
+    const rows4 = await Promise.all(promises);
+    const answer = {
+      resort: rows[0],
+      images: rows2,
+      reviewimg: rows4,
+    };
     console.log(rows, rows2);
     res.status(200).json(answer);
   } catch (err) {
@@ -21,28 +38,45 @@ const getResortByBame = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-const getMultipleResortByBame = async (req, res) => {
+const getMultipleResortByName = async (req, res) => {
   const { names } = req.body;
 
-  if (!names) return res.status(400).json({ message: "names not provided" });
+  if (!names || !Array.isArray(names)) {
+    return res.status(400).json({ message: "names not provided or invalid" });
+  }
 
   try {
     const { rows } = await db.query(
-      format(`SELECT * FROM resort WHERE name in %L`, [names])
+      format(`SELECT * FROM resort WHERE name IN %L`, [names])
     );
     const { rows: rows2 } = await db.query(
-      format("select * from img where owner in %L", [names])
+      format(`SELECT * FROM img WHERE owner IN %L`, [names])
     );
-    const answer = { resort: rows, img: rows2 };
-    console.log(rows);
-    console.log(rows2);
+    const { rows: rows3 } = await db.query(
+      format(`SELECT * FROM review WHERE resort_id IN %L`, [names])
+    );
+    const promises = rows3.map((review) =>
+      db.query(
+        format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)
+      ).then(({ rows: reviewimgRows }) => {
+        return {
+          ...review,
+          reviewimg: reviewimgRows,
+        };
+      })
+    );
+    const rows4 = await Promise.all(promises);
+    const answer = {
+      resort: rows,
+      images: rows2,
+      reviewimg: rows4,
+    };
     res.status(200).json(answer);
   } catch (err) {
-    console.log(err);
-    console.log(names);
     res.status(404).json({ message: err.message });
   }
 };
+
 const getResortByCountry = async (req, res) => {
   const country = req.params.country;
   console.log(country);
@@ -62,7 +96,7 @@ const getResortByCountry = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-const deleteResortByBame = async (req, res) => {
+const deleteResortByName = async (req, res) => {
   const { name } = req.params;
 
   if (!name) return res.status(400).json({ message: "name not provided" });
@@ -177,9 +211,9 @@ const getCountryByContinent = async (req, res) => {
 
 module.exports = {
   getResortByCountry,
-  getMultipleResortByBame,
-  getResortByBame,
-  deleteResortByBame,
+  getMultipleResortByName,
+  getResortByName,
+  deleteResortByName,
   createResort,
   updateResort,
   getAllResorts,

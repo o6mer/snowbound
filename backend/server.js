@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const queryRouter = require("./routes/queryRouter");
+const reviewRouter = require("./routes/reviewRouter");
 const resortRouter = require("./routes/resortRouter");
 const userRouter = require("./routes/userRouter");
 const googleRouter = require("./routes/googleRouter");
@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/api/", queryRouter);
+app.use("/api/review", reviewRouter);
 app.use("/api/resort", resortRouter);
 app.use("/api/user", userRouter);
 app.use("/api/google", googleRouter);

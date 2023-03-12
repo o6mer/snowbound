@@ -149,9 +149,42 @@ const checkToken = async (token) => {
   }
 };
 
+const getMyInfo = async (req, res) => {
+  try {
+    const { username } = req.params;
+    console.log(username)
+    const { rows } = await db.query(`SELECT * FROM users WHERE username = $1`, [
+      username,
+    ]);
+    const { rows: rows2 } = await db.query(`SELECT * FROM review WHERE poster = $1`, [
+      username,
+    ]);
+
+    const promises = rows2.map((review) =>
+      db.query(
+        format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)
+      ).then(({ rows: reviewimgRows }) => {
+        return {
+          ...review,
+          reviewimg: reviewimgRows,
+        };
+      })
+    );
+    const rows4 = await Promise.all(promises);
+
+    const answer = { info: rows, reviews: rows4 }
+    res.status(200).json(answer);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({ message: err.message });
+    alert("Error Reload page");
+  }
+}
+
 module.exports = {
   createUser,
   updateChecklist,
   login,
   auth,
+  getMyInfo,
 };
