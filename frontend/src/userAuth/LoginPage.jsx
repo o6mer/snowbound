@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../general/Navbar";
 import "./Login.css";
 import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import { useAuth } from "../hooks/useAuth";
 import Loader from "../general/Loader";
+import SignupPage from "./SignupPage";
+
 const LoginPage = (props) => {
   if (!props.open) {
     return null;
@@ -116,65 +117,7 @@ const LoginPage = (props) => {
             )}
           </form>
         </div>
-        <div className="form-wrapper mt-10">
-          <button type="button" className="switcher switcher-signup">
-            Sign Up
-            <span className="underline"></span>
-          </button>
-          <form className="form form-signup">
-            <button
-              onClick={props.onClose}
-              className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150"
-            >
-              <CloseIcon />
-            </button>
-            <fieldset className="mt-4">
-              <TextField label="E-mail" type="email" variant="outlined" />
-              <br />
-              <TextField
-                sx={{
-                  marginTop: "1rem",
-                }}
-                label="User name"
-                type="text"
-                variant="outlined"
-              />
-              <br />
-              <TextField
-                sx={{
-                  marginTop: "1rem",
-                }}
-                label="Full name"
-                type="text"
-                variant="outlined"
-              />
-              <br />
-              <TextField
-                sx={{
-                  marginTop: "1rem",
-                }}
-                label="Password"
-                type="password"
-                variant="outlined"
-              />
-              <br />
-              <TextField
-                sx={{
-                  marginTop: "1rem",
-                }}
-                label="Verify password"
-                type="password"
-                variant="outlined"
-              />
-            </fieldset>
-            <button
-              type="submit"
-              className=" hover:bg-blue-500/50 shadow-lg shadow-blue-500/50 rounded-full "
-            >
-              Register
-            </button>
-          </form>
-        </div>
+        <SignupPage onClose={props.onClose} />
       </div>
     </section>
   );
