@@ -4,13 +4,13 @@ const RecomendedResorts = ({ resortData }) => {
   return (
     <div
       id="recomendedImg"
-      className={`max-w-md w-full m-10 antialiased text-gray-900`}
+      className={`max-w-md w-96 m-10 antialiased text-gray-900`}
     >
       <div>
         <img
           src={resortData?.image}
           alt=" random imgee"
-          className="w-full h-44 object-cover object-center rounded-lg shadow-md"
+          className="w-96 h-44 object-cover object-center rounded-lg shadow-md"
         />
 
         <a href={`/resort/${resortData?.name}`}>
