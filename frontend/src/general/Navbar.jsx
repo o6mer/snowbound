@@ -45,16 +45,16 @@ function Navbar() {
   console.log(openProfile);
   return (
     <>
-      <nav className="bg-clip-content bg-gradient-to-r to-sky-300 from-sky-100">
+      <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
+            <div className="flex items-center text-xl">
               <div className="flex-shrink-0">
                 <NavLink
                   to="/"
                   className="flex items-center text-blue-600 font-large"
                 >
-                  <SnowboardingIcon color="primary" sx={{ fontSize: 30 }} />
+                  <SnowboardingIcon color="primary" sx={{ fontSize: 50 }} />
                   <span className="ml-2">SnowBound</span>
                 </NavLink>
               </div>
@@ -65,7 +65,7 @@ function Navbar() {
                     className=" hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md text-sm font-medium"
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium"
                   >
                     France
                   </a>
@@ -73,7 +73,7 @@ function Navbar() {
                     href="/search/Europe/Switzerland/none"
                     className=" hover:bg-sky-400  
                     hover:text-white
-                    focus:bg-sky-400  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    focus:bg-sky-400  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
                     Switzerland
                   </a>
@@ -82,7 +82,7 @@ function Navbar() {
                     href="/search/Europe/Italy/none"
                     className=" hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md font-medium"
                   >
                     Italy
                   </a>
@@ -90,7 +90,7 @@ function Navbar() {
                     href="/search/North America/Canada/none"
                     className=" hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
                     Canada
                   </a>
@@ -100,12 +100,11 @@ function Navbar() {
                       to="/admin"
                       className=" hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                     >
                       admin
                     </NavLink>
                   )}
-
                   {!user ? (
                     <div>
                       <NavLink

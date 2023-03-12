@@ -3,10 +3,12 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Divider } from "@mui/material";
 const Footer = () => {
   return (
     <div>
-      <footer className="relative bg-gray-200 pt-8 pb-6 ">
+      <Divider/>
+      <footer className="relative 			pt-8 pb-6 ">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-left lg:text-left">
             <div className="w-full lg:w-6/12 px-4">

@@ -63,9 +63,9 @@ const LoginPage = (props) => {
       className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 modal animated 
       ${props.open ? "fadeIn overflow-auto" : "fadeOut faster"}  shadow-2xl`}
     >
-      <div className="forms absolute left-96 ">
-        <div className="form-wrapper is-active">
-          <button type="button" className="switcher switcher-login">
+      <div className="forms flex justify-center ">
+        <div className="form-wrapper is-active mt-10">
+          <button type="button" className="switcher switcher-login  ">
             Login
             <span className="underline"></span>
           </button>
@@ -115,7 +115,7 @@ const LoginPage = (props) => {
             )}
           </form>
         </div>
-        <div className="form-wrapper">
+        <div className="form-wrapper mt-10">
           <button type="button" className="switcher switcher-signup">
             Sign Up
             <span className="underline"></span>
