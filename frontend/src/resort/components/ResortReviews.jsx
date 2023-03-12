@@ -3,18 +3,21 @@ import Review from "../../general/Review";
 import { Divider, Rating } from "@mui/material";
 
 const ResortReviews = ({ resortData }) => {
-  const allRatings = resortData?.review?.map((review) => review.star);
+  const { review: reviews } = resortData;
+
+  const allRatings = reviews?.map((review) => review.star);
   const sum = allRatings?.reduce((partialSum, a) => partialSum + a, 0);
   const avgRatings = sum / allRatings?.length;
 
   return (
     <section className="">
       <p className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
-        Reviews <Rating name="avg-rating" value={avgRatings || 4} readOnly />
+        {reviews?.length} Reviews{" "}
+        <Rating name="avg-rating" value={avgRatings || 4} readOnly />
       </p>
       <div className="flex flex-col gap-2 overflow-y-scroll max-h-[50vh] ">
-        {resortData?.review ? (
-          resortData?.review?.map((review) => <Review {...review} />)
+        {reviews ? (
+          reviews?.map((review) => <Review {...review} />)
         ) : (
           <>
             <Review
