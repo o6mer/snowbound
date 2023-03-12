@@ -4,7 +4,7 @@ const RecomendedResorts = ({ resortData }) => {
   return (
     <div
       id="recomendedImg"
-      className={`max-w-md w-96 m-10 antialiased text-gray-900`}
+      className={`max-w-md w-full m-10 antialiased text-gray-900`}
     >
       <div>
         <img
