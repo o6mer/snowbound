@@ -31,9 +31,31 @@ const createReview = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 };
+const deleteReviewById = async (req, res) => {
+    const { id } = req.body;
 
+    if (!id) return res.status(400).json({ message: "id not provided" });
+
+    try {
+        const { rows } = await db.query("DELETE FROM review WHERE id = $1", [
+            id,
+        ]);
+        const { rows: rows2 } = await db.query("DELETE FROM reviewimg WHERE review = $1", [
+            id,
+        ]);
+
+        console.log(rows);
+        console.log(rows2);
+        res.status(200).json({ message: "DELETED" });
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({ message: err.message });
+        alert("Error deleting resort");
+    }
+};
 
 
 module.exports = {
-    createReview
+    createReview,
+    deleteReviewById
 };
