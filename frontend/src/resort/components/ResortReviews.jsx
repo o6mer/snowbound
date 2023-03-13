@@ -18,13 +18,17 @@ const defualtReview = {
   star: 0,
 };
 
-const ResortReviews = ({ resortData }) => {
-  const { reviews } = resortData;
-
+const calcAverage = (reviews) => {
   const allRatings = reviews?.map((review) => review.star);
   const sum = allRatings?.reduce((partialSum, a) => partialSum + a, 0);
   const avgRatings = sum / allRatings?.length;
+  return avgRatings.toFixed(1);
+};
 
+const ResortReviews = ({ resortData }) => {
+  const { reviews } = resortData;
+
+  const [avgStar] = useState(calcAverage(resortData.reviews));
   const [open, setOpen] = useState(false);
 
   const { user } = useContext(UserContext);
@@ -34,12 +38,25 @@ const ResortReviews = ({ resortData }) => {
       <p className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
         {reviews?.length} Reviews{" "}
         {reviews?.length ? (
-          <Rating name="avg-rating" value={avgRatings} readOnly />
+          <div className="flex items-center">
+            <Rating
+              name="avg-rating"
+              value={avgStar}
+              readOnly
+              precision={0.1}
+            />
+            <p className="font-normal text-gray-500">({avgStar})</p>
+          </div>
         ) : null}
       </p>
       <div className="flex flex-col gap-2 overflow-y-scroll  h-[50vh] ">
         {reviews?.length ? (
-          reviews?.map((review) => <Review {...review} />)
+          reviews?.map((review) => (
+            <>
+              <Review {...review} />
+              <Divider />
+            </>
+          ))
         ) : (
           <div className="">No Reviews</div>
         )}

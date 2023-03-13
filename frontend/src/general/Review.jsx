@@ -1,7 +1,8 @@
 import { Rating } from "@mui/material";
-import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import React, { useContext } from "react";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import dateFormat, { masks } from "dateformat";
+import { UserContext } from "../contexts/UserContextProvider";
 
 const Review = ({
   title,
@@ -13,6 +14,8 @@ const Review = ({
   poster,
   images,
 }) => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="flex flex-col h-fit gap-4 px-8">
       <header className="flex flex-col">
@@ -22,10 +25,15 @@ const Review = ({
             <Rating name="read-only" value={star} readOnly />
             <p className="text-gray-500">{dateFormat(date, "mmmm yyyy")}</p>
           </div>
-          <p>
-            <FavoriteBorderIcon />
-            {vote}
-          </p>
+          <button
+            disabled={!user}
+            className={`${
+              user && "hover:scale-[1.05] hover:text-lg"
+            }text-md transition-all flex items-center gap-1 font-bold`}
+          >
+            <p className="">{vote}</p>
+            <ThumbUpOutlinedIcon />
+          </button>
         </div>
       </header>
       <div>
