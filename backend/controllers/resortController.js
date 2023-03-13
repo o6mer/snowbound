@@ -21,7 +21,7 @@ const getResortByName = async (req, res) => {
       ).then(({ rows: reviewimgRows }) => {
         return {
           ...review,
-          reviewimg: reviewimgRows,
+          reviews: reviewimgRows,
         };
       })
     );
@@ -29,7 +29,7 @@ const getResortByName = async (req, res) => {
     const answer = {
       resort: rows[0],
       images: rows2,
-      reviewimg: rows4,
+      reviews: rows4,
     };
     console.log(rows, rows2);
     res.status(200).json(answer);
@@ -61,7 +61,7 @@ const getMultipleResortByName = async (req, res) => {
       ).then(({ rows: reviewimgRows }) => {
         return {
           ...review,
-          reviewimg: reviewimgRows,
+          reviews: reviewimgRows,
         };
       })
     );
@@ -69,7 +69,7 @@ const getMultipleResortByName = async (req, res) => {
     const answer = {
       resort: rows,
       images: rows2,
-      reviewimg: rows4,
+      reviews: rows4,
     };
     res.status(200).json(answer);
   } catch (err) {

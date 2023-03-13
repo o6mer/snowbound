@@ -121,4 +121,22 @@ updateResort: [POST] (http://localhost:8000/api/resort/update):
 getAllCountry : [GET] (http://localhost:8000/api/resort/getcountry):
 
 getCountryByContinent: [GET] (http://localhost:8000/api/resort/countrybycont):
+
  {continent:"acontinent"}
+
+ createReview : [POST] (http://localhost:8000/api/review/create):
+ {
+    "review": {
+        "title": "title",
+        "body": "body",
+        "star": 4.4,
+        "poster": "omerlir",
+        "resort_id": "Verbier", 
+        "date": "2000-12-05"
+    },
+    "img": [
+        "link1",
+        "link2",
+        "link3"
+    ]
+}
