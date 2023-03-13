@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
 import HomeHero from "./Components/HomeHero";
@@ -9,7 +9,10 @@ import axios from "axios";
 import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
 import { useAuth } from "../hooks/useAuth";
+import { UserContext } from "../contexts/UserContextProvider";
 const HomePage = () => {
+  const { user } = useContext(UserContext);
+  // user && console.log(user);
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
