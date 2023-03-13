@@ -54,8 +54,41 @@ const deleteReviewById = async (req, res) => {
     }
 };
 
+const upVote = async (req, res) => {
+    const { id } = req.body;
 
+    if (!id) return res.status(400).json({ message: "id not provided" });
+
+    try {
+        const { rows } = await db.query(
+            "UPDATE review SET vote = vote + 1 WHERE id = $1 RETURNING *",
+            [id]
+        );
+        res.status(200).json(rows);
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({ message: err.message });
+    }
+}
+const downVote = async (req, res) => {
+    const { id } = req.body;
+    if (!id) return res.status(400).json({ message: "id not provided" });
+
+    try {
+        const { rows } = await db.query(
+            "UPDATE review SET vote = vote - 1 WHERE id = $1 RETURNING *",
+            [id]
+        );
+        res.status(200).json(rows);
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({ message: err.message });
+    }
+
+}
 module.exports = {
     createReview,
-    deleteReviewById
+    deleteReviewById,
+    upVote,
+    downVote
 };

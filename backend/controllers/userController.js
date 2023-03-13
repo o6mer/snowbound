@@ -60,7 +60,9 @@ const login = async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
+    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
+      user.username,
+    ]);
     const token = jwt.sign(
       {
         email: user.email,
@@ -72,8 +74,10 @@ const login = async (req, res) => {
       }
     );
     return res.status(200).json({
-      user: { admin: user.admin, username: user.username },
+      user: { admin: user.admin, username: user.username, favorite: rows3 },
       token,
+
+
       message: "Logged in successfully",
     });
   } catch (err) {
@@ -120,8 +124,12 @@ const auth = async (req, res) => {
 
     // If the user is found, return the user data
     const { username, admin } = user;
+    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
+      username,
+    ]);
 
-    res.status(200).json({ user: { username, admin } });
+
+    res.status(200).json({ user: { username, admin, favorite: rows3 } });
   } catch (error) {
     // If the token is invalid, return a 401 status
     return res.status(401).send({ message: "Unauthorized" });
@@ -159,6 +167,9 @@ const getMyInfo = async (req, res) => {
     const { rows: rows2 } = await db.query(`SELECT * FROM review WHERE poster = $1`, [
       username,
     ]);
+    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
+      username,
+    ]);
 
     const promises = rows2.map((review) =>
       db.query(
@@ -172,7 +183,7 @@ const getMyInfo = async (req, res) => {
     );
     const rows4 = await Promise.all(promises);
 
-    const answer = { info: rows, reviews: rows4 }
+    const answer = { info: rows, reviews: rows4, favorites: rows3 }
     res.status(200).json(answer);
   } catch (err) {
     console.log(err);
