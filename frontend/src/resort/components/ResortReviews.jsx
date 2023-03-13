@@ -3,7 +3,7 @@ import Review from "../../general/Review";
 import { Divider, Rating } from "@mui/material";
 
 const ResortReviews = ({ resortData }) => {
-  const { review: reviews } = resortData;
+  const { reviews } = resortData;
 
   const allRatings = reviews?.map((review) => review.star);
   const sum = allRatings?.reduce((partialSum, a) => partialSum + a, 0);
