@@ -16,7 +16,9 @@ import EditAddResort from "./admin/components/EditAddResort";
 import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
 import EasterEgg from "./general/easteregg";
+import AboutPage from "./AboutPage/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
+
 
 const router = createBrowserRouter([
   {
@@ -68,6 +70,11 @@ const router = createBrowserRouter([
     element: <EasterEgg />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/AboutUs",
+    element: <AboutPage />,
+    errorElement: <ErrorPage />,
+  }, 
   {
     path: "/:userName",
     element: <ProfilePage />,

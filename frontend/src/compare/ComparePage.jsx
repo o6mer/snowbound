@@ -10,10 +10,8 @@ import Navbar from "../general/Navbar";
 import ResortNotFound from "../admin/components/ResortNotFound";
 import Loader from "../general/Loader";
 import { useAuth } from "../hooks/useAuth";
+// import AboutPage from "../AboutPage/AboutPage";
 let dummyResorts = [];
-
-
-
 
 const ComparePage = () => {
   const DUMMY_RESORT = [
@@ -178,6 +176,8 @@ const ComparePage = () => {
                 resetFilterResorts={resetFilterResorts}
               />
               <CompareTable DUMMY_RESORT={compareData} />
+
+              {/* <AboutPage /> */}
               {/* <h1>more to see</h1> */}
             </div>
           )}
