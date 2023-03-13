@@ -7,8 +7,8 @@ import { Divider } from "@mui/material";
 const Footer = () => {
   return (
     <div>
-      <Divider/>
-      <footer className="relative 			pt-8 pb-6 ">
+      <Divider />
+      <footer className="block py-4 pt-12  bg-slate-50 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-left lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
