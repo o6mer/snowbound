@@ -76,6 +76,7 @@ const ResortPage = () => {
         setResortData({
           ...data.resort,
           images: data.images.map((picture) => picture.link),
+          reviews: [...data.reviews],
         });
         setIsLoading(false);
       } catch (err) {
