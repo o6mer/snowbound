@@ -19,7 +19,6 @@ import EasterEgg from "./general/easteregg";
 import AboutPage from "./AboutPage/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -74,9 +73,9 @@ const router = createBrowserRouter([
     path: "/AboutUs",
     element: <AboutPage />,
     errorElement: <ErrorPage />,
-  }, 
+  },
   {
-    path: "/:userName",
+    path: "/profile/:userName",
     element: <ProfilePage />,
     errorElement: <ErrorPage />,
   },
