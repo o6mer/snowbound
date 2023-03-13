@@ -17,7 +17,8 @@ import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
 import EasterEgg from "./general/easteregg";
 import ProfilePage from "./profile/ProfilePage";
-
+import EditUser from "./profile/components/EditUser";
+import userReviews from "./profile/components/userReviews";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -69,8 +70,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/:userName",
+    path: "/profile/:userName",
     element: <ProfilePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/EditUser/:userName",
+    element: <EditUser />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/UserReviews/:userName",
+    element: <userReviews/>,
     errorElement: <ErrorPage />,
   },
 ]);
