@@ -4,9 +4,8 @@ import { UserContext } from "../contexts/UserContextProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
-
 export const useAuth = () => {
+  const cookies = new Cookies();
   const { token, setToken, user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -16,8 +15,6 @@ export const useAuth = () => {
   }, []);
 
   useEffect(() => {
-    console.log({ token, user });
-
     if (!token) return;
 
     cookies.set("token", token, { path: "/" });
@@ -38,7 +35,6 @@ export const useAuth = () => {
 
       if (!token || !user) return;
 
-      console.log("loggggggggin: ", { token, user });
       setUser(user);
       setToken(token);
     } catch (err) {
@@ -99,5 +95,11 @@ export const useAuth = () => {
     }
   };
 
-  return { login, signup, auth };
+  const logout = () => {
+    cookies.remove("token", { path: "/" });
+    setToken();
+    setUser();
+  };
+
+  return { login, signup, logout, auth };
 };

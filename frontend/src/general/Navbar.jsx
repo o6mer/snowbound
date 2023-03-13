@@ -15,23 +15,25 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { UserContext } from "../contexts/UserContextProvider";
+import { useAuth } from "../hooks/useAuth";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { user } = useContext(UserContext);
+
+  const { logout } = useAuth();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const { user } = useContext(UserContext);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -42,7 +44,9 @@ function Navbar() {
     setModalOpen(false);
     document.body.style.overflow = "auto";
   };
-  console.log(openProfile);
+  const openProfile = () => {
+    navigate(`/${user}`);
+  }
   return (
     <>
       <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
@@ -174,7 +178,7 @@ function Navbar() {
                           vertical: "bottom",
                         }}
                       >
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={openProfile}>
                           <Avatar /> Profile
                         </MenuItem>
                         <MenuItem onClick={handleClose}>
@@ -193,7 +197,12 @@ function Navbar() {
                           </ListItemIcon>
                           Settings
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem
+                          onClick={() => {
+                            logout();
+                            handleClose();
+                          }}
+                        >
                           <ListItemIcon>
                             <Logout fontSize="small" color="error" />
                           </ListItemIcon>
