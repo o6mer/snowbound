@@ -2,17 +2,22 @@ import React from "react";
 import RecomendedResorts from "../../general/RecomendedResorts";
 import ResortDetails from "./ResortDetails";
 import SvgPaths from "./svg/SvgPaths";
+// import YetiWalking from "./yeti/YetiWalking";
 
 const CompareTable = ({ DUMMY_RESORT }) => {
   return (
     <>
       <div className="w-full">
-        <div className="flex p-5 gap-5    ">
+        <div
+          className="hello
+         grid grid-cols-3 justify-center p-5 gap-5    "
+        >
           {DUMMY_RESORT.map((resort) => {
             return <ResortDetails key={resort?.id} resortData={resort} />;
           })}
         </div>
-        <SvgPaths />
+        {/* <SvgPaths /> */}
+        {/* <YetiWalking /> */}
       </div>
       {/* <RecomendedResorts /> */}
       {/* <ResortDetails resortData={DUMMY_RESORT[0]} /> */}

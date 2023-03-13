@@ -16,6 +16,7 @@ import EditAddResort from "./admin/components/EditAddResort";
 import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
 import EasterEgg from "./general/easteregg";
+import AboutPage from "./AboutPage/AboutPage";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
   {
     path: "/fuck",
     element: <EasterEgg />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/AboutUs",
+    element: <AboutPage />,
     errorElement: <ErrorPage />,
   },
 ]);
