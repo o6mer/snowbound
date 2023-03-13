@@ -45,7 +45,8 @@ function Navbar() {
     document.body.style.overflow = "auto";
   };
   const openProfile = () => {
-    navigate(`/${user}`);
+    console.log(user.username);
+    navigate(`/profile/${user.username}`);
   }
   return (
     <>
