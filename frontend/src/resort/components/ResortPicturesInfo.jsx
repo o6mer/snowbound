@@ -24,9 +24,7 @@ const ResortPicturesInfo = ({ resortData }) => {
           />
         ))}
       </Carousel>
-      <div>
-        <ResortReviews resortData={resortData} />
-      </div>
+      <ResortReviews resortData={resortData} />
     </section>
   );
 };

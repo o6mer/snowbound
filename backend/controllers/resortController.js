@@ -16,14 +16,14 @@ const getResortByName = async (req, res) => {
       format("SELECT * FROM review WHERE resort_id = %L ", name)
     );
     const promises = rows3.map((review) =>
-      db.query(
-        format("SELECT * FROM reviewimg WHERE review = %L", review.id)
-      ).then(({ rows: reviewimgRows }) => {
-        return {
-          ...review,
-          reviews: reviewimgRows,
-        };
-      })
+      db
+        .query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
+        .then(({ rows: reviewimgRows }) => {
+          return {
+            ...review,
+            images: reviewimgRows,
+          };
+        })
     );
     const rows4 = await Promise.all(promises);
     const answer = {
@@ -56,14 +56,14 @@ const getMultipleResortByName = async (req, res) => {
       format(`SELECT * FROM review WHERE resort_id IN %L`, [names])
     );
     const promises = rows3.map((review) =>
-      db.query(
-        format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)
-      ).then(({ rows: reviewimgRows }) => {
-        return {
-          ...review,
-          reviews: reviewimgRows,
-        };
-      })
+      db
+        .query(format(`SELECT * FROM reviewimg WHERE review = %L`, review.id))
+        .then(({ rows: reviewimgRows }) => {
+          return {
+            ...review,
+            images: reviewimgRows,
+          };
+        })
     );
     const rows4 = await Promise.all(promises);
     const answer = {
