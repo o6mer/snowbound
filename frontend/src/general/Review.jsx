@@ -38,7 +38,7 @@ const Review = ({
       </header>
       <div>
         <p className="text-xl">{title}</p>
-        <p>{body}</p>
+        <p className="text-gray-700">{body}</p>
       </div>
       <div className="flex flex-wrap gap-2">
         {images?.map((image) => (
