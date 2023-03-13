@@ -20,7 +20,6 @@ function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -42,7 +41,9 @@ function Navbar() {
     setModalOpen(false);
     document.body.style.overflow = "auto";
   };
-  console.log(openProfile);
+  const openProfile = () => {
+    navigate(`/${user}`);
+  }
   return (
     <>
       <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
@@ -174,7 +175,7 @@ function Navbar() {
                           vertical: "bottom",
                         }}
                       >
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={openProfile}>
                           <Avatar /> Profile
                         </MenuItem>
                         <MenuItem onClick={handleClose}>
