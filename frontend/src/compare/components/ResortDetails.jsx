@@ -46,12 +46,15 @@ const ResortDetails = ({ resortData }) => {
         <h1>About</h1>
       </div>
       <div className="keys  desc flex flex-col  [&>div]:py-5 [&>div]:flex [&>div]:flex-col [&>div]:items-center [&>*:nth-child(even)]:bg-gray-200  ">
-        <div>
+        <div className="h-[500px] overflow-hidden text-ellipsis">
           <span>
             <DescriptionIcon fontSize="large" sx={{ marginRight: "10px" }} />
             description
           </span>
-          <span> {resortData?.description}</span>
+          <span className="overflow-hidden text-ellipsis [&>#text]:text-ellipsis">
+            {" "}
+            {resortData?.description}
+          </span>
         </div>
       </div>
 

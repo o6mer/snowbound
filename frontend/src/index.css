@@ -45,3 +45,8 @@ html {
   @apply font-semibold;
   @apply mb-2;
 }
+.hello {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* line-break: ; */
+  /* -webkit-line-clamp:; */
+}

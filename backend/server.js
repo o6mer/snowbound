@@ -7,6 +7,7 @@ const reviewRouter = require("./routes/reviewRouter");
 const resortRouter = require("./routes/resortRouter");
 const userRouter = require("./routes/userRouter");
 const googleRouter = require("./routes/googleRouter");
+const favoriteRouter = require("./routes/favoriteRouter");
 
 const PORT = process.env.PORT || 8000;
 
@@ -28,7 +29,7 @@ app.use("/api/review", reviewRouter);
 app.use("/api/resort", resortRouter);
 app.use("/api/user", userRouter);
 app.use("/api/google", googleRouter);
-
+app.use("/api/favorite", favoriteRouter);
 app.listen(PORT, () => {
   console.log("listening on port", PORT);
 });

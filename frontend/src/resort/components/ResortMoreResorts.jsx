@@ -47,6 +47,16 @@ const ResortMoreResorts = ({ resortData }) => {
               gap={10}
               loop
               hideArrow={resorts?.length <= 4}
+              responsiveLayout={[
+                {
+                  breakpoint: 900,
+                  cols: 3,
+                },
+                {
+                  breakpoint: 500,
+                  cols: 2,
+                },
+              ]}
             >
               {resorts?.map((resort) => (
                 <Carousel.Item>

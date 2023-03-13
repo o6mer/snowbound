@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ResortReviews from "./ResortReviews";
 
 const ResortPicturesInfo = ({ resortData }) => {
   return (
@@ -23,9 +24,7 @@ const ResortPicturesInfo = ({ resortData }) => {
           />
         ))}
       </Carousel>
-      <div>
-        <p>{resortData?.exstraDetails}</p>
-      </div>
+      <ResortReviews resortData={resortData} />
     </section>
   );
 };

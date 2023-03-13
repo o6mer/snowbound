@@ -16,20 +16,20 @@ const getResortByName = async (req, res) => {
       format("SELECT * FROM review WHERE resort_id = %L ", name)
     );
     const promises = rows3.map((review) =>
-      db.query(
-        format("SELECT * FROM reviewimg WHERE review = %L", review.id)
-      ).then(({ rows: reviewimgRows }) => {
-        return {
-          ...review,
-          reviewimg: reviewimgRows,
-        };
-      })
+      db
+        .query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
+        .then(({ rows: reviewimgRows }) => {
+          return {
+            ...review,
+            images: reviewimgRows,
+          };
+        })
     );
     const rows4 = await Promise.all(promises);
     const answer = {
       resort: rows[0],
       images: rows2,
-      reviewimg: rows4,
+      reviews: rows4,
     };
     console.log(rows, rows2);
     res.status(200).json(answer);
@@ -56,20 +56,20 @@ const getMultipleResortByName = async (req, res) => {
       format(`SELECT * FROM review WHERE resort_id IN %L`, [names])
     );
     const promises = rows3.map((review) =>
-      db.query(
-        format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)
-      ).then(({ rows: reviewimgRows }) => {
-        return {
-          ...review,
-          reviewimg: reviewimgRows,
-        };
-      })
+      db
+        .query(format(`SELECT * FROM reviewimg WHERE review = %L`, review.id))
+        .then(({ rows: reviewimgRows }) => {
+          return {
+            ...review,
+            images: reviewimgRows,
+          };
+        })
     );
     const rows4 = await Promise.all(promises);
     const answer = {
       resort: rows,
       images: rows2,
-      reviewimg: rows4,
+      reviews: rows4,
     };
     res.status(200).json(answer);
   } catch (err) {
