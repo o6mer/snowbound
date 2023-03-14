@@ -45,9 +45,9 @@ function Navbar() {
     document.body.style.overflow = "auto";
   };
   const openProfile = () => {
-    console.log(user.username);
     navigate(`/profile/${user.username}`);
   }
+  
   return (
     <>
       <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
@@ -90,6 +90,22 @@ function Navbar() {
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md font-medium"
                   >
                     Italy
+                  </a>
+                  <a
+                    href="/search/Europe/Bulgaria/none"
+                    className=" hover:bg-sky-400 
+                    hover:text-white
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                  >
+                    Bulgaria
+                  </a>
+                  <a
+                    href="/search/Europe/Austria/none"
+                    className=" hover:bg-sky-400 
+                    hover:text-white
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                  >
+                    Austria
                   </a>
                   <a
                     href="/search/North America/Canada/none"
@@ -182,8 +198,8 @@ function Navbar() {
                         <MenuItem onClick={openProfile}>
                           <Avatar /> Profile
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <Avatar /> My account
+                        <MenuItem onClick={openProfile}>
+                          <Avatar /> My reviews
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={handleClose}>

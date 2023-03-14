@@ -19,7 +19,7 @@ import EasterEgg from "./general/easteregg";
 import AboutPage from "./AboutPage/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 import EditUser from "./profile/components/EditUser";
-import userReviews from "./profile/components/userReviews";
+import UserReviews from "./profile/components/UserReviews";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -86,8 +86,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/UserReviews/:userName",
-    element: <userReviews/>,
+    path: "/userReviews/:userName",
+    element: <UserReviews />,
     errorElement: <ErrorPage />,
   },
 ]);
