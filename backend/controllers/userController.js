@@ -105,6 +105,24 @@ const updateChecklist = async (req, res) => {
   }
 };
 
+const updateUserInfo = async (req, res) => {
+  const { userId, valuesToUpdate } = req.body
+  try {
+    const columnsToUpdate = Object.keys(valuesToUpdate);
+    const values = Object.values(valuesToUpdate);
+    if ("password" in valuesToUpdate) {
+      values[columnsToUpdate.indexOf("password")] = await bcrypt.hash(valuesToUpdate.password, 10);
+    }
+    const queryString = `UPDATE users SET ${columnsToUpdate.map((c, i) => `${c} = $${i + 1}`).join(', ')} WHERE id = $${columnsToUpdate.length + 1}`;
+    const { rows } = await db.query(queryString, [...values, userId]);
+    res.status(200).json({ message: "Successfully Updated" })
+  } catch (error) {
+    return res.status(401).send(error);
+  }
+}
+
+
+
 const auth = async (req, res) => {
   const authorizationHeader = req.headers.authorization;
 
@@ -198,4 +216,6 @@ module.exports = {
   login,
   auth,
   getMyInfo,
+  updateUserInfo,
+
 };
