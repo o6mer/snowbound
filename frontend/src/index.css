@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  overflow-y: scroll;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* width */
+.snowboard::-webkit-scrollbar {
+  width: 44px;
+  background-color: rgb(31 41 55);
+}
+
+/* Track */
+.snowboard::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+.snowboard::-webkit-scrollbar-thumb {
+  background-image: url("./assets/snowboard.png");
+  background-repeat: no-repeat;
+  background-position: 35% 5%;
+}
+.table-body > tr:nth-child(even) > th {
+  background-color: rgb(65, 76, 95);
+  color: white;
+}
+.table-body > tr:nth-child(odd) > th {
+  background-color: rgb(101, 114, 135);
+  color: white;
+}
+
+.keys > div > span:first-child {
+  /* background-color: rgb(218, 213, 213); */
+  @apply text-xl;
+  @apply font-semibold;
+  @apply mb-2;
+}
+.hello {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* line-break: ; */
+  /* -webkit-line-clamp:; */
+}
