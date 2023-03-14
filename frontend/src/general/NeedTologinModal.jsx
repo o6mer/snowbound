@@ -1,9 +1,10 @@
 import { Modal } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import LoginPage from "../userAuth/LoginPage";
+import { UserContext } from "../contexts/UserContextProvider";
 
 const NeedTologinModal = ({ text, open, handleClose }) => {
-  const [openLogin, setOpenLogin] = useState(false);
+  const { setOpenLogin } = useContext(UserContext);
 
   return (
     <>
@@ -25,13 +26,6 @@ const NeedTologinModal = ({ text, open, handleClose }) => {
           </button>
         </div>
       </Modal>
-      <LoginPage
-        open={openLogin}
-        onClose={() => {
-          setOpenLogin(false);
-          document.body.style.overflow = "hidden";
-        }}
-      />
     </>
   );
 };
