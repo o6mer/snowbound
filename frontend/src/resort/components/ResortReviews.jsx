@@ -49,18 +49,24 @@ const ResortReviews = ({ resortData }) => {
           </div>
         ) : null}
       </p>
-      <div className="flex flex-col gap-2 overflow-y-scroll  h-[50vh] ">
+      <ul className="flex flex-col gap-2 overflow-y-scroll  h-[50vh] ">
         {reviews?.length ? (
-          reviews?.map((review) => (
-            <>
-              <Review {...review} />
-              <Divider />
-            </>
-          ))
+          reviews
+            ?.sort((a, b) => {
+              if (a.vote < b.vote) return 1;
+              if (a.vote > b.vote) return -1;
+              return 0;
+            })
+            ?.map((review) => (
+              <li key={review.id + review.title}>
+                <Review {...review} />
+                <Divider />
+              </li>
+            ))
         ) : (
           <div className="">No Reviews</div>
         )}
-      </div>
+      </ul>
       {user ? <Button onClick={() => setOpen(true)}>Add Review</Button> : null}
       <NewReviewModal open={open} setOpen={setOpen} resortData={resortData} />
     </section>
