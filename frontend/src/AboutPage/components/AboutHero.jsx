@@ -2,8 +2,22 @@ import React from "react";
 import aboutHero from "../../assets/AboutHero.jpg";
 import aboutHero2 from "../../assets/HeroSearch1.jpg";
 import mainSection from "../../assets/mainSection.jpg";
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 const AboutHero = () => {
+  gsap.registerPlugin(
+      ScrollTrigger,
+
+  );
+
+  // gsap.plugins(Scrol)
+  gsap.to(".hey", {
+    scrollTrigger: ".hey", // start the animation when ".box" enters the viewport (once)
+    x: 500,
+    start: "top center"
+  });
   return (
     <>
       <div className="relative h-[60vh]">
@@ -14,7 +28,7 @@ const AboutHero = () => {
           <h1 className="text-center text-5xl font-semibold">Why SnowBound?</h1>
         </div>
       </div>
-      <div className="container my-24 px-6 mx-auto">
+      <div className="container hey my-24 px-6 mx-auto">
         {/* <!-- Section: Design Block --> */}
         <section className="mb-32 text-gray-800">
           {/* <!-- Jumbotron --> */}
