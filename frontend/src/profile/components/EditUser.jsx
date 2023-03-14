@@ -55,7 +55,7 @@ const EditUser = ({ userData, setShowEdit }) => {
     });
   };
   return (
-    <section class="w-64 mx-auto bg-white bg-opacity-70 rounded-2xl px-8 py-6 shadow-lg">
+    <section class="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-lg z-10">
       <div class="flex items-center justify-between">
         <span class="text-emerald-400">
           <button
