@@ -15,9 +15,10 @@ const getResortByName = async (req, res) => {
     const { rows: rows3 } = await db.query(
       format("SELECT * FROM review WHERE resort_id = %L ", name)
     );
+
+
     const promises = rows3.map((review) =>
-      db
-        .query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
+      db.query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
         .then(({ rows: reviewimgRows }) => {
           return {
             ...review,
@@ -25,11 +26,24 @@ const getResortByName = async (req, res) => {
           };
         })
     );
+    const likes = rows3.map((review) =>
+      db.query(format("SELECT * FROM likes WHERE review_id = %L ", review.id))
+        .then(({ rows: reviewimgRows }) => {
+          if (reviewimgRows.length > 0) {
+            return {
+              likes: reviewimgRows,
+            };
+
+          }
+        })
+    );
     const rows4 = await Promise.all(promises);
+    const rows5 = await Promise.all(likes);
     const answer = {
       resort: rows[0],
       images: rows2,
       reviews: rows4,
+      reviewlikes: rows5,
     };
     console.log(rows, rows2);
     res.status(200).json(answer);

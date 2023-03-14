@@ -55,7 +55,7 @@ const deleteReviewById = async (req, res) => {
 };
 
 const upVote = async (req, res) => {
-    const { id } = req.body;
+    const { id, username } = req.body;
 
     if (!id) return res.status(400).json({ message: "id not provided" });
 
@@ -64,6 +64,11 @@ const upVote = async (req, res) => {
             "UPDATE review SET vote = vote + 1 WHERE id = $1 RETURNING *",
             [id]
         );
+        await db.query(
+            "INSERT INTO likes (review_id, username) VALUES ($1, $2)",
+            [id, username]
+        );
+
         res.status(200).json(rows);
     } catch (err) {
         console.log(err);
@@ -71,7 +76,7 @@ const upVote = async (req, res) => {
     }
 }
 const downVote = async (req, res) => {
-    const { id } = req.body;
+    const { id, username } = req.body;
     if (!id) return res.status(400).json({ message: "id not provided" });
 
     try {
@@ -79,6 +84,17 @@ const downVote = async (req, res) => {
             "UPDATE review SET vote = vote - 1 WHERE id = $1 RETURNING *",
             [id]
         );
+        const { rowCount: deletedRows } = await db.query(
+            "DELETE FROM likes WHERE review_id = $1 AND username = $2",
+            [id, username]
+        );
+        if (deletedRows === 0) {
+            await db.query("ROLLBACK");
+            return res
+                .status(404)
+                .json({ message: "User has not liked this review" });
+        }
+
         res.status(200).json(rows);
     } catch (err) {
         console.log(err);
