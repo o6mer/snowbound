@@ -4,6 +4,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import dateFormat, { masks } from "dateformat";
 import { UserContext } from "../contexts/UserContextProvider";
 import axios from "axios";
+import NeedTologinModal from "./NeedTologinModal";
 
 const Review = ({
   id,
@@ -17,10 +18,13 @@ const Review = ({
   images,
 }) => {
   const [votes, setVotes] = useState(vote);
+  const [open, setOpen] = useState(false);
 
   const { user } = useContext(UserContext);
 
   const handlUpVote = async () => {
+    if (!user) return setOpen(true);
+
     try {
       setVotes(votes + 1);
       const { data } = await axios.post(
@@ -64,6 +68,11 @@ const Review = ({
         ))}
       </div>
       <footer className="flex justify-between"></footer>
+      <NeedTologinModal
+        text={"Want to upvote? You need to login first"}
+        open={open}
+        handleClose={() => setOpen(false)}
+      />
     </div>
   );
 };
