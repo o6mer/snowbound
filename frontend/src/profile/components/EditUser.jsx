@@ -1,41 +1,74 @@
-import React from 'react'
-import { useState } from 'react';
-import { TextField } from '@mui/material';
+import React from "react";
+import { useState } from "react";
+import { TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useContext, useEffect } from "react";
-import {UserContext} from "../../contexts/UserContextProvider";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { UserContext } from "../../contexts/UserContextProvider";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import imageUploader from "../../utils/imageUploader";
+import Loader from "../../general/Loader";
+
 const EditUser = ({ userData, setShowEdit }) => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
-    email: userData.email,    
-    username:userData.username,
+    email: userData.email,
+    username: userData.username,
     firstname: userData.firstname,
     lastname: userData.lastname,
     password: "",
+    pfp: userData?.pfp,
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState({ email: false, password: false });
+  const [files, setFiles] = useState();
 
-const updateUser=async({email, password, username, firstname, lastname})=>{
-try {
+  useEffect(() => {
+    if (!files) return;
+
+    const upload = async () => {
+      setIsLoading(true);
+      const url = await imageUploader(files);
+      setUser((prev) => {
+        return { ...prev, pfp: url };
+      });
+      setIsLoading(false);
+    };
+    upload();
+  }, [files]);
+
+  const updateUser = async ({
+    email,
+    password,
+    username,
+    firstname,
+    lastname,
+    pfp,
+  }) => {
+    try {
       if (!email || !password || !username || !firstname || !lastname) return;
 
       const { data } = await axios.post(
         "http://localhost:8000/api/user/update",
         {
-          userId:userData?.id,valuesToUpdate:{email, password, username, firstname, lastname}
+          userId: userData?.id,
+          valuesToUpdate: {
+            email,
+            password,
+            username,
+            firstname,
+            lastname,
+            pfp,
+          },
         }
       );
       console.log(data);
-       } catch (err) {
+    } catch (err) {
       console.log(err.message);
     }
   };
- 
-    
+
   const handleUpdate = async (e) => {
     e.preventDefault();
 
@@ -53,7 +86,7 @@ try {
         firstname: !user.firstname,
         lastname: !user.lastname,
       });
- 
+
     try {
       setIsLoading(true);
       await updateUser({ ...user });
@@ -74,7 +107,6 @@ try {
       prev[field] = value;
       return { ...prev };
     });
-    
   };
   return (
     <section class="w-64 mx-auto bg-white bg-opacity-90 rounded-2xl px-8 py-6 shadow-lg z-10">
@@ -92,19 +124,26 @@ try {
         <span class="text-gray-400 text-sm">Roll</span>
       </div>
       <div class="mr-8 mt-6 w-fit mx-auto">
-        <img
-          src={
-            userData?.pfp
-              ? userData?.pfp
-              : "https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
-          }
-          className="rounded-full w-28 "
-          alt="profile picture"
-        />
-        <button class="text-gray-400 hover:text-gray-600 ">
-          {" "}
-          Choose a picture
-        </button>
+        {isLoading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <img
+              src={user?.pfp}
+              className="rounded-full w-28 "
+              alt="profile picture"
+            />
+            <label htmlFor="pfp-input">Choose Profile Picture"</label>
+            <input
+              id="pfp-input"
+              class="text-gray-400 hover:text-gray-600 "
+              type="file"
+              onChange={(e) => setFiles(e.target.files)}
+            />
+          </>
+        )}
       </div>
 
       <div class="mt-8 space-y-3">
@@ -169,4 +208,4 @@ try {
   );
 };
 
-export default EditUser
+export default EditUser;
