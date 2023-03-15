@@ -12,7 +12,7 @@ const ResortHeader = ({ resortData }) => {
         />
         <FavoriteButton resortData={resortData} />
       </div>
-      <div className="flex flex-col md:flex-row items-center gap-8">
+      <div className="flex flex-col lg:flex-row items-center gap-8">
         <div className="flex flex-col md:max-w-[60%] gap-2   md:gap-10 justify-between">
           <header className="text-4xl font-bold py-4 ">
             {resortData?.name}

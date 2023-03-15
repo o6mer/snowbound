@@ -12,14 +12,15 @@ import AdminPage from "./admin/AdminPage";
 import LoginPage from "./userAuth/LoginPage";
 import SignupPage from "./userAuth/SignupPage";
 import HomePage from "./home/HomePage";
-import EditAddResort from "./admin/components/EditAddResort";
 import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
 import EasterEgg from "./general/easteregg";
-import AboutPage from "./AboutPage/AboutPage";
+import AboutPage from "./about/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 import EditUser from "./profile/components/EditUser";
 import UserReviews from "./profile/components/UserReviews";
+import Snowfall from "react-snowfall";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -91,10 +92,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 ]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserContextProvider>
+      <Snowfall
+        style={{
+          zIndex: "999",
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+        }}
+      />
       <RouterProvider router={router} />
     </UserContextProvider>
   </React.StrictMode>

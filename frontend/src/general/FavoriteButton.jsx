@@ -1,14 +1,16 @@
-import react, {useContext, useEffect} from "react"
+import react, {useContext, useEffect, useState} from "react"
 import {UserContext} from "../contexts/UserContextProvider.jsx";
 import axios from "axios";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
 import NeedTologinModal from "../general/NeedTologinModal"
 import React from "react";
-import {useState} from "react"
+import NeedTologinModal from "../general/NeedTologinModal"
 
 const FavoriteButton = ({resortData}) => {
     const { user, setUser } = useContext(UserContext);
+    const [open, setOpen] = useState(false);
+
 
     const checkFavorite = () => {
         const temp = user?.favorite?.find(
@@ -26,6 +28,10 @@ const FavoriteButton = ({resortData}) => {
     const [open,setOpen]=useState(false)
 
     const addToFavorite = () => {
+        if(!user){
+            setOpen(true)
+            return
+        }
         axios
             .post("http://localhost:8000/api/favorite/create", {
                 resort_id: resortData?.name,
@@ -107,8 +113,6 @@ const FavoriteButton = ({resortData}) => {
                     <FavoriteBorderIcon />
                 </button>
             }
-
-
         </>)
 }
 export default FavoriteButton

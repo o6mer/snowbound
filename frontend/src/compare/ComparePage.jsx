@@ -168,17 +168,8 @@ const ComparePage = () => {
               <ResortNotFound />
             </div>
           ) : (
-            <div className="px-[5vw] ">
-              <FindModel />
-              <CompareFilter
-                DUMMY_RESORT={dummyResorts}
-                getFilterResorts={getFilterResorts}
-                resetFilterResorts={resetFilterResorts}
-              />
+            <div className="p-[5vw] ">
               <CompareTable DUMMY_RESORT={compareData} />
-
-              {/* <AboutPage /> */}
-              {/* <h1>more to see</h1> */}
             </div>
           )}
         </>

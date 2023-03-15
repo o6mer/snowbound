@@ -54,7 +54,7 @@ const Review = ({
         <p className="font-bold">{poster}</p>
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <Rating name="read-only" value={star} readOnly />
+            <Rating name="read-only" value={Number(star)} readOnly />
             <p className="text-gray-500">{dateFormat(date, "mmmm yyyy")}</p>
           </div>
           <button
@@ -78,7 +78,7 @@ const Review = ({
       </div>
       <div className="flex flex-wrap gap-2">
         {images?.map((image) => (
-          <img src={image.link} alt="" className="max-w-xs" />
+          <img key={image.link} src={image.link} alt="" className="max-w-xs" />
         ))}
       </div>
       <footer className="flex justify-between"></footer>

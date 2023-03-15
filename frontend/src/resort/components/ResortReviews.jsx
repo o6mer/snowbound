@@ -30,20 +30,20 @@ const ResortReviews = ({ resortData }) => {
   return (
     <section className="flex flex-col flex-grow py-4 px-2 rounded-lg">
       <div className="flex justify-between">
-        <p className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
-          {reviews?.length} Reviews{" "}
+        <div className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
+          <p>{reviews?.length} Reviews </p>
           {reviews?.length ? (
             <div className="flex items-center">
               <Rating
                 name="avg-rating"
-                value={avgStar}
+                value={Number(avgStar)}
                 readOnly
                 precision={0.1}
               />
               <p className="font-normal text-gray-500">({avgStar})</p>
             </div>
           ) : null}
-        </p>
+        </div>
         <Button onClick={handleAddReview} variant="contained">
           Add Review
         </Button>
