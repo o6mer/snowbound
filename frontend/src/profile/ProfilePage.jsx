@@ -1,59 +1,81 @@
-import { Divider, TextField } from '@mui/material';
-import Navbar from '../general/Navbar';
-import { useState } from 'react';
-import Footer from '../general/Footer';
+import { Divider, TextField } from "@mui/material";
+import Navbar from "../general/Navbar";
+import { useState } from "react";
+import Footer from "../general/Footer";
 import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import UserReviews from './components/UserReviews';
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import UserReviews from "./components/UserReviews";
 import "./Profile.css";
-import UserTools from './components/UserTools';
+import UserTools from "./components/UserTools";
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
-import EditUser from './components/EditUser';
+import EditUser from "./components/EditUser";
+import Loader from "../general/Loader";
+import Hero from "../assets/profileHero.jpg";
+import UserFavorites from "./components/UserFavorites";
 const ProfilePage = () => {
-const [showEdit,setShowEdit] = useState(false);
- const navigate = useNavigate();
- const [isLoading,setIsLoading] = useState(false);
- const [showReviews, setShowReviews] = useState(false);
- const [userData,setUserData] = useState();
- const [userReviews, setUserReviews] = useState([]);
- const {userName}=useParams();
- useEffect(() => {
-  const fetchData = async () => {
-    setIsLoading(true);
-    
-    try {
-      const  {data}  = await axios.post(
-        `http://localhost:8000/api/user/profile/${userName}`
-      );
-      console.log(data.info);
-      setUserData(data.info[0])
-      setUserReviews (data.reviews)
-      console.log(userData);
-      console.log(userReviews)
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err.meessage);
-      setIsLoading(false);
-    }
-  };
-  fetchData();
- }, [])
+  const [showEdit, setShowEdit] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [userData, setUserData] = useState();
+  const [userReviews, setUserReviews] = useState([]);
+  const [userFavorites, setUserFavorites] = useState();
+  const { userName } = useParams();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
 
+      try {
+        const { data } = await axios.post(
+          `http://localhost:8000/api/user/profile/${userName}`
+        );
+        console.log([
+          ...data?.favorites.map((resort) =>resort.resort_id),
+        ]);
 
-    return (
-      <div>
-        <Navbar />
-        <Divider />
-        {/* <UserTools /> */}
-        {userData && (
-          <section class="relative  bg-center  bg-cover  bg-no-repeat bg-[url('./assets/profileHero.jpg')]   bg-opacity-50 flex font-medium items-center justify-center h-screen">
-            {!showEdit ? (
-              <section class="w-64 mx-auto bg-white bg-opacity-70 rounded-2xl px-8 py-6 shadow-2xl">
+        setUserFavorites([
+          ...data?.favorites.map((resort) => resort.resort_id),
+        ]);
+        setUserData(data.info[0]);
+        setUserReviews(data.reviews);
+        console.log(userData);
+        console.log(userReviews);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err.meessage);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <Navbar />
+      <Divider />
+      {userData ? (
+        <>
+          <UserTools
+            userData={userData}
+            setShowFavorites={setShowFavorites}
+            setShowReviews={setShowReviews}
+          />
+          <section class="relative  bg-center  bg-cover  bg-no-repeat  flex font-medium items-center justify-center h-screen bg-black ">
+            <div className="absolute top-0 left-0 w-full h-full">
+              <img
+                className="  h-full w-full object-cover opacity-50"
+                src={Hero}
+                alt=""
+              />
+            </div>
+            {!showFavorites && !showReviews && !showEdit ? (
+              <section class="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
                 <div class="flex items-center justify-between">
                   <span class="text-gray-400 text-sm">Roll</span>
                   <span class="text-emerald-400">
@@ -68,7 +90,11 @@ const [showEdit,setShowEdit] = useState(false);
                 </div>
                 <div class="mt-6 w-fit mx-auto">
                   <img
-                    src="https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
+                    src={
+                      userData?.pfp
+                        ? userData?.pfp
+                        : "https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
+                    }
                     class="rounded-full w-28 "
                     alt="profile picture"
                     srcset=""
@@ -80,7 +106,7 @@ const [showEdit,setShowEdit] = useState(false);
                     {userData?.firstname} <br /> {userData?.lastname}
                   </h2>
                 </div>
-                <p>{userData.email}</p>
+                <p>{userData?.email}</p>
                 {userReviews.length > 4 ? (
                   <p class="text-emerald-400 font-semibold mt-2.5">Active</p>
                 ) : (
@@ -97,18 +123,20 @@ const [showEdit,setShowEdit] = useState(false);
                   <span>{userReviews?.length}</span>
                 </div>
                 <button
-                  class="inline-flex items-center bg-opacity-50 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
+                  class="inline-flex items-center  justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
                   onClick={() => setShowReviews(true)}
                 >
                   My reviews
                 </button>
               </section>
-            ) : (
+            ) : showEdit ? (
               <EditUser userData={userData} setShowEdit={setShowEdit} />
+            ) : (
+              <div></div>
             )}
 
             {showReviews && (
-              <div>
+              <div class="z-10">
                 <button
                   onClick={() => setShowReviews(false)}
                   class="inline-flex items-center bg-opacity-70 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-yellow-500 hover:bg-yellow-700 focus:shadow-outline focus:outline-none"
@@ -118,11 +146,18 @@ const [showEdit,setShowEdit] = useState(false);
                 <UserReviews userReviews={userReviews} />
               </div>
             )}
+            {showFavorites && <UserFavorites favorites={userFavorites} />}
           </section>
-        )}
-        <Footer />
-      </div>
-    );
-}
 
-export default ProfilePage
+          <Footer />
+        </>
+      ) : (
+        <div class="h-screen">
+          <Loader />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProfilePage;
