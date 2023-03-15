@@ -3,30 +3,26 @@ const format = require("pg-format");
 const getResortByName = async (req, res) => {
   const { name } = req.params;
 
-  if (!name) return res.status(400).json({ message: "name not provided" });
+  if (!name) {
+    return res.status(400).json({ message: "name not provided" });
+  }
 
   try {
-    const { rows } = await db.query("SELECT * FROM resort WHERE name = $1", [
-      name,
+    const [resortResult, imgResult, reviewResult] = await Promise.all([
+      db.query("SELECT * FROM resort WHERE name = $1", [name]),
+      db.query("SELECT * FROM img WHERE owner = $1", [name]),
+      db.query("SELECT * FROM review WHERE resort_id = $1", [name]),
     ]);
-    const { rows: rows2 } = await db.query(
-      format("SELECT * FROM img WHERE owner = %L", name)
-    );
-    const { rows: rows3 } = await db.query(
-      format("SELECT * FROM review WHERE resort_id = %L ", name)
-    );
+    const rows = resortResult.rows;
+    const rows2 = imgResult.rows;
+    const rows3 = reviewResult.rows;
+
     const promises = rows3.map(async (review) => {
-      const reviewimgPromise = db.query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
-        .then(({ rows: reviewimgRows }) => ({ ...review, images: reviewimgRows }));
+      const reviewimgResult = await db.query("SELECT * FROM reviewimg WHERE review = $1", [review.id]);
+      const reviewWithImages = { ...review, images: reviewimgResult.rows };
 
-      const likesPromise = db.query(format("SELECT * FROM likes WHERE review_id = %L ", review.id))
-        .then(({ rows: reviewimgRows }) => {
-          if (reviewimgRows.length > 0) {
-            return reviewimgRows;
-          }
-        });
-
-      const [reviewWithImages, likes] = await Promise.all([reviewimgPromise, likesPromise]);
+      const likesResult = await db.query("SELECT * FROM likes WHERE review_id = $1", [review.id]);
+      const likes = likesResult.rows.length > 0 ? likesResult.rows : null;
       if (likes) {
         reviewWithImages.likes = likes;
       }
@@ -55,31 +51,34 @@ const getMultipleResortByName = async (req, res) => {
   }
 
   try {
-    const { rows } = await db.query(
-      format(`SELECT * FROM resort WHERE name IN %L`, [names])
-    );
-    const { rows: rows2 } = await db.query(
-      format(`SELECT * FROM img WHERE owner IN %L`, [names])
-    );
-    const { rows: rows3 } = await db.query(
-      format(`SELECT * FROM review WHERE resort_id IN %L`, [names])
-    );
-    const promises = rows3.map((review) =>
-      db
-        .query(format(`SELECT * FROM reviewimg WHERE review = %L`, review.id))
-        .then(({ rows: reviewimgRows }) => {
-          return {
-            ...review,
-            images: reviewimgRows,
-          };
-        })
-    );
-    const rows4 = await Promise.all(promises);
+    const [resorts, images, reviews] = await Promise.all([
+      db.query(format(`SELECT * FROM resort WHERE name IN %L`, [names])),
+      db.query(format(`SELECT * FROM img WHERE owner IN %L`, [names])),
+      db.query(format(`SELECT * FROM review WHERE resort_id IN %L`, [names]))
+    ]);
+
+    const reviewPromises = reviews.rows.map(async (review) => {
+      const [reviewImgRows, likesRows] = await Promise.all([
+        db.query(format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)),
+        db.query(format(`SELECT * FROM likes WHERE review_id = %L`, review.id))
+      ]);
+
+      const reviewWithImages = { ...review, images: reviewImgRows };
+      if (likesRows.rows.length > 0) {
+        reviewWithImages.likes = likesRows.rows;
+      }
+
+      return reviewWithImages;
+    });
+
+    const reviewsWithImages = await Promise.all(reviewPromises);
+
     const answer = {
-      resort: rows,
-      images: rows2,
-      reviews: rows4,
+      resort: resorts.rows,
+      images: images.rows,
+      reviews: reviewsWithImages
     };
+
     res.status(200).json(answer);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -98,7 +97,6 @@ const getResortByCountry = async (req, res) => {
       [country]
     );
 
-    console.log("Rows:", rows);
     res.status(200).json(rows);
   } catch (err) {
     console.log(err);
