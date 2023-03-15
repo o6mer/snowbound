@@ -228,6 +228,30 @@ const getMyInfo = async (req, res) => {
   }
 };
 
+const thankYou = async (req, res) => {
+  const { emailme } = req.body;
+  try {
+    const msg = {
+      to: emailme,
+      from: 'snowboundinc@gmail.com',
+      subject: 'Thank you for your reaching out!',
+      template_id: "d-0c28da1db01945649be8c6d7d98cf79e"
+
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
+
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: err.message });
+    alert("Error Reload page");
+
+  }
+}
+
 module.exports = {
   createUser,
   updateChecklist,
@@ -235,5 +259,6 @@ module.exports = {
   auth,
   getMyInfo,
   updateUserInfo,
+  thankYou
 
 };
