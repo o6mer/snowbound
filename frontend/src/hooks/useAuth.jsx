@@ -84,7 +84,7 @@ export const useAuth = () => {
         }
       );
 
-      console.log({ savedToken, user: data.user });
+      if (data?.message === "Token expired") return logout();
 
       if (!data.user) return;
 

@@ -1,22 +1,8 @@
 import React, { useContext, useState } from "react";
 import Review from "../../general/Review";
-import { Button, Divider, Modal, Rating, TextField } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import axios from "axios";
-import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import Loader from "../../general/Loader";
+import { Button, Divider, Rating } from "@mui/material";
 import { UserContext } from "../../contexts/UserContextProvider";
-import dateFormat, { masks } from "dateformat";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import NewReviewModal from "./NewReviewModal";
-
-const defualtReview = {
-  title: "",
-  body: "",
-  images: [],
-  star: 0,
-};
 
 const calcAverage = (reviews) => {
   const allRatings = reviews?.map((review) => review.star);

@@ -60,9 +60,10 @@ const login = async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
-      user.username,
-    ]);
+    const { rows: rows3 } = await db.query(
+      `SELECT * FROM favorite WHERE owner = $1`,
+      [user.username]
+    );
     const token = jwt.sign(
       {
         email: user.email,
@@ -76,7 +77,6 @@ const login = async (req, res) => {
     return res.status(200).json({
       user: { admin: user.admin, username: user.username, favorite: rows3 },
       token,
-
 
       message: "Logged in successfully",
     });
@@ -140,12 +140,15 @@ const auth = async (req, res) => {
       return res.status(401).send({ message: "Unauthorized" });
     }
 
+    if (user.message === "Token expired")
+      return res.status(200).send({ message: "Token expired" });
+
     // If the user is found, return the user data
     const { username, admin } = user;
-    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
-      username,
-    ]);
-
+    const { rows: rows3 } = await db.query(
+      `SELECT * FROM favorite WHERE owner = $1`,
+      [username]
+    );
 
     res.status(200).json({ user: { username, admin, favorite: rows3 } });
   } catch (error) {
@@ -169,6 +172,7 @@ const checkToken = async (token) => {
   } catch (err) {
     if (err.name === "TokenExpiredError") {
       console.log("Token expired");
+      return { message: "Token expired" };
     } else {
       console.error(err);
     }
@@ -178,37 +182,39 @@ const checkToken = async (token) => {
 const getMyInfo = async (req, res) => {
   try {
     const { username } = req.params;
-    console.log(username)
+    console.log(username);
     const { rows } = await db.query(`SELECT * FROM users WHERE username = $1`, [
       username,
     ]);
-    const { rows: rows2 } = await db.query(`SELECT * FROM review WHERE poster = $1`, [
-      username,
-    ]);
-    const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
-      username,
-    ]);
+    const { rows: rows2 } = await db.query(
+      `SELECT * FROM review WHERE poster = $1`,
+      [username]
+    );
+    const { rows: rows3 } = await db.query(
+      `SELECT * FROM favorite WHERE owner = $1`,
+      [username]
+    );
 
     const promises = rows2.map((review) =>
-      db.query(
-        format(`SELECT * FROM reviewimg WHERE review = %L`, review.id)
-      ).then(({ rows: reviewimgRows }) => {
-        return {
-          ...review,
-          reviewimg: reviewimgRows,
-        };
-      })
+      db
+        .query(format(`SELECT * FROM reviewimg WHERE review = %L`, review.id))
+        .then(({ rows: reviewimgRows }) => {
+          return {
+            ...review,
+            reviewimg: reviewimgRows,
+          };
+        })
     );
     const rows4 = await Promise.all(promises);
 
-    const answer = { info: rows, reviews: rows4, favorites: rows3 }
+    const answer = { info: rows, reviews: rows4, favorites: rows3 };
     res.status(200).json(answer);
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
     alert("Error Reload page");
   }
-}
+};
 
 module.exports = {
   createUser,

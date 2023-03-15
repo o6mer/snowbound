@@ -6,13 +6,8 @@ import axios from "axios";
 import FavoriteButton from "./FavoriteButton.jsx";
 
 const RecomendedResorts = ({ resortData }) => {
-
-
   return (
-    <div
-      id="recomendedImg"
-      className={`max-w-md w-full m-10 antialiased text-gray-900`}
-    >
+    <div id="recomendedImg" className={`w-full m-10 antialiased text-gray-900`}>
       <div>
         <img
           src={resortData?.image}
@@ -35,7 +30,6 @@ const RecomendedResorts = ({ resortData }) => {
                   ))}
                 </div>
                 <FavoriteButton resortData={resortData} />
-
               </div>
 
               <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">

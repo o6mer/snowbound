@@ -20,11 +20,11 @@ import { useAuth } from "../hooks/useAuth";
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { user } = useContext(UserContext);
+
+  const { user, openLogin, setOpenLogin } = useContext(UserContext);
 
   const { logout } = useAuth();
 
@@ -36,18 +36,18 @@ function Navbar() {
   };
 
   const handleOpenModal = () => {
-    setModalOpen(true);
+    setOpenLogin(true);
     document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
-    setModalOpen(false);
+    setOpenLogin(false);
     document.body.style.overflow = "auto";
   };
   const openProfile = () => {
     navigate(`/profile/${user.username}`);
-  }
-  
+  };
+
   return (
     <>
       <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
@@ -67,7 +67,7 @@ function Navbar() {
                 <div className="ml-10 flex items-baseline space-x-4">
                   <a
                     href="/search/Europe/France/none"
-                    className=" hover:bg-sky-400 
+                    className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400 
                    focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium"
@@ -76,7 +76,7 @@ function Navbar() {
                   </a>
                   <a
                     href="/search/Europe/Switzerland/none"
-                    className=" hover:bg-sky-400  
+                    className="transition-all hover:bg-sky-400  
                     hover:text-white
                     focus:bg-sky-400  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
@@ -85,7 +85,7 @@ function Navbar() {
 
                   <a
                     href="/search/Europe/Italy/none"
-                    className=" hover:bg-sky-400 
+                    className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md font-medium"
                   >
@@ -93,7 +93,7 @@ function Navbar() {
                   </a>
                   <a
                     href="/search/Europe/Bulgaria/none"
-                    className=" hover:bg-sky-400 
+                    className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
@@ -101,7 +101,7 @@ function Navbar() {
                   </a>
                   <a
                     href="/search/Europe/Austria/none"
-                    className=" hover:bg-sky-400 
+                    className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
@@ -109,7 +109,7 @@ function Navbar() {
                   </a>
                   <a
                     href="/search/North America/Canada/none"
-                    className=" hover:bg-sky-400 
+                    className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
@@ -119,7 +119,7 @@ function Navbar() {
                   {user?.admin && (
                     <NavLink
                       to="/admin"
-                      className=" hover:bg-sky-400 
+                      className="transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                     >
@@ -129,7 +129,7 @@ function Navbar() {
                   {!user ? (
                     <div>
                       <NavLink
-                        className="absolute top-4 right-2  hover:bg-sky-500 
+                        className="absolute top-4 right-2 transition-all  hover:bg-sky-500 
                     hover:text-white
                     focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
                         onClick={handleOpenModal}
@@ -137,7 +137,7 @@ function Navbar() {
                         LogIn
                       </NavLink>
                       <LoginPage
-                        open={modalOpen}
+                        open={openLogin}
                         onClose={handleCloseModal}
                       ></LoginPage>
                     </div>
@@ -329,7 +329,7 @@ function Navbar() {
                   LogIn
                 </NavLink>
                 <LoginPage
-                  open={modalOpen}
+                  open={openLogin}
                   onClose={handleCloseModal}
                 ></LoginPage>
               </div>

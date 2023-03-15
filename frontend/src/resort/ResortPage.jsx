@@ -105,7 +105,7 @@ const ResortPage = () => {
                   className="-z-10 w-full h-full object-cover "
                 />
               </div>
-              <main className="flex flex-col gap-10 w-full h-full px-24 ">
+              <main className="flex flex-col gap-10 w-full h-full px-12 md:px-24 ">
                 <ResortHeader resortData={resortData} />
                 <Divider />
 
