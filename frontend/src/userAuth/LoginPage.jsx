@@ -63,7 +63,7 @@ const LoginPage = (props) => {
 
   return (
     <section
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 modal animated 
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-10 modal animated 
       ${props.open ? "fadeIn overflow-auto" : "fadeOut faster"}  shadow-2xl`}
     >
       <div className="forms flex justify-center ">
