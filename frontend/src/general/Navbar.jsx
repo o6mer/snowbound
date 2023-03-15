@@ -8,6 +8,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Menu from "@mui/material/Menu";
+import GroupsIcon from "@mui/icons-material/Groups";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
@@ -78,11 +79,11 @@ function Navbar() {
                   <span className="ml-2">SnowBound</span>
                 </NavLink>
               </div>
-              <div className="hidden lg:block">
+              <div className="hidden xl:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink
-                      to="/about"
-                      className="transition-all hover:bg-sky-400
+                    to="/about"
+                    className="transition-all hover:bg-sky-400
                    hover:text-white text-blue-600
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                   >
@@ -90,14 +91,14 @@ function Navbar() {
                   </NavLink>
 
                   {user?.admin && (
-                      <NavLink
-                          to="/admin"
-                          className="transition-all hover:bg-sky-400
+                    <NavLink
+                      to="/admin"
+                      className="transition-all hover:bg-sky-400
                     hover:text-white
                     focus:bg-sky-400 text-blue-600  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
-                      >
-                        Admin
-                      </NavLink>
+                    >
+                      Admin
+                    </NavLink>
                   )}
                   <a
                     href="/search/Europe/France/none"
@@ -149,7 +150,6 @@ function Navbar() {
                   >
                     Canada
                   </a>
-
 
                   {!user ? (
                     <div>
@@ -253,7 +253,7 @@ function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="-mr-2 flex lg:hidden">
+            <div className="-mr-2 flex xl:hidden">
               {console.log(isOpen)}
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -322,6 +322,17 @@ function Navbar() {
                         class="relative m-0 list-none px-[0.2rem] pb-12"
                         data-te-sidenav-menu-ref
                       >
+                        <li class="relative pt-4">
+                         
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none  "
+                            data-te-sidenav-link-ref
+                            href="/about"
+                          >
+                            <GroupsIcon />
+                            <span>About us</span>
+                          </a>
+                        </li>
                         {user && (
                           <>
                             <li class="relative pt-4">

@@ -93,12 +93,15 @@ try {
       </div>
       <div class="mr-8 mt-6 w-fit mx-auto">
         <img
-          src="https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
-          class="rounded-full w-28 "
+          src={
+            userData?.pfp
+              ? userData?.pfp
+              : "https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
+          }
+          className="rounded-full w-28 "
           alt="profile picture"
-          srcset=""
         />
-        <button  class="text-gray-400 hover:text-gray-600 ">
+        <button class="text-gray-400 hover:text-gray-600 ">
           {" "}
           Choose a picture
         </button>
