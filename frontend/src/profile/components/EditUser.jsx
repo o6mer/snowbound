@@ -4,18 +4,38 @@ import { TextField } from '@mui/material';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useContext, useEffect } from "react";
 import {UserContext} from "../../contexts/UserContextProvider";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const EditUser = ({ userData, setShowEdit }) => {
+  const navigate=useNavigate();
   const [user, setUser] = useState({
-    email: "",
+    email: userData.email,    
+    username:userData.username,
+    firstname: userData.firstname,
+    lastname: userData.lastname,
     password: "",
-    username: "",
-    firstname: "",
-    lastname: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState({ email: false, password: false });
 
+const updateUser=async({email, password, username, firstname, lastname})=>{
+try {
+      if (!email || !password || !username || !firstname || !lastname) return;
+
+      const { data } = await axios.post(
+        "http://localhost:8000/api/user/update",
+        {
+          userId:userData?.id,valuesToUpdate:{email, password, username, firstname, lastname}
+        }
+      );
+      console.log(data);
+       } catch (err) {
+      console.log(err.message);
+    }
+  };
+ 
+    
   const handleUpdate = async (e) => {
     e.preventDefault();
 
@@ -33,15 +53,16 @@ const EditUser = ({ userData, setShowEdit }) => {
         firstname: !user.firstname,
         lastname: !user.lastname,
       });
-
+ 
     try {
       setIsLoading(true);
-      await signup({ ...user });
+      await updateUser({ ...user });
     } catch (err) {
       console.log(err);
     }
     setIsLoading(false);
     document.body.style.overflow = "auto";
+    window.location.reload();
   };
 
   const handleChange = (e) => {
@@ -53,9 +74,10 @@ const EditUser = ({ userData, setShowEdit }) => {
       prev[field] = value;
       return { ...prev };
     });
+    
   };
   return (
-    <section class="w-64 mx-auto bg-white bg-opacity-70 rounded-2xl px-8 py-6 shadow-lg">
+    <section class="w-64 mx-auto bg-white bg-opacity-90 rounded-2xl px-8 py-6 shadow-lg z-10">
       <div class="flex items-center justify-between">
         <span class="text-emerald-400">
           <button
@@ -69,14 +91,14 @@ const EditUser = ({ userData, setShowEdit }) => {
         </span>{" "}
         <span class="text-gray-400 text-sm">Roll</span>
       </div>
-      <div class="mt-6 w-fit mx-auto">
+      <div class="mr-8 mt-6 w-fit mx-auto">
         <img
           src="https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
           class="rounded-full w-28 "
           alt="profile picture"
           srcset=""
         />
-        <button class="text-gray-400 hover:text-gray-600 ">
+        <button  class="text-gray-400 hover:text-gray-600 ">
           {" "}
           Choose a picture
         </button>
@@ -125,8 +147,6 @@ const EditUser = ({ userData, setShowEdit }) => {
         />
         <TextField
           error={isError.password}
-          defaultValue={userData?.password}
-          value={user.password}
           label="Password"
           type="password"
           name="password"
@@ -137,8 +157,8 @@ const EditUser = ({ userData, setShowEdit }) => {
       </div>
 
       <button
-        class="mt-2 inline-flex items-center bg-opacity-50 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
-        onClick={() => setShowReviews(true)}
+        class="mt-2 inline-flex items-center bg-opacity-90 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
+        onClick={handleUpdate}
       >
         Confirm
       </button>
