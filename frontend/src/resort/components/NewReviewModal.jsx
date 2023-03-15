@@ -8,6 +8,7 @@ import { UserContext } from "../../contexts/UserContextProvider";
 import dateFormat, { masks } from "dateformat";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import imageUploader from "../../utils/imageUploader";
 
 const defualtReview = {
   title: "",
@@ -31,10 +32,6 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
 
   const { user } = useContext(UserContext);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -44,17 +41,11 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
 
     try {
       setIsImageLoading(true);
-      const formData = new FormData();
-      formData.append("file", files[0]);
-      formData.append("upload_preset", "bit-site-uploads");
 
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_CLOUDINARY_URL}/image/upload`,
-        formData
-      );
+      const imageUrl = await imageUploader(files);
 
       setReviewData((prev) => {
-        return { ...prev, images: [...prev.images, data.secure_url] };
+        return { ...prev, images: [...prev.images, imageUrl] };
       });
       setFiles(null);
       setIsImageLoading(false);
@@ -191,7 +182,7 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
           </div>
           <div className="flex ">
             {reviewData.images.map((image) => (
-              <img className="w-56" src={image} />
+              <img key={image} className="w-56" src={image} />
             ))}
           </div>
         </div>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import Footer from "../general/Footer";
 import Navbar from "../general/Navbar";
 import HomeHero from "./Components/HomeHero";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import RecomendedResorts from "../general/RecomendedResorts";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,11 +13,10 @@ import { UserContext } from "../contexts/UserContextProvider";
 import FormModal from "../general/Modals/FormModal"
 
 const HomePage = () => {
-  const { user } = useContext(UserContext);
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { continent, country, resort } = useParams();
+  const { country } = useParams();
 
   useAuth();
 
@@ -65,7 +64,7 @@ const HomePage = () => {
               <FormModal/>
               <div className="  grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 content-center justify-items-center p-[5vw]">
                 {resortData?.map((resort) => (
-                  <RecomendedResorts resortData={resort} />
+                  <RecomendedResorts key={resort?.name} resortData={resort} />
                 ))}
               </div>
               <Footer />

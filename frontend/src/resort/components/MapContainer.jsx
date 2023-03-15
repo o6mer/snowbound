@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   GoogleMap,
-  Marker,
   MarkerF,
   useLoadScript,
   InfoWindow,
@@ -9,6 +8,8 @@ import {
 import axios from "axios";
 import Rating from "@mui/material/Rating";
 import Loader from "../../general/Loader";
+import LanguageIcon from "@mui/icons-material/Language";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 const libraries = ["places"];
@@ -29,6 +30,8 @@ const MapContainer = ({ location, name, category }) => {
         );
 
         if (!data) return;
+
+        console.log({ data });
 
         setSelected();
         setPlaces(data.results);
@@ -73,7 +76,6 @@ const Map = ({ location, places, name, selected, setSelected }) => {
   const [lat, lng] = location?.split(",");
   const calcCenter = { lat: Number(lat), lng: Number(lng) };
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(false);
-  // const [map, setMap] = useState();
 
   useEffect(() => {
     if (!selected) return;
@@ -129,9 +131,55 @@ const Map = ({ location, places, name, selected, setSelected }) => {
 };
 
 const PlaceInfowWindow = ({ placeData }) => {
+  const [placeDetails, setPlaceDetails] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!placeData) return;
+
+    const fetchPicture = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.post(
+          `http://localhost:8000/api/google/get-place/${placeData.place_id}`
+        );
+
+        if (!data) return;
+
+        console.log({ data });
+        setPlaceDetails(data.result);
+      } catch (err) {
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+    fetchPicture();
+  }, [placeData]);
+
   return (
-    <div className="">
-      <p>{placeData?.name}</p>
+    <div className="bg-white">
+      {isLoading ? (
+        <div>
+          <Loader />
+        </div>
+      ) : (
+        <div className="flex flex-col">
+          <p>{placeDetails?.name}</p>
+          <a
+            className="text-blue-700 hover:underline  w-fit"
+            href={placeDetails?.website}
+          >
+            <LanguageIcon fontSize="small" /> Visit Website
+          </a>
+          <a
+            className="text-blue-700 hover:underline w-fit"
+            href={`tel:${placeDetails?.international_phone_number}`}
+          >
+            <LocalPhoneIcon fontSize="small" />
+            {placeDetails?.international_phone_number}
+          </a>
+        </div>
+      )}
     </div>
   );
 };
