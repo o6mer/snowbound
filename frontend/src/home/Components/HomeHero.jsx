@@ -70,7 +70,7 @@ const HomeHero = () => {
           />
           <br />
           <a
-            href="/aboutus#HowToGetStarted"
+            href="/about#HowToGetStarted"
             className="text-blue-700  hover:text-blue-900"
           >
             Need help?
