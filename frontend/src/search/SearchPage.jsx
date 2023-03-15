@@ -13,7 +13,7 @@ import ResortNotFound from "../resort/components/ResortNotFound";
 import { useAuth } from "../hooks/useAuth";
 const SearchPage = () => {
   const [resortData, setResortData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { continent, country, resort } = useParams();
 
@@ -29,9 +29,9 @@ const SearchPage = () => {
             `http://localhost:8000/api/resort/find/country/${country}`
           );
           if (!data) return;
-          setIsLoading(false);
           console.log(data);
           setResortData(data);
+          setIsLoading(false);
         } catch (err) {
           console.log(err.meessage);
           setIsLoading(false);
@@ -44,8 +44,8 @@ const SearchPage = () => {
           if (!data) return;
 
           console.log(data);
-          setIsLoading(false);
           setResortData([data.resort]);
+          setIsLoading(false);
         } catch (err) {
           console.log(err.meessage);
           setIsLoading(false);
@@ -55,7 +55,7 @@ const SearchPage = () => {
     fetchData();
   }, []);
   return (
-    <>
+    <main>
       <Navbar />
       {isLoading ? (
         <div className="h-screen">
@@ -77,10 +77,7 @@ const SearchPage = () => {
               />
               {resortData &&
                 resortData?.map((resort, index) => (
-                    <ResortsCard
-                      key={index}
-                      resort={resort}
-                    />
+                  <ResortsCard key={index} resort={resort} />
                 ))}
 
               <Footer />
@@ -90,7 +87,7 @@ const SearchPage = () => {
           )}
         </>
       )}
-    </>
+    </main>
   );
 };
 
