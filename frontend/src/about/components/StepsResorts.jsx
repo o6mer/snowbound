@@ -104,7 +104,11 @@ const StepsResorts = () => {
 
   return (
     <>
-      <section ref={ref} className="header bg-white dark:bg-gray-900 ">
+      <section
+        ref={ref}
+        id="HowToGetStarted"
+        className="header bg-white dark:bg-gray-900 "
+      >
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 flex flex-col-reverse ">
           <div className="grid grid-cols-2 gap-4 mt-8 px-10 md:px-0">
             <img

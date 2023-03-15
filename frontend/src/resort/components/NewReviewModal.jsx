@@ -191,7 +191,7 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
           </div>
           <div className="flex ">
             {reviewData.images.map((image) => (
-              <img className="w-56" src={image} />
+              <img key={image} className="w-56" src={image} />
             ))}
           </div>
         </div>

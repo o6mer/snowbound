@@ -1,30 +1,31 @@
-import {React,useState} from "react";
+import { React, useState } from "react";
 import CompareModal from "../../general/Modals/CompareModal";
 import FindModal from "../../general/Modals/FindModal";
 import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 const HomeHero = () => {
-   const [modalOpen, setModalOpen] = useState(false);
-   const [compareModalOpen, setcompareModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [compareModalOpen, setcompareModalOpen] = useState(false);
 
-   const handleOpenModal = () => {
-     setModalOpen(true);
+  const handleOpenModal = () => {
+    setModalOpen(true);
     document.body.style.overflow = "hidden";
-   };
+  };
 
-   const handleCloseModal = () => {
-     setModalOpen(false);
-     document.body.style.overflow = "auto";
-   };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
 
-   const handleOpencompareModal = () => {
-     setcompareModalOpen(true);
-        document.body.style.overflow = "hidden";
-   };
+  const handleOpencompareModal = () => {
+    setcompareModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
 
-   const handleClosecompareModal = () => {
-     setcompareModalOpen(false);
-         document.body.style.overflow = "auto";
-   };
+  const handleClosecompareModal = () => {
+    setcompareModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
 
   return (
     <div
@@ -55,10 +56,7 @@ const HomeHero = () => {
             className="flex-grow  h-12 px-4 mb-3 bg-white opacity-80 transition duration-200 bg-transparent border-2 border-gray-400 rounded appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-200 focus:outline-none focus:shadow-outline"
             onClick={handleOpenModal}
           />
-          <CompareModal
-            open={modalOpen}
-            onClose={handleCloseModal}
-          ></CompareModal>
+          <CompareModal open={modalOpen} onClose={handleCloseModal} />
           <input
             placeholder="Find"
             required
@@ -69,11 +67,14 @@ const HomeHero = () => {
           <FindModal
             open={compareModalOpen}
             onClose={handleClosecompareModal}
-          ></FindModal>
+          />
           <br />
-          <button className="text-blue-700  hover:text-blue-900">
+          <a
+            href="/aboutus#HowToGetStarted"
+            className="text-blue-700  hover:text-blue-900"
+          >
             Need help?
-          </button>
+          </a>
           <a
             href="#recomendedResorts"
             aria-label="Scroll down"
