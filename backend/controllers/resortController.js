@@ -16,9 +16,9 @@ const getResortByName = async (req, res) => {
       format("SELECT * FROM review WHERE resort_id = %L ", name)
     );
 
-
     const promises = rows3.map((review) =>
-      db.query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
+      db
+        .query(format("SELECT * FROM reviewimg WHERE review = %L", review.id))
         .then(({ rows: reviewimgRows }) => {
           return {
             ...review,
@@ -27,13 +27,11 @@ const getResortByName = async (req, res) => {
         })
     );
     const likes = rows3.map((review) =>
-      db.query(format("SELECT * FROM likes WHERE review_id = %L ", review.id))
+      db
+        .query(format("SELECT * FROM likes WHERE review_id = %L ", review.id))
         .then(({ rows: reviewimgRows }) => {
           if (reviewimgRows.length > 0) {
-            return {
-              likes: reviewimgRows,
-            };
-
+            return reviewimgRows;
           }
         })
     );
