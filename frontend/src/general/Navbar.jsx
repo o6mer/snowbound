@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Transition } from "@headlessui/react";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import LoginPage from "../userAuth/LoginPage";
 import Avatar from "@mui/material/Avatar";
 import LoginIcon from "@mui/icons-material/Login";
@@ -36,6 +36,8 @@ function Navbar() {
 
   const { user, openLogin, setOpenLogin } = useContext(UserContext);
   const { logout } = useAuth();
+
+  const { country } = useParams();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,51 +104,68 @@ function Navbar() {
                   )}
                   <a
                     href="/search/Europe/France/none"
-                    className="transition-all hover:bg-sky-400 
+                    className={`${
+                      country === "France" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium"
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     France
                   </a>
                   <a
                     href="/search/Europe/Switzerland/none"
-                    className="transition-all hover:bg-sky-400  
+                    className={`${
+                      country === "Switzerland" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                    focus:bg-sky-400 
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     Switzerland
                   </a>
 
                   <a
                     href="/search/Europe/Italy/none"
-                    className="transition-all hover:bg-sky-400 
+                    className={`${
+                      country === "Italy" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md font-medium"
+                    focus:bg-sky-400 
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     Italy
                   </a>
                   <a
                     href="/search/Europe/Bulgaria/none"
-                    className="transition-all hover:bg-sky-400 
+                    className={`${
+                      country === "Bulgaria" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                    focus:bg-sky-400 
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     Bulgaria
                   </a>
                   <a
                     href="/search/Europe/Austria/none"
-                    className="transition-all hover:bg-sky-400 
+                    className={`${
+                      country === "Austria" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                    focus:bg-sky-400 
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     Austria
                   </a>
                   <a
                     href="/search/North America/Canada/none"
-                    className="transition-all hover:bg-sky-400 
+                    className={`${
+                      country === "Canada" && "bg-sky-400 text-white"
+                    } transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                    focus:bg-sky-400 
+                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
                   >
                     Canada
                   </a>
@@ -312,7 +331,6 @@ function Navbar() {
                     >
                       <a
                         class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
-                    
                         data-te-ripple-init
                         data-te-ripple-color="primary"
                       >
@@ -323,7 +341,6 @@ function Navbar() {
                         data-te-sidenav-menu-ref
                       >
                         <li class="relative pt-4">
-                         
                           <a
                             class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none  "
                             data-te-sidenav-link-ref
