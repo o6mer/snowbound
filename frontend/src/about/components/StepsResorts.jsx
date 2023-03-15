@@ -89,40 +89,45 @@ const StepsResorts = () => {
     );
   };
 
-  const paraStepsAnimation =()=>{
-    const boxes = gsap.utils.toArray('.rightPara');
-    boxes.forEach(box => {
-      gsap.fromTo(box,{
-        opacity:0,
-        y:200
-      }, {
-        y: 0,
-        duration:1.2,
-        opacity:1,
-        scrollTrigger: {
-          trigger: box,
-          start:"top bottom-=45",
-          // markers: true,
-          // scrub: true
+  const paraStepsAnimation = () => {
+    const boxes = gsap.utils.toArray(".rightPara");
+    boxes.forEach((box) => {
+      gsap.fromTo(
+        box,
+        {
+          opacity: 0,
+          y: 200,
+        },
+        {
+          y: 0,
+          duration: 1.2,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: box,
+            start: "top bottom-=45",
+            // markers: true,
+            // scrub: true
+          },
         }
-      })
+      );
     });
-
-  }
+  };
 
   useEffect(() => {
     if (ref.current) {
       startedAnimation();
       stepsAnimation();
-      paraStepsAnimation()
+      paraStepsAnimation();
     }
-
-
   }, []);
 
   return (
     <>
-      <section ref={ref} className="header bg-white dark:bg-gray-900 lg:py-[5vw] id="HowToGetStarted"">
+      <section
+        ref={ref}
+        className="header bg-white dark:bg-gray-900 lg:py-[5vw]"
+        id="HowToGetStarted"
+      >
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 flex flex-col-reverse ">
           <div className="grid grid-cols-2 gap-4 mt-8 px-10 md:px-0">
             <img
