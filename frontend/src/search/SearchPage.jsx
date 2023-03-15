@@ -77,12 +77,10 @@ const SearchPage = () => {
               />
               {resortData &&
                 resortData?.map((resort, index) => (
-                  <Link to={`/resort/${resort.name}`}>
                     <ResortsCard
                       key={index}
                       resort={resort}
                     />
-                  </Link>
                 ))}
 
               <Footer />
