@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee8c1fc8-b815-40a0-b7d7-b06421c841fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/general/Modals/FormModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/general/Modals/FormModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/home/Components/HomeHero.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/home/Components/HomeHero.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/home/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/home/HomePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/search/components/ResortsCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/search/components/ResortsCard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,11 +83,6 @@
           <url>file://$PROJECT_DIR$/frontend/src/about/components/StepsResorts.jsx</url>
           <line>164</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/search/components/ResortsCard.jsx</url>
-          <line>36</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
