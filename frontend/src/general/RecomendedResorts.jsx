@@ -25,8 +25,8 @@ const RecomendedResorts = ({ resortData }) => {
                 <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider ">
                   {resortData?.country_id} &bull; {resortData?.siteHeight}m
                   &bull;{" "}
-                  {[...Array(resortData?.price)].map((n) => (
-                    <span>$</span>
+                  {[...Array(resortData?.price)].map((n, i) => (
+                    <span key={i}>$</span>
                   ))}
                 </div>
                 <FavoriteButton resortData={resortData} />

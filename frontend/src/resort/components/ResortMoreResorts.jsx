@@ -37,7 +37,6 @@ const ResortMoreResorts = ({ resortData }) => {
         const { data } = await axios.get(
           `http://localhost:8000/api/resort/find/country/${resortData?.country_id}`
         );
-        console.log("moreeeee:", data);
         setResorts([
           ...data?.filter((resort) => resort.name !== resortData.name),
         ]);
@@ -56,7 +55,7 @@ const ResortMoreResorts = ({ resortData }) => {
       ) : resorts?.length ? (
         <>
           <Divider />
-          <section section className="">
+          <section className="">
             <p className="text-center text-2xl font-bold">
               More From {resortData?.country_id}
             </p>

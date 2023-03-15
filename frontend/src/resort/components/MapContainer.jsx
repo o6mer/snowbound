@@ -151,7 +151,7 @@ const PlacesList = ({ places, selected, setSelected }) => {
         >
           <p>{place?.name}</p>
           <div className="flex">
-            <Rating name="read-only" value={place?.rating} readOnly />
+            <Rating name="read-only" value={Number(place?.rating)} readOnly />
             <p>({place?.user_ratings_total})</p>
           </div>
         </button>
