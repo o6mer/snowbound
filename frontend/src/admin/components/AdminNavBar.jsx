@@ -41,24 +41,6 @@ const AdminNavBar = () => {
                   >
                     Add Resort
                   </a>
-
-                  {/* <NavLink
-                    to="/"
-                    className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Country 1
-                  </NavLink> */}
-
-                  {!token ? (
-                    <NavLink
-                      to="/Login"
-                      className="absolute  right-2 text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      My Profile
-                    </NavLink>
-                  ) : (
-                    <div className="absolute  right-2"></div>
-                  )}
                 </div>
               </div>
             </div>
@@ -133,20 +115,6 @@ const AdminNavBar = () => {
                   className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Add Resort
-                </NavLink>
-
-                {/* <NavLink
-                  to="/"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Country 1
-                </NavLink> */}
-
-                <NavLink
-                  to="/"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  My Profile
                 </NavLink>
               </div>
             </div>
