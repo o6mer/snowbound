@@ -5,17 +5,9 @@ import { UserContext } from "../../contexts/UserContextProvider";
 import NewReviewModal from "./NewReviewModal";
 import NeedTologinModal from "../../general/NeedTologinModal";
 
-const calcAverage = (reviews) => {
-  const allRatings = reviews?.map((review) => review.star);
-  const sum = allRatings?.reduce((partialSum, a) => partialSum + a, 0);
-  const avgRatings = sum / allRatings?.length;
-  return avgRatings.toFixed(1);
-};
-
 const ResortReviews = ({ resortData }) => {
   const { reviews } = resortData;
 
-  const [avgStar] = useState(calcAverage(resortData.reviews));
   const [open, setOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
 
@@ -31,16 +23,18 @@ const ResortReviews = ({ resortData }) => {
     <section className="flex flex-col flex-grow py-4 px-2 rounded-lg">
       <div className="flex justify-between">
         <div className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
-          <p>{reviews?.length} Reviews </p>
-          {reviews?.length ? (
+          <p>{resortData?.review_amount} Reviews </p>
+          {resortData?.review_amount ? (
             <div className="flex items-center">
               <Rating
                 name="avg-rating"
-                value={Number(avgStar)}
+                value={Number(resortData.avg_rating)}
                 readOnly
                 precision={0.1}
               />
-              <p className="font-normal text-gray-500">({avgStar})</p>
+              <p className="font-normal text-gray-500">
+                ({resortData.avg_rating.toFixed(1)})
+              </p>
             </div>
           ) : null}
         </div>
@@ -63,7 +57,9 @@ const ResortReviews = ({ resortData }) => {
               </li>
             ))
         ) : (
-          <div className="">No Reviews</div>
+          <div className=" flex justify-center items-center">
+            <p>Be the frist to review!</p>
+          </div>
         )}
       </ul>
 
