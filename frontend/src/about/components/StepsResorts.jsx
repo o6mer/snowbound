@@ -18,7 +18,7 @@ const StepsResorts = () => {
       document.querySelector(".header-para"),
       {
         opacity: 0,
-        x: 100,
+        x: 150,
       },
       {
         duration: 1.5,
@@ -26,7 +26,7 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: "top center+=100",
+          start: "top center+=130",
           markers: true,
         },
       }
@@ -35,7 +35,7 @@ const StepsResorts = () => {
       ".img-1",
       {
         opacity: 0,
-        y: 100,
+        y: 150,
       },
       {
         duration: 1.5,
@@ -43,7 +43,7 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: "top center+=100",
+          start: "top center+=130",
         },
       }
     );
@@ -51,7 +51,7 @@ const StepsResorts = () => {
       ".img-2",
       {
         opacity: 0,
-        y: -100,
+        y: -150,
       },
       {
         duration: 1.5,
@@ -59,7 +59,7 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: "top center+=100",
+          start: "top center+=130",
           // scrub: true,
         },
       }
@@ -69,7 +69,7 @@ const StepsResorts = () => {
 
   const stepsAnimation = () => {
     gsap.fromTo(
-      ".img-3",
+      ".div-3",
       {
         opacity: 0,
         x: 200,
@@ -81,19 +81,41 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: " top center+=150",
-          markers: true,
+          start: " top bottom",
+          // markers: true,
           // scrub: true,
         },
       }
     );
   };
 
+  const paraStepsAnimation =()=>{
+    const boxes = gsap.utils.toArray('.rightPara');
+    boxes.forEach(box => {
+      gsap.fromTo(box,{
+        opacity:0,
+        y:200
+      }, {
+        y: 0,
+        duration:1.2,
+        opacity:1,
+        scrollTrigger: {
+          trigger: box,
+          start:"top bottom-=45",
+          markers: true,
+          // scrub: true
+        }
+      })
+    });
+
+  }
+
   useEffect(() => {
     // setTimeout(()=>{
     if (ref.current) {
       startedAnimation();
       stepsAnimation();
+      paraStepsAnimation()
     }
 
     // },10)
@@ -104,7 +126,7 @@ const StepsResorts = () => {
 
   return (
     <>
-      <section ref={ref} className="header bg-white dark:bg-gray-900 ">
+      <section ref={ref} className="header bg-white dark:bg-gray-900 lg:py-[5vw]">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 flex flex-col-reverse ">
           <div className="grid grid-cols-2 gap-4 mt-8 px-10 md:px-0">
             <img
@@ -140,7 +162,7 @@ const StepsResorts = () => {
         <section className="mb-32 text-gray-800 ">
           <div className="flex flex-wrap items-center p-10">
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6 mb-12 ">
-              <div className="flex mb-10">
+              <div className="rightPara flex mb-10">
                 <div className="shrink-0">
                   <div
                     className="p-4 rounded-md shadow-lg"
@@ -164,7 +186,7 @@ const StepsResorts = () => {
                 </div>
               </div>
 
-              <div className="flex mb-10">
+              <div className="rightPara flex mb-10">
                 <div className="shrink-0">
                   <div
                     className="p-4 rounded-md shadow-lg"
@@ -185,7 +207,7 @@ const StepsResorts = () => {
                 </div>
               </div>
 
-              <div className="flex mb-10">
+              <div className="rightPara flex mb-10">
                 <div className="shrink-0">
                   <div
                     className="p-4 rounded-md shadow-lg"
@@ -205,7 +227,7 @@ const StepsResorts = () => {
                 </div>
               </div>
 
-              <div className="flex mb-10 ">
+              <div className="rightPara flex mb-10 ">
                 <div className="shrink-0">
                   <div
                     className="p-4 rounded-md shadow-lg"
@@ -225,7 +247,7 @@ const StepsResorts = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex">
+              <div className="rightPara flex">
                 <div className="shrink-0">
                   <div
                     className="p-4 rounded-md shadow-lg"
@@ -248,7 +270,7 @@ const StepsResorts = () => {
             </div>
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-5/12 mb-12 lg:mb-0 md:px-6 ">
               <div
-                className="relative overflow-hidden bg-no-repeat bg-cover rounded-lg shadow-lg"
+                className="relative overflow-hidden bg-no-repeat bg-cover rounded-lg shadow-lg div-3"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 style={{ backgroundPosition: "50%" }}

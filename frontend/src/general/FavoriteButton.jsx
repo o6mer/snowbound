@@ -5,7 +5,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
 import NeedTologinModal from "../general/NeedTologinModal"
 import React from "react";
-import NeedTologinModal from "../general/NeedTologinModal"
 
 const FavoriteButton = ({resortData}) => {
     const { user, setUser } = useContext(UserContext);
@@ -25,7 +24,6 @@ const FavoriteButton = ({resortData}) => {
             checkFavorite();
         }
     }, [user]);
-    const [open,setOpen]=useState(false)
 
     const addToFavorite = () => {
         if(!user){
