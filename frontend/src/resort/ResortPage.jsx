@@ -11,44 +11,7 @@ import Footer from "../general/Footer";
 import ResortMoreResorts from "./components/ResortMoreResorts";
 import Loader from "../general/Loader";
 import ResortNotFound from "./components/ResortNotFound";
-import CustomizedBreadcrumbs from "../general/CustomizedBreadcrumbs";
 import { useAuth } from "../hooks/useAuth";
-
-const DUMMY_RESORT = {
-  name: "resort name",
-  description:
-    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, consequatur rem amet perferendis fuga nobis dignissimos minima voluptatem doloremque maxime.",
-  exstraDetails:
-    " Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptatibus iusto, soluta libero maiores ipsa consequuntur asperiores deserunt perferendis eum explicabo, laborum culpa voluptas. Libero placeat ratione repellendus accusamus ipsam.",
-  liveCam:
-    "https://www.skylinewebcams.com/en/webcam/italia/veneto/belluno/cortina-d-ampezzo.html",
-  pictures: [
-    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
-    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
-    "https://media.cnn.com/api/v1/images/stellar/prod/211218043659-06-best-ski-resorts-restricted.jpg?q=h_2000,w_3000,x_0,y_0",
-  ],
-  city: "resort city",
-  country: "resort country",
-  price: "3",
-  kmOfTracks: "80",
-  greenTrack: "5",
-  blueTrack: "10",
-  redTrack: "15",
-  blackTrack: "20",
-  blackTrack2X: "25",
-  soloTrack: "30",
-  siteHiegt: "3000",
-  beginnerFriendly: "1",
-  intermediateFriendly: "2",
-  proFriendly: "3",
-  kidFriendly: "2",
-  familyFriendly: "1",
-  liftWaitingTime: "2",
-  artificialSnow: true,
-  offSeason: false,
-  hikingTracks: "10",
-  location: "-33.8670522,151.1957362",
-};
 
 const ResortPage = () => {
   const [resortData, setResortData] = useState();
@@ -105,7 +68,7 @@ const ResortPage = () => {
                   className="-z-10 w-full h-full object-cover "
                 />
               </div>
-              <main className="flex flex-col gap-10 w-full h-full px-24 ">
+              <main className="flex flex-col gap-10 w-full h-full px-12 md:px-24 ">
                 <ResortHeader resortData={resortData} />
                 <Divider />
 

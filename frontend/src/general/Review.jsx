@@ -5,7 +5,7 @@ import dateFormat, { masks } from "dateformat";
 import { UserContext } from "../contexts/UserContextProvider";
 import axios from "axios";
 import NeedTologinModal from "./NeedTologinModal";
-
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 const Review = ({
   id,
   title,
@@ -16,26 +16,36 @@ const Review = ({
   date,
   poster,
   images,
+  likes,
 }) => {
+  const { user } = useContext(UserContext);
   const [votes, setVotes] = useState(vote);
   const [open, setOpen] = useState(false);
+  const [isLiked, setIsLiked] = useState(
+    checkIfLiked({ likes, username: user?.username })
+  );
 
-  const { user } = useContext(UserContext);
+  function checkIfLiked({ likes, username }) {
+    const isLiked = likes?.find((like) => like.username === username);
+    return !!isLiked;
+  }
 
   const handlUpVote = async () => {
     if (!user) return setOpen(true);
 
     try {
-      setVotes(votes + 1);
       const { data } = await axios.post(
-        "http://localhost:8000/api/review/upvote",
+        `http://localhost:8000/api/review/${isLiked ? "downvote" : "upvote"}`,
         {
           id,
+          username: user.username,
         }
       );
     } catch (err) {
       console.log(err);
     }
+    setVotes(isLiked ? votes - 1 : votes + 1);
+    setIsLiked(!isLiked);
   };
 
   return (
@@ -44,7 +54,7 @@ const Review = ({
         <p className="font-bold">{poster}</p>
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <Rating name="read-only" value={star} readOnly />
+            <Rating name="read-only" value={Number(star)} readOnly />
             <p className="text-gray-500">{dateFormat(date, "mmmm yyyy")}</p>
           </div>
           <button
@@ -54,7 +64,11 @@ const Review = ({
             onClick={handlUpVote}
           >
             <p className="">{votes}</p>
-            <ThumbUpOutlinedIcon />
+            {isLiked ? (
+              <ThumbUpIcon sx={{ color: "black" }} />
+            ) : (
+              <ThumbUpOutlinedIcon />
+            )}
           </button>
         </div>
       </header>
@@ -64,7 +78,7 @@ const Review = ({
       </div>
       <div className="flex flex-wrap gap-2">
         {images?.map((image) => (
-          <img src={image.link} alt="" className="max-w-xs" />
+          <img key={image.link} src={image.link} alt="" className="max-w-xs" />
         ))}
       </div>
       <footer className="flex justify-between"></footer>

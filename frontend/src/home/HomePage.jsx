@@ -10,9 +10,9 @@ import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
 import { useAuth } from "../hooks/useAuth";
 import { UserContext } from "../contexts/UserContextProvider";
+
 const HomePage = () => {
   const { user } = useContext(UserContext);
-  // user && console.log(user);
   const [resortData, setResortData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +42,7 @@ const HomePage = () => {
     console.log(resortData);
   }, []);
   return (
-    <>
+    <main className="h-full">
       <Navbar />
       {isLoading ? (
         <div className="h-screen">
@@ -73,7 +73,7 @@ const HomePage = () => {
           )}
         </>
       )}
-    </>
+    </main>
   );
 };
 

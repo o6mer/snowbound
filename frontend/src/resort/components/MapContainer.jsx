@@ -46,7 +46,7 @@ const MapContainer = ({ location, name, category }) => {
   });
 
   return (
-    <div className="flex w-full justify-center gap-2 h-[80vh] ">
+    <div className="flex flex-col md:flex-row w-full justify-center gap-2 h-[80vh] ">
       {!isLoaded || isLoading ? (
         <Loader />
       ) : (
@@ -92,7 +92,8 @@ const Map = ({ location, places, name, selected, setSelected }) => {
       zoom={10}
       center={selected?.geometry.location || calcCenter}
       mapContainerStyle={{
-        width: "70%",
+        display: "flex",
+        flexGrow: 1,
       }}
       // onLoad={(map) => setMap(map)}
     >
@@ -137,7 +138,7 @@ const PlaceInfowWindow = ({ placeData }) => {
 
 const PlacesList = ({ places, selected, setSelected }) => {
   return (
-    <div className="w-[30%] overflow-y-scroll flex flex-col">
+    <div className="  md:w-[30%] overflow-y-scroll hidden md:flex flex-col">
       {places?.map((place) => (
         <button
           key={place.place_id}
@@ -150,7 +151,7 @@ const PlacesList = ({ places, selected, setSelected }) => {
         >
           <p>{place?.name}</p>
           <div className="flex">
-            <Rating name="read-only" value={place?.rating} readOnly />
+            <Rating name="read-only" value={Number(place?.rating)} readOnly />
             <p>({place?.user_ratings_total})</p>
           </div>
         </button>

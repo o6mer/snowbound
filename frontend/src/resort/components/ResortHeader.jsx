@@ -2,21 +2,18 @@ import React from "react";
 import CustomizedBreadcrumbs from "../../general/CustomizedBreadcrumbs";
 import FavoriteButton from "../../general/FavoriteButton.jsx";
 const ResortHeader = ({ resortData }) => {
-
   return (
     <section className={`flex flex-col justify-between gap-4`}>
-        <div className="flex ">
-
-
-      <CustomizedBreadcrumbs
-        continent={resortData?.continent_id}
-        country={resortData?.country_id}
-        resort={resortData?.name}
-      />
-            <FavoriteButton resortData={resortData} />
-        </div>
-      <div className="flex items-center gap-8">
-        <div className="flex flex-col max-w-[60%] gap-10 justify-between">
+      <div className="flex ">
+        <CustomizedBreadcrumbs
+          continent={resortData?.continent_id}
+          country={resortData?.country_id}
+          resort={resortData?.name}
+        />
+        <FavoriteButton resortData={resortData} />
+      </div>
+      <div className="flex flex-col lg:flex-row items-center gap-8">
+        <div className="flex flex-col md:max-w-[60%] gap-2   md:gap-10 justify-between">
           <header className="text-4xl font-bold py-4 ">
             {resortData?.name}
           </header>

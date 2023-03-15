@@ -5,9 +5,9 @@ import ResortReviews from "./ResortReviews";
 
 const ResortPicturesInfo = ({ resortData }) => {
   return (
-    <section className="w-full flex gap-8">
+    <section className="w-full flex flex-col md:flex-row gap-8">
       <Carousel
-        className="max-w-[40%]"
+        className="max-w-full md:max-w-[40%]"
         showArrows
         showStatus
         showIndicators

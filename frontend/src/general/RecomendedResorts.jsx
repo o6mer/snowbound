@@ -6,13 +6,9 @@ import axios from "axios";
 import FavoriteButton from "./FavoriteButton.jsx";
 
 const RecomendedResorts = ({ resortData }) => {
-
-
   return (
-    <div
-      id="recomendedImg"
-      className={`max-w-md w-full  antialiased text-gray-900`}
-    >
+
+    <div id="recomendedImg" className={`w-full m-10 antialiased text-gray-900`}>
       <div>
         <img
           src={resortData?.image}
@@ -30,12 +26,11 @@ const RecomendedResorts = ({ resortData }) => {
                 <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider ">
                   {resortData?.country_id} &bull; {resortData?.siteHeight}m
                   &bull;{" "}
-                  {[...Array(resortData?.price)].map((n) => (
-                    <span>$</span>
+                  {[...Array(resortData?.price)].map((n, i) => (
+                    <span key={i}>$</span>
                   ))}
                 </div>
                 <FavoriteButton resortData={resortData} />
-
               </div>
 
               <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">

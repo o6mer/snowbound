@@ -86,7 +86,7 @@ const updateUser=async({user,valuesToUpdate:{email, password, username, firstnam
         }
       );
 
-      console.log({ savedToken, user: data.user });
+      if (data?.message === "Token expired") return logout();
 
       if (!data.user) return;
 

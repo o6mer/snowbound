@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import Review from "../../general/Review";
-import { Button, Divider, Modal, Rating, TextField } from "@mui/material";
+import { Button, Modal, Rating, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
@@ -145,14 +144,14 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
         </header>
         <div className="flex flex-col gap-2 mt-4">
           <TextField
-            label="title"
+            label="Title"
             name="title"
             onChange={handleChange}
             value={reviewData.title}
             error={isError.title}
           />
           <TextField
-            label="description"
+            label="Description"
             multiline
             name="body"
             onChange={handleChange}

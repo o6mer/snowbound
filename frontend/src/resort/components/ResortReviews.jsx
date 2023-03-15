@@ -1,22 +1,9 @@
 import React, { useContext, useState } from "react";
 import Review from "../../general/Review";
-import { Button, Divider, Modal, Rating, TextField } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import axios from "axios";
-import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import Loader from "../../general/Loader";
+import { Button, Divider, Rating } from "@mui/material";
 import { UserContext } from "../../contexts/UserContextProvider";
-import dateFormat, { masks } from "dateformat";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import NewReviewModal from "./NewReviewModal";
-
-const defualtReview = {
-  title: "",
-  body: "",
-  images: [],
-  star: 0,
-};
+import NeedTologinModal from "../../general/NeedTologinModal";
 
 const calcAverage = (reviews) => {
   const allRatings = reviews?.map((review) => review.star);
@@ -30,25 +17,37 @@ const ResortReviews = ({ resortData }) => {
 
   const [avgStar] = useState(calcAverage(resortData.reviews));
   const [open, setOpen] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
 
   const { user } = useContext(UserContext);
 
+  const handleAddReview = () => {
+    if (!user) return setOpenLoginModal(true);
+
+    setOpen(true);
+  };
+
   return (
-    <section className="flex flex-col flex-grow">
-      <p className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
-        {reviews?.length} Reviews{" "}
-        {reviews?.length ? (
-          <div className="flex items-center">
-            <Rating
-              name="avg-rating"
-              value={avgStar}
-              readOnly
-              precision={0.1}
-            />
-            <p className="font-normal text-gray-500">({avgStar})</p>
-          </div>
-        ) : null}
-      </p>
+    <section className="flex flex-col flex-grow py-4 px-2 rounded-lg">
+      <div className="flex justify-between">
+        <div className="text-center flex items-center justify-center gap-2 text-lg font-bold p-2">
+          <p>{reviews?.length} Reviews </p>
+          {reviews?.length ? (
+            <div className="flex items-center">
+              <Rating
+                name="avg-rating"
+                value={Number(avgStar)}
+                readOnly
+                precision={0.1}
+              />
+              <p className="font-normal text-gray-500">({avgStar})</p>
+            </div>
+          ) : null}
+        </div>
+        <Button onClick={handleAddReview} variant="contained">
+          Add Review
+        </Button>
+      </div>
       <ul className="flex flex-col gap-2 overflow-y-scroll  h-[50vh] ">
         {reviews?.length ? (
           reviews
@@ -67,7 +66,12 @@ const ResortReviews = ({ resortData }) => {
           <div className="">No Reviews</div>
         )}
       </ul>
-      {user ? <Button onClick={() => setOpen(true)}>Add Review</Button> : null}
+
+      <NeedTologinModal
+        text={"Want to add a reveiw? You need to login first"}
+        open={openLoginModal}
+        handleClose={() => setOpenLoginModal(false)}
+      />
       <NewReviewModal open={open} setOpen={setOpen} resortData={resortData} />
     </section>
   );
