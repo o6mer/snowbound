@@ -59,7 +59,6 @@ const HomePage = () => {
               Recomended resorts
             </span>{" "}
           </h1>
-          <FormModal />
           <div className="  grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 content-center justify-items-center p-[5vw]">
             {resortData?.map((resort) => (
               <RecomendedResorts key={resort?.name} resortData={resort} />

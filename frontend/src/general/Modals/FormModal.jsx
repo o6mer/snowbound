@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {useState} from "react"
+import axios from"axios"
 
 
  const FormModal=()=> {
@@ -15,15 +16,30 @@ import {useState} from "react"
      const [subject,setSubject]=useState("")
      const [message,setMessage]=useState("")
 
-     const handleSubmit =(e)=>{
-        e.preventDefault()
-         console.log( email,"22",subject,"33",message)
+     const handleSubmit =(e)=> {
+         e.preventDefault()
+         console.log(email, "22", subject, "33", message)
+            axios.post("http://localhost:8000/api/user/thankyou",{emailme:email})
+                .then(res=> {
+                    console.log(res.data)
+                })
+                .catch(err=> {
+                    console.log(err)
+                })
+         setOpen(false)
+
     }
 
 
     return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+        <>
+            <button
+
+                className="text-blue-700  hover:text-blue-900"
+                onClick={()=>setOpen(true)}
+            >
+                Need help?
+            </button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -31,8 +47,8 @@ import {useState} from "react"
                 aria-describedby="modal-modal-description"
 
             >
-                <div className={"w-full h-full flex justify-center items-center " }>
-                <section className="bg-white dark:bg-gray-900 w-max rounded px-[5vw]">
+                {/*<div  className={" w-full h-full flex justify-center items-center " }>*/}
+                <section className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2  bg-white dark:bg-gray-900 w-max rounded px-[5vw]">
                     <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact
                             Us</h2>
@@ -75,9 +91,9 @@ import {useState} from "react"
                         </form>
                     </div>
                 </section>
-                </div>
+                {/*</div>*/}
             </Modal>
-        </div>
+        </>
     );
 }
 export default FormModal
