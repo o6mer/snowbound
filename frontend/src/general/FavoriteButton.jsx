@@ -3,8 +3,8 @@ import {UserContext} from "../contexts/UserContextProvider.jsx";
 import axios from "axios";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
-import React from "react";
 import NeedTologinModal from "../general/NeedTologinModal"
+import React from "react";
 
 const FavoriteButton = ({resortData}) => {
     const { user, setUser } = useContext(UserContext);
@@ -32,8 +32,8 @@ const FavoriteButton = ({resortData}) => {
         }
         axios
             .post("http://localhost:8000/api/favorite/create", {
-                resort_id: resortData.name,
-                username: user.username,
+                resort_id: resortData?.name,
+                username: user?.username,
             })
             .then((res) => {
                 console.log(res.data);
@@ -80,35 +80,37 @@ const FavoriteButton = ({resortData}) => {
     };
 
     return (
-        <>
+    <>
 
-        {isFavorite ? (
+        <NeedTologinModal
+            text={"Want to add it to your favorites? You need to login first"}
+            open={open}
+            handleClose={() => setOpen(false)}
+        />
+            {user ?<>
+                {isFavorite ? (
+                    <button
+                        style={{ marginLeft: "auto" }}
+                        onClick={removeFromFavorite}
+                    >
+                        <FavoriteIcon sx={{ color: "red" }} />
+                    </button>
+                ) : (
+                    <button
+                        style={{ marginLeft: "auto" }}
+                        onClick={addToFavorite}
+                    >
+                        <FavoriteBorderIcon />
+                    </button>
+                )}
+            </>:
                 <button
                     style={{ marginLeft: "auto" }}
-                    onClick={removeFromFavorite}
-                >
-                    <FavoriteIcon sx={{ color: "red" }} />
-                </button>
-            ) : (
-                <button
-                    style={{ marginLeft: "auto" }}
-                    onClick={addToFavorite}
+                    onClick={()=>setOpen(true)}
                 >
                     <FavoriteBorderIcon />
                 </button>
-            )}
-            {open &&
-
-                <div className="absolute h-screen w-screen top-0 left-0 -z-1 bg-black ">
-                        <h1>Hello</h1>
-                    <NeedTologinModal
-                        text={"Want to add to Favorites? You need to login first"}
-                        open={open}
-                        handleClose={() => setOpen(false)}
-                    />
-                </div>
             }
-
         </>)
 }
 export default FavoriteButton

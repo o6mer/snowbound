@@ -132,7 +132,7 @@ const SignupPage = ({ onClose }) => {
             className=" hover:bg-blue-500/50 shadow-lg shadow-blue-500/50 rounded-full "
             Login
           >
-            Login
+            Sign up
           </button>
         )}
       </form>

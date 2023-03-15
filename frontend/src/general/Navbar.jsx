@@ -4,6 +4,9 @@ import SnowboardingIcon from "@mui/icons-material/Snowboarding";
 import { NavLink, useNavigate } from "react-router-dom";
 import LoginPage from "../userAuth/LoginPage";
 import Avatar from "@mui/material/Avatar";
+import LoginIcon from "@mui/icons-material/Login";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -16,6 +19,12 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { UserContext } from "../contexts/UserContextProvider";
 import { useAuth } from "../hooks/useAuth";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import Flag from "@mui/icons-material/Flag";
+import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
+import Close from "@mui/icons-material/Close";
+import { TableRow } from "@mui/material";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -25,7 +34,6 @@ function Navbar() {
   const open = Boolean(anchorEl);
 
   const { user, openLogin, setOpenLogin } = useContext(UserContext);
-
   const { logout } = useAuth();
 
   const handleClick = (event) => {
@@ -45,11 +53,18 @@ function Navbar() {
     document.body.style.overflow = "auto";
   };
   const openProfile = () => {
-    navigate(`/profile/${user.username}`);
+    navigate(`/profile/${user.username}/card`);
+  };
+  const openReviews = () => {
+    navigate(`/profile/${user.username}/reviews`);
+  };
+  const openFavorites = () => {
+    navigate(`/profile/${user.username}/favorites`);
   };
 
   return (
     <>
+      <LoginPage open={openLogin} onClose={handleCloseModal}></LoginPage>
       <nav className="bg-clip-content bg-gradient-to-r h-16 to-white from-white">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -63,8 +78,27 @@ function Navbar() {
                   <span className="ml-2">SnowBound</span>
                 </NavLink>
               </div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-4">
+                  <NavLink
+                      to="/about"
+                      className="transition-all hover:bg-sky-400
+                   hover:text-white text-blue-600
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                  >
+                    About us
+                  </NavLink>
+
+                  {user?.admin && (
+                      <NavLink
+                          to="/admin"
+                          className="transition-all hover:bg-sky-400
+                    hover:text-white
+                    focus:bg-sky-400 text-blue-600  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                      >
+                        Admin
+                      </NavLink>
+                  )}
                   <a
                     href="/search/Europe/France/none"
                     className="transition-all hover:bg-sky-400 
@@ -116,30 +150,17 @@ function Navbar() {
                     Canada
                   </a>
 
-                  {user?.admin && (
-                    <NavLink
-                      to="/admin"
-                      className="transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
-                    >
-                      admin
-                    </NavLink>
-                  )}
+
                   {!user ? (
                     <div>
                       <NavLink
-                        className="absolute top-4 right-2 transition-all  hover:bg-sky-500 
+                        className="absolute top-2 right-2 transition-all hover:bg-sky-400 
                     hover:text-white
-                    focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                         onClick={handleOpenModal}
                       >
                         LogIn
                       </NavLink>
-                      <LoginPage
-                        open={openLogin}
-                        onClose={handleCloseModal}
-                      ></LoginPage>
                     </div>
                   ) : (
                     <div className="absolute top-3 left-[93vw]">
@@ -198,26 +219,27 @@ function Navbar() {
                         <MenuItem onClick={openProfile}>
                           <Avatar /> Profile
                         </MenuItem>
-                        <MenuItem onClick={openProfile}>
-                          <Avatar /> My reviews
+                        <MenuItem onClick={openReviews}>
+                          <ReviewsIcon
+                            fontSize="medium"
+                            style={{ marginRight: "12px", color: "gray" }}
+                          />{" "}
+                          My reviews
+                        </MenuItem>
+                        <MenuItem onClick={openFavorites}>
+                          <FavoriteBorder
+                            fontSize="medium"
+                            style={{ marginRight: "12px", color: "gray" }}
+                          />
+                          Favorites
                         </MenuItem>
                         <Divider />
-                        <MenuItem onClick={handleClose}>
-                          <ListItemIcon>
-                            <PersonAdd fontSize="small" />
-                          </ListItemIcon>
-                          Add another account
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <ListItemIcon>
-                            <Settings fontSize="small" />
-                          </ListItemIcon>
-                          Settings
-                        </MenuItem>
+
                         <MenuItem
                           onClick={() => {
                             logout();
                             handleClose();
+                            navigate("/");
                           }}
                         >
                           <ListItemIcon>
@@ -231,7 +253,8 @@ function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="-mr-2 flex md:hidden">
+            <div className="-mr-2 flex lg:hidden">
+              {console.log(isOpen)}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -248,6 +271,10 @@ function Navbar() {
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     aria-hidden="true"
+                    type="button"
+                    data-drawer-target="drawer-navigation"
+                    data-drawer-show="drawer-navigation"
+                    aria-controls="drawer-navigation"
                   >
                     <path
                       strokeLinecap="round"
@@ -273,69 +300,163 @@ function Navbar() {
                     />
                   </svg>
                 )}
+                {isOpen && (
+                  <section class="relative flex h-96 min-h-full items-start justify-center overflow-y-hidden border bg-gray-50 dark:border-zinc-900 dark:bg-zinc-700">
+                    <nav
+                      id="sidenav-8"
+                      class="fixed top-0 right-0 z-[1035] h-screen w-60 translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:-translate-x-0 dark:bg-zinc-800"
+                      data-te-sidenav-init
+                      data-te-sidenav-hidden="false"
+                      data-te-sidenav-position="absolute"
+                      data-te-sidenav-accordion="true"
+                    >
+                      <a
+                        class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
+                        href="/"
+                        data-te-ripple-init
+                        data-te-ripple-color="primary"
+                      >
+                        <ArrowForwardIosIcon style={{ marginRight: "163px" }} />
+                      </a>
+                      <ul
+                        class="relative m-0 list-none px-[0.2rem] pb-12"
+                        data-te-sidenav-menu-ref
+                      >
+                        {user && (
+                          <>
+                            <li class="relative pt-4">
+                              <button
+                                onClick={openProfile}
+                                class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none  "
+                              >
+                                <div class="flex justify-center items-center  space-x-2">
+                                  <div>
+                                    <Avatar
+                                      sx={{ width: 32, height: 32 }}
+                                    ></Avatar>
+                                  </div>
+                                  <div class="flex justify-start flex-col items-start">
+                                    <p class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none">
+                                      Hello {user?.username}
+                                    </p>
+                                  </div>
+                                </div>
+                              </button>
+                            </li>
+                          </>
+                        )}
+                        <li class="relative pt-4">
+                          <span class="py-4 px-6 text-[1rem] font-bold uppercase text-gray-600 dark:text-gray-400">
+                            Countries
+                          </span>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/France/none"
+                          >
+                            <Flag />
+                            <span>France</span>
+                          </a>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/Switzerland/none"
+                          >
+                            <Flag />
+                            <span>Switzerland</span>
+                          </a>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/Italy/none"
+                          >
+                            <Flag />
+                            <span>Italy</span>
+                          </a>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/Bulgaria/none"
+                          >
+                            <Flag />
+                            <span>Bulgaria</span>
+                          </a>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/Austria/none"
+                          >
+                            <Flag />
+                            <span>Austria</span>
+                          </a>
+                          <a
+                            class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                            data-te-sidenav-link-ref
+                            href="/search/Europe/Canada/none"
+                          >
+                            <Flag />
+                            <span>Canada</span>
+                          </a>
+                        </li>
+
+                        {user?.admin && (
+                          <li class="relative pt-4">
+                            <span class="py-4 px-6 text-[1rem] font-bold uppercase text-gray-600 ">
+                              Manage
+                            </span>
+                            <a
+                              class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none  "
+                              data-te-sidenav-link-ref
+                              href="/search/Europe/France/none"
+                            >
+                              <AdminPanelSettings />
+                              <span>Admin</span>
+                            </a>
+                          </li>
+                        )}
+                        {!user ? (
+                          <li class="relative pt-4">
+                            <button
+                              class="py-4 px-6 text-[1rem] font-bold uppercase text-gray-600 "
+                              data-te-sidenav-link-ref
+                              onClick={() => setOpenLogin(true)}
+                            >
+                              <span class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none  ">
+                                <LoginIcon /> Log in
+                              </span>
+                            </button>
+                          </li>
+                        ) : (
+                          <li class="relative pt-4">
+                            <div class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none ">
+                              <div class="flex justify-center items-center  space-x-2">
+                                <div>
+                                  <Logout fontSize="small" color="error" />
+                                </div>
+                                <div class="flex justify-start flex-col items-start">
+                                  <button
+                                    onClick={() => {
+                                      logout();
+                                      handleClose();
+                                      navigate("/");
+                                    }}
+                                    class="flex cursor-pointer items-center truncate rounded-[5px] py-[0.45rem] px-6 text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-200 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+                                  >
+                                    Log out
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        )}
+                      </ul>
+                    </nav>
+                  </section>
+                )}
               </button>
             </div>
           </div>
         </div>
-
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-100 transform"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <NavLink
-                  to="/"
-                  className="hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:ring focus:ring-white-300 text-white  block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Country 1
-                </NavLink>
-
-                <NavLink
-                  to="/"
-                  className="text-gray-300 hover:bg-gray-700 focus:bg-gray-700 hover:text-white focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Country 1
-                </NavLink>
-
-                <NavLink
-                  to="/"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Country 1
-                </NavLink>
-
-                {user?.admin && (
-                  <NavLink
-                    to="/"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700  focus:outline-none focus:ring focus:ring-white-300 block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    admin
-                  </NavLink>
-                )}
-
-                <NavLink
-                  className="absolute top-4 right-2  hover:bg-sky-500 
-                    hover:text-white
-                    focus:bg-sky-700 focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md text-sm font-medium"
-                  onClick={handleOpenModal}
-                >
-                  LogIn
-                </NavLink>
-                <LoginPage
-                  open={openLogin}
-                  onClose={handleCloseModal}
-                ></LoginPage>
-              </div>
-            </div>
-          )}
-        </Transition>
       </nav>
     </>
   );

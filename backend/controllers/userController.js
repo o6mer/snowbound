@@ -2,7 +2,8 @@ const db = require("../models/dbModel");
 const format = require("pg-format");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const saltRounds = 10;
 
 const createUser = async (req, res) => {
@@ -24,7 +25,6 @@ const createUser = async (req, res) => {
         hashedPassword
       )
     );
-    await db.query(format("INSERT INTO checklist (owner) VALUES (%L)", email));
 
     const { admin } = rows[0];
 
@@ -38,6 +38,18 @@ const createUser = async (req, res) => {
         expiresIn: "1h",
       }
     );
+    const msg = {
+      to: email,
+      from: 'snowboundinc@gmail.com',
+      subject: 'Welcome to Snowbound',
+      template_id: "d-46e059afb9ed4fb69e3716db31e5469b"
+
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
     return res
       .status(201)
       .json({ user: { admin, username }, token, message: "User Created" });
@@ -216,6 +228,30 @@ const getMyInfo = async (req, res) => {
   }
 };
 
+const thankYou = async (req, res) => {
+  const { emailme } = req.body;
+  try {
+    const msg = {
+      to: emailme,
+      from: 'snowboundinc@gmail.com',
+      subject: 'Thank you for your reaching out!',
+      template_id: "d-0c28da1db01945649be8c6d7d98cf79e"
+
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
+
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: err.message });
+    alert("Error Reload page");
+
+  }
+}
+
 module.exports = {
   createUser,
   updateChecklist,
@@ -223,5 +259,6 @@ module.exports = {
   auth,
   getMyInfo,
   updateUserInfo,
+  thankYou
 
 };

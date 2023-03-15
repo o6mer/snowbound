@@ -21,7 +21,7 @@ const AboutHero = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".hey",
-          start: "top center",
+          start: "top center+=130",
         },
       }
     );
@@ -37,7 +37,7 @@ const AboutHero = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".hey",
-          start: "top center",
+          start: "top center+=130",
         },
       }
     );

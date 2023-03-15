@@ -67,7 +67,9 @@ export const useAuth = () => {
       console.log(err.message);
     }
   };
+const updateUser=async({user,valuesToUpdate:{email, password, username, firstname, lastname}})=>{
 
+}
   const auth = async () => {
     try {
       const savedToken = cookies.get("token");
