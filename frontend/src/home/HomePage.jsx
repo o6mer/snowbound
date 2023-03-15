@@ -10,6 +10,8 @@ import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
 import { useAuth } from "../hooks/useAuth";
 import { UserContext } from "../contexts/UserContextProvider";
+import Snowfall from 'react-snowfall'
+
 const HomePage = () => {
   const { user } = useContext(UserContext);
   // user && console.log(user);
@@ -52,6 +54,8 @@ const HomePage = () => {
         <>
           {resortData ? (
             <>
+              <Snowfall style={{zIndex:"999" , height:"100%"}}/>
+
               <HomeHero />
               <h1
                 id="recomendedResorts"

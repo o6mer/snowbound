@@ -26,7 +26,7 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: " center center",
+          // start: " center center",
           markers: true,
         },
       }
@@ -43,7 +43,7 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: "center center",
+          // start: "center center",
         },
       }
     );
@@ -59,10 +59,13 @@ const StepsResorts = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".header",
-          start: "center center",
+          // start: " top bottom+=100",
+          scrub:true,
+
         },
       }
     );
+    // ScrollTrigger.refresh()
   };
 
   const stepsAnimation = () => {
@@ -75,19 +78,27 @@ const StepsResorts = () => {
       {
         duration: 1.5,
         x: 0,
+
         opacity: 1,
         scrollTrigger: {
-          trigger: ".stepsC",
-          start: " center center",
+          trigger: ".header",
+          start: " top bottom+=200",
           markers: true,
+          scrub:true,
         },
       }
     );
   };
 
   useEffect(() => {
-    startedAnimation();
-    stepsAnimation();
+    // setTimeout(()=>{
+    if (ref.current){
+      startedAnimation();
+      stepsAnimation();
+    }
+
+    // },10)
+    // ScrollTrigger.refresh()
     // startedAnimation();
     // }
   }, []);
