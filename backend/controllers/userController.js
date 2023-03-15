@@ -241,7 +241,7 @@ const thankYou = async (req, res) => {
     sgMail
       .send(msg)
       .then(() => {
-        console.log('Email sent')
+        res.status(200).send('Email sent')
       })
 
   } catch (error) {

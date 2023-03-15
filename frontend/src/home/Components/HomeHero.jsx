@@ -3,8 +3,10 @@ import CompareModal from "../../general/Modals/CompareModal";
 import FindModal from "../../general/Modals/FindModal";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
+import FormModal from "../../general/Modals/FormModal.jsx";
 const HomeHero = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [formModalOpen, setFormModalOpen] = useState(false);
   const [compareModalOpen, setcompareModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -69,12 +71,7 @@ const HomeHero = () => {
             onClose={handleClosecompareModal}
           />
           <br />
-          <a
-            href="/about#HowToGetStarted"
-            className="text-blue-700  hover:text-blue-900"
-          >
-            Need help?
-          </a>
+          <FormModal/>
           <a
             href="#recomendedResorts"
             aria-label="Scroll down"

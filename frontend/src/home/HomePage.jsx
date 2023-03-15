@@ -10,7 +10,6 @@ import Loader from "../general/Loader";
 import ResortNotFound from "../resort/components/ResortNotFound";
 import { useAuth } from "../hooks/useAuth";
 import { UserContext } from "../contexts/UserContextProvider";
-import FormModal from "../general/Modals/FormModal"
 
 const HomePage = () => {
   const [resortData, setResortData] = useState();
@@ -61,7 +60,6 @@ const HomePage = () => {
                   Recomended resorts
                 </span>{" "}
               </h1>
-              <FormModal/>
               <div className="  grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 content-center justify-items-center p-[5vw]">
                 {resortData?.map((resort) => (
                   <RecomendedResorts key={resort?.name} resortData={resort} />
