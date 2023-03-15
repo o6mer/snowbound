@@ -57,23 +57,14 @@ const UserFavorites = ({ favorites }) => {
            <p className="text-center text-2xl font-bold">
              Your favorites resorts
            </p>
-           <Carousel
-             swipeable={true}
-             draggable={true}
-             responsive={responsive}
-             keyBoardControl={true}
-             containerClass="carousel-container"
-             removeArrowOnDeviceType={["tablet", "mobile"]}
-             dotListClass="custom-dot-list-style"
-             itemClass="carousel-item-padding-40-px"
-           >
+    <div className="mt-20 ml-32  grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-1 content-center justify-items-center p-[5vw]">
              {resorts?.map((resort) => (
                <RecomendedResorts
                  resortData={resort}
                  key={`${resort?.name}from${resort?.country}`}
                />
              ))}
-           </Carousel>
+            </div>
          </section>
        </>
      ) : null}
