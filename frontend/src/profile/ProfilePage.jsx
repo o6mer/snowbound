@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState();
   const [userReviews, setUserReviews] = useState([]);
   const [userFavorites, setUserFavorites] = useState();
-  const { userName } = useParams();
+  const { userName,info } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +66,7 @@ const ProfilePage = () => {
             setShowFavorites={setShowFavorites}
             setShowReviews={setShowReviews}
           />
-          <section class="relative  bg-center  bg-cover  bg-no-repeat  flex font-medium items-center justify-center h-screen bg-black ">
+          <section className="relative  bg-center  bg-cover  bg-no-repeat  flex font-medium items-center justify-center h-screen bg-black ">
             <div className="absolute top-0 left-0 w-full h-full">
               <img
                 className="  h-full w-full object-cover opacity-50"
@@ -74,85 +74,84 @@ const ProfilePage = () => {
                 alt=""
               />
             </div>
-            {!showFavorites && !showReviews && !showEdit ? (
-              <section class="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-400 text-sm">Roll</span>
-                  <span class="text-emerald-400">
+            {info == "card" ? (
+              <section className="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-400 text-sm">Roll</span>
+                  <span className="text-emerald-400">
                     <button
                       onClick={() => setShowEdit(true)}
-                      class="text-emerald-400 hover:text-emerald-600"
+                      className="text-emerald-400 hover:text-emerald-600"
                     >
                       {" "}
                       Edit
                     </button>
                   </span>
                 </div>
-                <div class="mt-6 w-fit mx-auto">
+                <div className="mt-6 w-fit mx-auto">
                   <img
                     src={
                       userData?.pfp
                         ? userData?.pfp
                         : "https://pbs.twimg.com/media/EFIv5HzUcAAdjhl.png"
                     }
-                    class="rounded-full w-28 "
+                    className="rounded-full w-28 "
                     alt="profile picture"
-                    srcset=""
                   />
                 </div>
 
-                <div class="mt-8 ">
-                  <h2 class=" font-bold text-2xl tracking-wide">
+                <div className="mt-8 ">
+                  <h2 className=" font-bold text-2xl tracking-wide">
                     {userData?.firstname} <br /> {userData?.lastname}
                   </h2>
                 </div>
                 <p>{userData?.email}</p>
                 {userReviews.length > 4 ? (
-                  <p class="text-emerald-400 font-semibold mt-2.5">Active</p>
+                  <p className="text-emerald-400 font-semibold mt-2.5">
+                    Active
+                  </p>
                 ) : (
-                  <p class="text-yellow-400 font-semibold mt-2.5">Inactive</p>
+                  <p className="text-yellow-400 font-semibold mt-2.5">
+                    Inactive
+                  </p>
                 )}
 
-                <div class="h-1 w-full bg-black mt-8 rounded-full">
+                <div className="h-1 w-full bg-black mt-8 rounded-full">
                   <div
-                    class={`h-1 rounded-full w-${userReviews.length} bg-white `}
+                    className={`h-1 rounded-full w-${userReviews.length} bg-white `}
                   ></div>
                 </div>
-                <div class="mt-3 text-sm">
-                  <span class="text-gray-400 font-semibold">Reviwes: </span>
+                <div className="mt-3 text-sm">
+                  <span className="text-gray-400 font-semibold">Reviwes: </span>
                   <span>{userReviews?.length}</span>
                 </div>
-                <button
-                  class="inline-flex items-center  justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
-                  onClick={() => setShowReviews(true)}
+                <a
+                  className="inline-flex items-center cursor-pointer justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none"
+                  href={`/profile/${userData.username}/reviews`}
                 >
                   My reviews
-                </button>
+                </a>
               </section>
             ) : showEdit ? (
               <EditUser userData={userData} setShowEdit={setShowEdit} />
-            ) : (
-              <div></div>
-            )}
-
-            {showReviews && (
-              <div class="z-10">
-                <button
-                  onClick={() => setShowReviews(false)}
-                  class="inline-flex items-center bg-opacity-70 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-yellow-500 hover:bg-yellow-700 focus:shadow-outline focus:outline-none"
-                >
-                  Hide reviews
-                </button>{" "}
+            ) : info == "reviews" ? (
+              <div className="z-10">
+                <a className="inline-flex items-center cursor-pointer bg-opacity-70 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-yellow-500 hover:bg-yellow-700 focus:shadow-outline focus:outline-none">
+                  Your reviews
+                </a>{" "}
                 <UserReviews userReviews={userReviews} />
               </div>
+            ) : info == "reviews" ? (
+              <UserFavorites favorites={userFavorites} />
+            ) : (
+              <></>
             )}
-            {showFavorites && <UserFavorites favorites={userFavorites} />}
           </section>
 
           <Footer />
         </>
       ) : (
-        <div class="h-screen">
+        <div className="h-screen">
           <Loader />
         </div>
       )}
