@@ -73,6 +73,25 @@ function Navbar() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
+                  <NavLink
+                      to="/about"
+                      className="transition-all hover:bg-sky-400
+                   hover:text-white text-blue-600
+                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                  >
+                    About us
+                  </NavLink>
+
+                  {user?.admin && (
+                      <NavLink
+                          to="/admin"
+                          className="transition-all hover:bg-sky-400
+                    hover:text-white
+                    focus:bg-sky-400 text-blue-600  focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
+                      >
+                        Admin
+                      </NavLink>
+                  )}
                   <a
                     href="/search/Europe/France/none"
                     className="transition-all hover:bg-sky-400 
@@ -124,16 +143,7 @@ function Navbar() {
                     Canada
                   </a>
 
-                  {user?.admin && (
-                    <NavLink
-                      to="/admin"
-                      className="transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
-                    >
-                      Admin
-                    </NavLink>
-                  )}
+
                   {!user ? (
                     <div>
                       <NavLink

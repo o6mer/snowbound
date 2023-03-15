@@ -27,7 +27,7 @@ const StepsResorts = () => {
         scrollTrigger: {
           trigger: ".header",
           start: "top center+=130",
-          markers: true,
+          // markers: true,
         },
       }
     );
@@ -102,7 +102,7 @@ const StepsResorts = () => {
         scrollTrigger: {
           trigger: box,
           start:"top bottom-=45",
-          markers: true,
+          // markers: true,
           // scrub: true
         }
       })
@@ -111,17 +111,13 @@ const StepsResorts = () => {
   }
 
   useEffect(() => {
-    // setTimeout(()=>{
     if (ref.current) {
       startedAnimation();
       stepsAnimation();
       paraStepsAnimation()
     }
 
-    // },10)
-    // ScrollTrigger.refresh()
-    // startedAnimation();
-    // }
+
   }, []);
 
   return (

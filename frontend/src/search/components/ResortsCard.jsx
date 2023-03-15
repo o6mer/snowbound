@@ -22,7 +22,7 @@ const ResortsCard = ({resort}) => {
         scrollTrigger: {
           trigger: box,
           immdediateRender:false,
-          markers: true,
+          // markers: true,
         }
       })
     });
@@ -31,7 +31,6 @@ const ResortsCard = ({resort}) => {
   const ref=useRef()
   useEffect(()=>{
     if (ref.current){
-
       paraStepsAnimation()
     }
   },[])
