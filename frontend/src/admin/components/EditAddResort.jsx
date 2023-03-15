@@ -162,7 +162,7 @@ const EditAddResort = () => {
                     label={"name "}
                     disabled={!isNewResort}
                     type={"text"}
-                    value={resort?.name || "" || ""}
+                    value={resort?.name || ""}
                     onChange={(e) => handleChangeInput(e, "name")}
                   />
                   <TextField
@@ -208,7 +208,7 @@ const EditAddResort = () => {
                     onChange={(e) => handleChangeInput(e, "image")}
                   />
                 </div>
-                <div className="location flex justify-center gap-10  ">
+                <div className="location flex flex-col-reverse justify-center gap-10  ">
                   <TextField
                     multiline
                     className="capitalize"
@@ -230,12 +230,12 @@ const EditAddResort = () => {
                     onChange={(e) => handleChangeInput(e, "livecam")}
                   />
                 </div>
-                <div className="nummbers flex flex-wrap justify-between gap-10">
+                <div className="nummbers  flex  flex-wrap justify-between gap-10 grid">
                   <TextField
                     className="capitalize"
                     label={"price"}
                     type="number"
-                    sx={{ width: "223px" }}
+                    //
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.price || ""}
                     onChange={(e) => handleChangeInput(e, "price")}
@@ -295,7 +295,7 @@ const EditAddResort = () => {
                     label={"Beginner Friendly"}
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     type="number"
-                    sx={{ width: "223px" }}
+
                     value={resort?.beginnerFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "beginnerFriendly")}
                   />
@@ -304,7 +304,7 @@ const EditAddResort = () => {
                     label={"intermediate Friendly"}
                     type="number"
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
-                    sx={{ width: "223px" }}
+
                     value={resort?.intermediateFriendly || ""}
                     onChange={(e) =>
                       handleChangeInput(e, "intermediateFriendly")
@@ -314,7 +314,7 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"pro Friendly"}
                     type="number"
-                    sx={{ width: "223px" }}
+
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.proFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "proFriendly")}
@@ -323,7 +323,7 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"kid Friendly"}
                     type="number"
-                    sx={{ width: "223px" }}
+
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.kidFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "kidFriendly")}
@@ -332,7 +332,7 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"family Friendly"}
                     type="number"
-                    sx={{ width: "223px" }}
+
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.familyFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "familyFriendly")}
@@ -341,7 +341,7 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"lift Waiting Time"}
                     type="number"
-                    sx={{ width: "223px" }}
+
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.liftWaitingTime || ""}
                     onChange={(e) => handleChangeInput(e, "liftWaitingTime")}
@@ -398,7 +398,7 @@ const EditAddResort = () => {
                     />
                   </div>
                 </div>
-                <div className="images flex flex-col gap-5">
+                <div className="images flex flex-col gap-5 ">
                   <div className="border-y flex justify-between items-center py-3">
                     <h2 className=" font-bold text-lg   ">Images Links</h2>
                     <Button
@@ -413,7 +413,7 @@ const EditAddResort = () => {
                       Reset Images
                     </Button>
                   </div>
-                  <div className="flex flex-col gap-3 max-h-[70vh] overflow-y-auto ">
+                  <div className=" flex flex-col gap-3 max-h-[70vh] overflow-y-auto  ">
                     {resortImages?.map((image, index) => {
                       return (
                         <div key={index} className="flex items-center mt-2 ">
@@ -446,14 +446,14 @@ const EditAddResort = () => {
                     Add Image
                   </Button>
                   <div
-                    id="imagespreview"
-                    className="imagespreview flex flex-wrap  gap-4 max-h-[85vh] overflow-y-auto "
+
+                    className="imagespreview  gap-4 max-h-[85vh] overflow-y-auto grid"
                   >
                     {resortImages?.map((image, index) => {
                       return (
                         <div
                           key={index}
-                          className="max-w-[30%] flex flex-col items-center"
+                          className=" flex flex-col items-center"
                         >
                           <p className="text-center font-semibold">
                             Image {index}

@@ -6,6 +6,7 @@ import AdminHome from "./components/AdminHome";
 import AdminNavBar from "./components/AdminNavBar";
 import { useAuth } from "../hooks/useAuth";
 
+
 const AdminPage = () => {
   useAuth();
   return (

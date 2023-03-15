@@ -30,6 +30,7 @@
     "react-multi-carousel": "^2.8.2",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.8.2",
+    "react-snowfall": "^1.2.1",
     "universal-cookie": "^4.0.4",
     "use-places-autocomplete": "^4.0.0"
   },

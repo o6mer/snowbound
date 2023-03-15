@@ -53,7 +53,7 @@ const ResortDetails = ({ resortData }) => {
           </span>
           <span className="overflow-hidden text-ellipsis [&>#text]:text-ellipsis">
             {" "}
-            {resortData?.description}
+            {resortData?.description || "No Details Yet"}
           </span>
         </div>
       </div>
@@ -68,7 +68,7 @@ const ResortDetails = ({ resortData }) => {
             <StraightenIcon fontSize="large" sx={{ marginRight: "10px" }} />
             KM of Tracks{" "}
           </span>
-          <span>{resortData?.kmTrack}</span>
+          <span>{resortData?.kmTrack|| "No Details Yet"}</span>
         </div>
 
         <div>
@@ -79,7 +79,7 @@ const ResortDetails = ({ resortData }) => {
             />
             Green Tracks{" "}
           </span>
-          <span>{resortData?.greenTrack}</span>
+          <span>{resortData?.greenTrack|| "No Details Yet"}</span>
         </div>
         <div>
           <span>
@@ -90,7 +90,7 @@ const ResortDetails = ({ resortData }) => {
             />
             blue Tracks
           </span>
-          <span> {resortData?.blueTrack}</span>
+          <span> {resortData?.blueTrack || "No Details Yet"}</span>
         </div>
         <div>
           <span>
@@ -101,14 +101,14 @@ const ResortDetails = ({ resortData }) => {
             />
             Red Tracks{" "}
           </span>
-          <span>{resortData?.redTrack}</span>
+          <span>{resortData?.redTrack || "No Details Yet"}</span>
         </div>
         <div className="text-black">
           <span>
             <CircleIcon fontSize="large" sx={{ marginRight: "10px" }} />
             Black Tracks{" "}
           </span>
-          <span>{resortData?.blackTrack}</span>
+          <span>{resortData?.blackTrack || "No Details Yet"}</span>
         </div>
         <div>
           {" "}
@@ -119,14 +119,14 @@ const ResortDetails = ({ resortData }) => {
             </span>
             Black2X Tracks{" "}
           </span>
-          <span>{resortData?.blackTrackX2}</span>
+          <span>{resortData?.blackTrackX2 || "No Details Yet"}</span>
         </div>
         <div>
           <span>
             <HikingIcon fontSize="large" sx={{ marginRight: "10px" }} />
             Hiking Tracks
           </span>
-          <span>{resortData?.hikingTracks}</span>
+          <span>{resortData?.hikingTracks || "No Details Yet"}</span>
         </div>
         <div>
           <span>
@@ -134,7 +134,7 @@ const ResortDetails = ({ resortData }) => {
             <LandscapeIcon fontSize="large" sx={{ marginRight: "10px" }} />
             Site Height
           </span>
-          <span> {resortData?.siteHeight}</span>
+          <span> {resortData?.siteHeight || "No Details Yet"}</span>
         </div>
       </div>
       <div className=" border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">
@@ -260,7 +260,7 @@ const ResortDetails = ({ resortData }) => {
             />
             Ski Pass
           </span>
-          <span> {resortData?.skiPass}$</span>
+          <span> {resortData?.skiPass || "No Details Yet"}$</span>
         </div>
       </div>
       <div className="border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">

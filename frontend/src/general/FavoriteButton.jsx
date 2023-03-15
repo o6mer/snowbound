@@ -1,12 +1,15 @@
-import react, {useContext, useEffect} from "react"
+import react, {useContext, useEffect, useState} from "react"
 import {UserContext} from "../contexts/UserContextProvider.jsx";
 import axios from "axios";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
 import React from "react";
+import NeedTologinModal from "../general/NeedTologinModal"
 
 const FavoriteButton = ({resortData}) => {
     const { user, setUser } = useContext(UserContext);
+    const [open, setOpen] = useState(false);
+
 
     const checkFavorite = () => {
         const temp = user?.favorite?.find(
@@ -23,6 +26,10 @@ const FavoriteButton = ({resortData}) => {
     }, [user]);
 
     const addToFavorite = () => {
+        if(!user){
+            setOpen(true)
+            return
+        }
         axios
             .post("http://localhost:8000/api/favorite/create", {
                 resort_id: resortData.name,
@@ -90,6 +97,17 @@ const FavoriteButton = ({resortData}) => {
                     <FavoriteBorderIcon />
                 </button>
             )}
+            {open &&
+
+                <div className="absolute h-screen w-screen top-0 left-0 -z-1 bg-black ">
+                        <h1>Hello</h1>
+                    <NeedTologinModal
+                        text={"Want to add to Favorites? You need to login first"}
+                        open={open}
+                        handleClose={() => setOpen(false)}
+                    />
+                </div>
+            }
 
         </>)
 }

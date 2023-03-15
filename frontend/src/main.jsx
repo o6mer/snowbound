@@ -20,6 +20,7 @@ import AboutPage from "./AboutPage/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 import EditUser from "./profile/components/EditUser";
 import UserReviews from "./profile/components/UserReviews";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -91,10 +92,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 ]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserContextProvider>
+
       <RouterProvider router={router} />
     </UserContextProvider>
   </React.StrictMode>
