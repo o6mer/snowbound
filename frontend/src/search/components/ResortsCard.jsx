@@ -1,9 +1,42 @@
 import React from 'react'
 import FavoriteButton from "../../general/FavoriteButton"
+import {useEffect,useRef} from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ResortsCard = ({resort}) => {
+  const paraStepsAnimation =()=>{
+    let boxes = gsap.utils.toArray('.card');
+    boxes.shift()
+    boxes.forEach(box => {
+      gsap.fromTo(box,{
+        opacity:0,
+        y:80
+      }, {
+        y: 0,
+
+        duration:1,
+        opacity:1,
+        scrollTrigger: {
+          trigger: box,
+          immdediateRender:false,
+          markers: true,
+        }
+      })
+    });
+
+  }
+  const ref=useRef()
+  useEffect(()=>{
+    if (ref.current){
+
+      paraStepsAnimation()
+    }
+  },[])
   return (
-    <div className="flex flex-col h-50 my-5 	 drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-100 duration-300">
+    <div ref={ref} className="    flex flex-col h-50 my-5 card	 drop-shadow-xl transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-100 duration-300">
       <div className="relative  flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
         <div className="w-full md:w-1/3 bg-white grid place-items-center ">
           <img src={resort.image} alt="resort " className="rounded-xl h-56 " />
