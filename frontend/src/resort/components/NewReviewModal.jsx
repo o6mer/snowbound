@@ -145,14 +145,14 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
         </header>
         <div className="flex flex-col gap-2 mt-4">
           <TextField
-            label="title"
+            label="Title"
             name="title"
             onChange={handleChange}
             value={reviewData.title}
             error={isError.title}
           />
           <TextField
-            label="description"
+            label="Description"
             multiline
             name="body"
             onChange={handleChange}
