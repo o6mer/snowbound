@@ -19,6 +19,7 @@ import AboutPage from "./about/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 import EditUser from "./profile/components/EditUser";
 import UserReviews from "./profile/components/UserReviews";
+import Snowfall from "react-snowfall";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,14 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserContextProvider>
+      <Snowfall
+        style={{
+          zIndex: "999",
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+        }}
+      />
       <RouterProvider router={router} />
     </UserContextProvider>
   </React.StrictMode>
