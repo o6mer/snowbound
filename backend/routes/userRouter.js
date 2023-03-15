@@ -15,5 +15,6 @@ userRouter.post("/login", login);
 userRouter.post("/auth", auth);
 userRouter.post("/profile/:username", getMyInfo);
 userRouter.post("/update", updateUserInfo);
+userRouter.post("/update", updateUserInfo);
 
 module.exports = userRouter;

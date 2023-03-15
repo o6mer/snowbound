@@ -229,9 +229,10 @@ const getMyInfo = async (req, res) => {
 };
 
 const thankYou = async (req, res) => {
+  const { emailme } = req.body;
   try {
     const msg = {
-      to: email,
+      to: emailme,
       from: 'snowboundinc@gmail.com',
       subject: 'Thank you for your reaching out!',
       template_id: "d-0c28da1db01945649be8c6d7d98cf79e"
