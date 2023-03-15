@@ -33,7 +33,7 @@ const ResortReviews = ({ resortData }) => {
                 precision={0.1}
               />
               <p className="font-normal text-gray-500">
-                ({resortData.avg_rating})
+                ({resortData.avg_rating.toFixed(1)})
               </p>
             </div>
           ) : null}
