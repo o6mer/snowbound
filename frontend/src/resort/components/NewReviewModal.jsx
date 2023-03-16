@@ -123,7 +123,7 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
     >
       <form
         onSubmit={handleSubmit}
-        className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]  max-w-sm w-full  bg-white p-12 rounded-lg flex flex-col gap-4"
+        className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]  w-max   bg-white p-12 rounded-lg flex flex-col gap-4"
       >
         <header className="">
           <button className=" absolute right-4 top-4" onClick={handleClose}>
@@ -182,7 +182,7 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
           </div>
           <div className="flex ">
             {reviewData.images.map((image) => (
-              <img key={image} className="w-56" src={image} />
+              <img key={image} className="w-14" src={image} />
             ))}
           </div>
         </div>

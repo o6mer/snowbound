@@ -78,7 +78,14 @@ const Review = ({
       </div>
       <div className="flex flex-wrap gap-2">
         {images?.map((image) => (
-          <img key={image.link} src={image.link} alt="" className="max-w-xs" />
+          <div className="w-[20%]">
+            <img
+              key={image.link}
+              src={image.link}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
         ))}
       </div>
       <footer className="flex justify-between"></footer>
