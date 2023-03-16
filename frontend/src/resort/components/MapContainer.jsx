@@ -26,7 +26,7 @@ const MapContainer = ({ location, name, category }) => {
       try {
         setIsloading(true);
         const { data } = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/google/find-nearby`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/google/find-nearby`,
           { location, category }
         );
 
@@ -142,7 +142,7 @@ const PlaceInfowWindow = ({ placeData }) => {
       setIsLoading(true);
       try {
         const { data } = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/google/get-place/${
+          `${import.meta.env.VITE_BACKEND_URL}/api/google/get-place/${
             placeData.place_id
           }`
         );

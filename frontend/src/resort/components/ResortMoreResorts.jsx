@@ -35,7 +35,7 @@ const ResortMoreResorts = ({ resortData }) => {
         if (!resortData) return;
 
         const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/resort/find/country/${
+          `${import.meta.env.VITE_BACKEND_URL}/api/resort/find/country/${
             resortData?.country_id
           }`
         );

@@ -29,7 +29,9 @@ const ResortPage = () => {
         const transFormedName = name.charAt(0).toUpperCase() + name.slice(1);
 
         const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/resort/find/${transFormedName}`
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/resort/find/${transFormedName}`
         );
 
         if (!data.resort || !data.images) return setIsLoading(false);

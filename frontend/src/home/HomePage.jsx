@@ -26,7 +26,7 @@ const HomePage = () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/resort/get`
+          `${import.meta.env.VITE_BACKEND_URL}/api/resort/get`
         );
 
         if (!data) return;

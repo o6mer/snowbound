@@ -24,7 +24,7 @@ export const useAuth = () => {
     if (!email || !password) return;
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
         {
           email,
           password,
@@ -47,7 +47,7 @@ export const useAuth = () => {
       if (!email || !password || !username || !firstname || !lastname) return;
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
         {
           email,
           password,
@@ -78,7 +78,7 @@ export const useAuth = () => {
       if (!savedToken) return;
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/auth`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/auth`,
         {},
         {
           headers: {

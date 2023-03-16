@@ -59,7 +59,9 @@ const EditAddResort = () => {
       setIsLoading(false);
     } else {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/resort/find/${resortName}`)
+        .get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/resort/find/${resortName}`
+        )
         .then((res) => {
           if (res.data) {
             setResort(res.data.resort);
@@ -95,7 +97,7 @@ const EditAddResort = () => {
     console.log(resortValues);
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/update`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/resort/update`, {
         name: resortName,
         values: resortValues,
         images: imagesLinks,
@@ -120,7 +122,7 @@ const EditAddResort = () => {
       img: imagesLinks,
     });
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/create`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/resort/create`, {
         resort: resort,
         img: imagesLinks,
       })

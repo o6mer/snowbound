@@ -30,7 +30,7 @@ const FavoriteButton = ({ resortData }) => {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/favorite/create`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/favorite/create`, {
         resort_id: resortData?.name,
         username: user?.username,
       })
@@ -66,7 +66,7 @@ const FavoriteButton = ({ resortData }) => {
   const removeFromFavorite = () => {
     const fav = check();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/favorite/delete`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/favorite/delete`, {
         id: fav?.id,
       })
       .then((res) => {

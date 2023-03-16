@@ -50,7 +50,7 @@ const EditUser = ({ userData, setShowEdit }) => {
       if (!email || !password || !username || !firstname || !lastname) return;
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/update`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/update`,
         {
           userId: userData?.id,
           valuesToUpdate: {

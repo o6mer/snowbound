@@ -35,7 +35,7 @@ const Review = ({
 
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/review/${
+        `${import.meta.env.VITE_BACKEND_URL}/api/review/${
           isLiked ? "downvote" : "upvote"
         }`,
         {

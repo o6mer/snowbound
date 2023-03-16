@@ -109,7 +109,7 @@ const ComparePage = () => {
     const queryNames = resortCompare.split("&");
     console.log(queryNames);
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/compare`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/resort/compare`, {
         names: queryNames,
       })
       .then((res) => {

@@ -14,7 +14,7 @@ export default function SearchBar({ handleSearch, isToast }) {
   useEffect(() => {
     const getAllResorts = async () => {
       await axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/resort/get`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/api/resort/get`)
         .then((res) => {
           console.log(res.data);
           setAllResorts(res.data);

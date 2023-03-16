@@ -32,7 +32,7 @@ const UserFavorites = ({ favorites }) => {
         setIsLoading(true);
 
         const { data } = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/resort/compare`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/resort/compare`,
           { names: favorites }
         );
         console.log(data.resort);
