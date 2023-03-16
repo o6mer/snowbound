@@ -120,8 +120,8 @@ const EditUser = ({ userData, setShowEdit }) => {
             <ArrowBackIcon />
             Back
           </button>
-        </span>{" "}
-        <span class="text-gray-400 text-sm">Roll</span>
+        </span>{" "}        
+        <span class="text-gray-400 text-sm"></span>
       </div>
       <div class="mr-8 mt-6 w-fit mx-auto">
         {isLoading ? (
