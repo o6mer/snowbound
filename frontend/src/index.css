@@ -51,7 +51,8 @@ html {
   /* -webkit-line-clamp:; */
 }
 .nummbers,
-.imagespreview {
+.imagespreview,
+.favorties {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
