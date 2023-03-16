@@ -32,7 +32,8 @@ const FormModal = () => {
   return (
     <>
       <button
-        className="text-blue-700  hover:text-blue-900 font-bold"
+        type="button"
+        className="pr-3.5 inline-flex items-center gap-x-2 text-sm text-gray-600 decoration-2 hover:underline hover:text-blue-600"
         onClick={() => setOpen(true)}
       >
         Contact us

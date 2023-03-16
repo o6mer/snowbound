@@ -23,6 +23,7 @@ const ResortHeader = ({ resortData }) => {
         <div className="flex flex-col items-center-center">
           <p className="text-center text-lg font-bold">Live Cam</p>
           <iframe
+            className="rounded-lg"
             width="560"
             height="315"
             src={

@@ -71,7 +71,6 @@ const HomeHero = () => {
             onClose={handleClosecompareModal}
           />
           <br />
-          <FormModal/>
           <a
             href="#recomendedResorts"
             aria-label="Scroll down"

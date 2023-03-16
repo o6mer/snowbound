@@ -55,7 +55,7 @@ const ResortMoreResorts = ({ resortData }) => {
       ) : resorts?.length ? (
         <>
           <Divider />
-          <section className="">
+          <section className="more-resorts">
             <p className="text-center text-2xl font-bold">
               More From {resortData?.country_id}
             </p>

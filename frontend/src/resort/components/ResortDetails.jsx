@@ -22,7 +22,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ResortDetails = ({ resortData }) => {
   return (
-    <section className="flex flex-wrap gap-4 justify-center [&>span]:flex [&>span]:items-center text-lg">
+    <section className="flex flex-wrap gap-4 justify-center [&>span]:flex  [&>span]:items-center text-lg resort-details divide-x divide-gray-700">
       <div>
         <span>
           {" "}
@@ -162,18 +162,20 @@ const ResortDetails = ({ resortData }) => {
           />{" "}
         </span>
       </div>
-      <span>
-        <EmojiEventsIcon fontSize="large" sx={{ marginRight: "10px" }} />
-        Pro Friendly{" "}
-      </span>
-      <span>
-        <Rating
-          name="read-only"
-          value={resortData?.proFriendly}
-          max={3}
-          readOnly
-        />{" "}
-      </span>
+      <div>
+        <span>
+          <EmojiEventsIcon fontSize="large" sx={{ marginRight: "10px" }} />
+          Pro Friendly{" "}
+        </span>
+        <span>
+          <Rating
+            name="read-only"
+            value={resortData?.proFriendly}
+            max={3}
+            readOnly
+          />{" "}
+        </span>
+      </div>
       <div className="flex items-center">
         <span>
           {" "}
@@ -188,26 +190,6 @@ const ResortDetails = ({ resortData }) => {
             readOnly
           />
         </span>
-      </div>
-      <div className="flex items-center">
-        <span>
-          {" "}
-          <AttachMoneyIcon fontSize="large" />
-          Price
-        </span>
-        <span>
-          <Rating name="read-only" value={resortData?.price} max={3} readOnly />{" "}
-        </span>
-      </div>
-      <div>
-        <span>
-          <ConfirmationNumberIcon
-            fontSize="large"
-            sx={{ marginRight: "10px" }}
-          />
-          Ski Pass
-        </span>
-        <span> {resortData?.skiPass}$</span>
       </div>
 
       <div className="flex items-center">

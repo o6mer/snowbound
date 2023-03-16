@@ -49,12 +49,14 @@ const AboutHero = () => {
 
   return (
     <>
-      <div className="relative h-[60vh]">
+      <div className="relative h-[70vh]">
         <div className="absolute top-0 left-0 -z-10 w-full h-full ">
           <img className="object-cover w-full h-full" src={aboutHero} alt="" />
         </div>
         <div className="w-full h-full text-xl flex flex-col justify-center text-white bg-black bg-opacity-[0.50]">
-          <h1 className="text-center text-5xl font-semibold">Why SnowBound?</h1>
+          <h1 className="text-center text-5xl font-semibold ">
+            Why SnowBound?
+          </h1>
         </div>
       </div>
       <div className="container hey my-24 px-6 mx-auto">
@@ -67,8 +69,7 @@ const AboutHero = () => {
                 <div
                   className="block rounded-lg shadow-lg px-6 py-12 md:px-12 lg:-mr-14"
                   style={{
-                    background: " hsla(0, 0%, 100%, 0.55)",
-                    backdropFilter: "blur(30px)",
+                    background: " hsla(0, 0%, 100%, 0.90)",
                   }}
                 >
                   <h2 className="text-3xl font-bold mb-6">Enjoy the moment</h2>

@@ -3,7 +3,10 @@ import FavoriteButton from "./FavoriteButton.jsx";
 
 const RecomendedResorts = ({ resortData }) => {
   return (
-    <div id="recomendedImg" className={`w-full m-10 antialiased text-gray-900`}>
+    <div
+      id="recomendedImg"
+      className={`w-full m-10 antialiased text-gray-900 card-more-resorts `}
+    >
       <div>
         <img
           src={resortData?.image}

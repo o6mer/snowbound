@@ -57,7 +57,39 @@ const ResortDetails = ({ resortData }) => {
           </span>
         </div>
       </div>
-
+      <div className=" border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">
+        <h1>Prices</h1>
+      </div>
+      <div className="keys tracks flex flex-col [&>div]:flex [&>div]:flex-col [&>div]:items-center [&>div]:py-5  [&>*:nth-child(even)]:bg-gray-200">
+        {/* <div className=""> */}
+        <div>
+          <span>
+            {" "}
+            <AttachMoneyIcon fontSize="large" />
+            Price Range
+          </span>
+          <span className="font-semibold text-xl">
+            {resortData?.price === 1 && "cheap "}
+            {resortData?.price === 2 && "Fair "}
+            {resortData?.price === 3 && "Expensive "}
+            {[...Array(resortData?.price)].map((n, i) => (
+              <span className="italic" key={i}>
+                $
+              </span>
+            ))}
+          </span>
+        </div>
+        <div>
+          <span>
+            <ConfirmationNumberIcon
+              fontSize="large"
+              sx={{ marginRight: "10px" }}
+            />
+            Ski Pass
+          </span>
+          <span> {resortData?.skiPass || "No Details Yet"}$</span>
+        </div>
+      </div>
       <div className=" border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">
         <h1>Tracks</h1>
       </div>
@@ -68,7 +100,7 @@ const ResortDetails = ({ resortData }) => {
             <StraightenIcon fontSize="large" sx={{ marginRight: "10px" }} />
             KM of Tracks{" "}
           </span>
-          <span>{resortData?.kmTrack|| "No Details Yet"}</span>
+          <span>{resortData?.kmTrack || "No Details Yet"}</span>
         </div>
 
         <div>
@@ -79,7 +111,7 @@ const ResortDetails = ({ resortData }) => {
             />
             Green Tracks{" "}
           </span>
-          <span>{resortData?.greenTrack|| "No Details Yet"}</span>
+          <span>{resortData?.greenTrack || "No Details Yet"}</span>
         </div>
         <div>
           <span>
@@ -114,7 +146,7 @@ const ResortDetails = ({ resortData }) => {
           {" "}
           <span>
             <span>
-              <CircleIcon fontSize="large" sx={{ marginRight: "10px" }} />
+              <CircleIcon fontSize="large" />
               <CircleIcon fontSize="large" sx={{ marginRight: "10px" }} />
             </span>
             Black2X Tracks{" "}
@@ -138,7 +170,7 @@ const ResortDetails = ({ resortData }) => {
         </div>
       </div>
       <div className=" border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">
-        <h1>Rating</h1>
+        <h1>Ratings</h1>
       </div>
       <div className="rates keys flex flex-col [&>div]:flex [&>div]:flex-col [&>div]:items-center [&>div]:py-5  [&>*:nth-child(even)]:bg-gray-200 ">
         <div>
@@ -164,7 +196,7 @@ const ResortDetails = ({ resortData }) => {
               fontSize="large"
               sx={{ marginRight: "10px" }}
             />
-            KidFriendly Friendly
+            Kid Friendly
           </span>
           <span>
             {" "}
@@ -237,34 +269,9 @@ const ResortDetails = ({ resortData }) => {
             />
           </span>
         </div>
-        <div>
-          <span>
-            {" "}
-            <AttachMoneyIcon fontSize="large" />
-            Price
-          </span>
-          <span>
-            <Rating
-              name="read-only"
-              value={resortData?.price}
-              max={3}
-              readOnly
-            />{" "}
-          </span>
-        </div>
-        <div>
-          <span>
-            <ConfirmationNumberIcon
-              fontSize="large"
-              sx={{ marginRight: "10px" }}
-            />
-            Ski Pass
-          </span>
-          <span> {resortData?.skiPass || "No Details Yet"}$</span>
-        </div>
       </div>
       <div className="border-y p-5 flex justify-center bg-gray-800 text-white rounded text-xl font-semibold">
-        <h1>More ...</h1>
+        <h1>More Information</h1>
       </div>
       <div className="keys flex flex-col [&>div]:flex [&>div]:flex-col [&>div]:items-center [&>div]:py-5  [&>*:nth-child(even)]:bg-gray-200 ">
         <div>

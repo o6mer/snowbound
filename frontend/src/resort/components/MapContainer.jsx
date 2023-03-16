@@ -10,6 +10,7 @@ import Rating from "@mui/material/Rating";
 import Loader from "../../general/Loader";
 import LanguageIcon from "@mui/icons-material/Language";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import hotel from "../../assets/occupied-bed-svgrepo-com.svg";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 const libraries = ["places"];
@@ -91,7 +92,7 @@ const Map = ({ location, places, name, selected, setSelected }) => {
 
   return (
     <GoogleMap
-      zoom={10}
+      zoom={15}
       center={selected?.geometry.location || calcCenter}
       mapContainerStyle={{
         display: "flex",
@@ -100,7 +101,7 @@ const Map = ({ location, places, name, selected, setSelected }) => {
       // onLoad={(map) => setMap(map)}
     >
       <MarkerF
-        label={name}
+        label={{ text: name }}
         position={calcCenter}
         icon={{
           path: google.maps.SymbolPath.CIRCLE,
@@ -120,7 +121,7 @@ const Map = ({ location, places, name, selected, setSelected }) => {
       )}
       {places?.map((place) => (
         <MarkerF
-          label={place.name}
+          label={{ text: place.name, fontWeight: "600", fontSize: "14px" }}
           onClick={() => handleMarkerClicked(place)}
           position={place.geometry.location}
           key={place?.place_id + place?.name}
@@ -164,10 +165,12 @@ const PlaceInfowWindow = ({ placeData }) => {
         </div>
       ) : (
         <div className="flex flex-col">
-          <p>{placeDetails?.name}</p>
+          <p className="text-lg font-bold">{placeDetails?.name}</p>
+          <p>{placeDetails?.formatted_address}</p>
           <a
             className="text-blue-700 hover:underline  w-fit"
             href={placeDetails?.website}
+            target="_blank"
           >
             <LanguageIcon fontSize="small" /> Visit Website
           </a>
@@ -178,6 +181,11 @@ const PlaceInfowWindow = ({ placeData }) => {
             <LocalPhoneIcon fontSize="small" />
             {placeDetails?.international_phone_number}
           </a>
+          <div className="flex flex-col gap-1">
+            {placeDetails?.opening_hours?.weekday_text?.map((day) => (
+              <p>{day}</p>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -50,7 +50,22 @@ html {
   /* line-break: ; */
   /* -webkit-line-clamp:; */
 }
-.nummbers,.imagespreview{
+.nummbers,
+.imagespreview {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
 
+.more-resorts .card-more-resorts {
+  padding: 0 12px;
+}
+
+.marker {
+  color: blue;
+}
+
+.resort-details div {
+  display: flex;
+  align-items: center;
+  @apply gap-2;
+  @apply pl-3;
 }

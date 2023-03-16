@@ -6,7 +6,7 @@ import StepsResorts from "./components/StepsResorts";
 
 const AboutPage = () => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Navbar />
       <AboutHero />
       <StepsResorts />

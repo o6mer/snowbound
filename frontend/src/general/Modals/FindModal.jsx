@@ -4,7 +4,8 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./Modal.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import FormModal from "./FormModal";
 export default function FindModal(props) {
   if (!props.open) {
     return null;
@@ -20,46 +21,46 @@ export default function FindModal(props) {
     "Europe",
     "North America",
     "South America",
-    "Australia"
+    "Australia",
   ];
-  
+
   useEffect(() => {
     setContinent(props.continent);
     setCountry(props.country);
-   getAllResorts(props.country);
-   getAllCountries(props.continent)
-},[])
-   const getAllCountries = async (continent) => {
-     await axios
-       .post("http://localhost:8000/api/resort/countrybycont", { continent })
-       .then((res) => {
-         console.log(res.data);
-         setAllContries(res.data);
-       })
-       .catch((err) => {
-         console.log(err);
-       });
-   };
-    const getAllResorts = async (country) => {
-          await axios
-            .get(`http://localhost:8000/api/resort/find/country/${country}`)
-            .then((res) => {
-              console.log(res.data);
-              setAllResorts(res.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        };
+    getAllResorts(props.country);
+    getAllCountries(props.continent);
+  }, []);
+  const getAllCountries = async (continent) => {
+    await axios
+      .post("http://localhost:8000/api/resort/countrybycont", { continent })
+      .then((res) => {
+        console.log(res.data);
+        setAllContries(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getAllResorts = async (country) => {
+    await axios
+      .get(`http://localhost:8000/api/resort/find/country/${country}`)
+      .then((res) => {
+        console.log(res.data);
+        setAllResorts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleSelect1 = (event, value) => {
     if (value) {
-      setContinent(value);      
+      setContinent(value);
       getAllCountries(value);
     }
   };
   const handleSelect2 = (event, value) => {
     if (value) {
-      setCountry(value);    
+      setCountry(value);
       getAllResorts(value);
     }
   };
@@ -217,21 +218,16 @@ export default function FindModal(props) {
                       </button>
                     </div>
 
-                    <p className="mt-3 flex justify-center items-center text-center divide-x divide-gray-300 ">
-                      <a
+                    <div className="mt-3 flex justify-center items-center text-center  ">
+                      <Link
+                        onClick={() => (document.body.style.overflow = "auto")}
+                        to={"/about"}
                         className="pr-3.5 inline-flex items-center gap-x-2 text-sm text-gray-600 decoration-2 hover:underline hover:text-blue-600"
-                        href="#"
-                        target="_blank"
                       >
                         Need help?
-                      </a>
-                      <a
-                        className="pl-3 inline-flex items-center gap-x-2 text-sm text-gray-600 decoration-2 hover:underline hover:text-blue-600 "
-                        href="#"
-                      >
-                        Contact us!
-                      </a>
-                    </p>
+                      </Link>
+                      <FormModal />
+                    </div>
                   </form>
                 </div>
               </div>
