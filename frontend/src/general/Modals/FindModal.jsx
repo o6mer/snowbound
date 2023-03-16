@@ -20,6 +20,7 @@ export default function FindModal(props) {
     "Europe",
     "North America",
     "South America",
+    "Australia"
   ];
   
   useEffect(() => {

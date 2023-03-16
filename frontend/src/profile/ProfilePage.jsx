@@ -77,7 +77,7 @@ const ProfilePage = () => {
             {info == "card"&&!showEdit ? (
               <section className="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-400 text-sm">Roll</span>
+                  <span className="text-gray-400 text-sm"></span>
                   <span className="text-emerald-400">
                     <button
                       onClick={() => setShowEdit(true)}
