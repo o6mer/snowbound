@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState();
   const [userReviews, setUserReviews] = useState([]);
   const [userFavorites, setUserFavorites] = useState();
-  const { userName,info } = useParams();
+  const { userName, info } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,9 +35,7 @@ const ProfilePage = () => {
         const { data } = await axios.post(
           `http://localhost:8000/api/user/profile/${userName}`
         );
-        console.log([
-          ...data?.favorites.map((resort) =>resort.resort_id),
-        ]);
+        console.log([...data?.favorites.map((resort) => resort.resort_id)]);
 
         setUserFavorites([
           ...data?.favorites.map((resort) => resort.resort_id),
@@ -60,21 +58,21 @@ const ProfilePage = () => {
       <Navbar />
       <Divider />
       {userData ? (
-        <>
+        <div className="flex">
           <UserTools
             userData={userData}
             setShowFavorites={setShowFavorites}
             setShowReviews={setShowReviews}
           />
-          <section className="relative  bg-center  bg-cover  bg-no-repeat  flex font-medium items-center justify-center h-screen bg-black ">
-            <div className="absolute top-0 left-0 w-full h-full">
+          <section className="overflow-x-hidden relative w-full bg-center  bg-cover  bg-no-repeat p-8 flex font-medium items-center justify-center h-screen bg-black ">
+            <div className="absolute top-0 left-0 w-full h-full p">
               <img
-                className="  h-full w-full object-cover opacity-50"
+                className="h-full w-full object-cover opacity-50"
                 src={Hero}
                 alt=""
               />
             </div>
-         
+
             {info == "card" && !showEdit ? (
               <section className="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
                 <div className="flex items-center justify-between">
@@ -136,10 +134,7 @@ const ProfilePage = () => {
             ) : showEdit ? (
               <EditUser userData={userData} setShowEdit={setShowEdit} />
             ) : info == "reviews" ? (
-              <div className="z-10">
-                <a className="inline-flex items-center cursor-pointer bg-opacity-70 justify-center  h-8 px-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto  bg-yellow-500 hover:bg-yellow-700 focus:shadow-outline focus:outline-none">
-                  Your reviews
-                </a>{" "}
+              <div className="z-10 flex justify-center items-center w-full">
                 <UserReviews userReviews={userReviews} />
               </div>
             ) : info == "favorites" ? (
@@ -148,9 +143,7 @@ const ProfilePage = () => {
               <></>
             )}
           </section>
-
-          <Footer />
-        </>
+        </div>
       ) : (
         <div className="h-screen">
           <Loader />

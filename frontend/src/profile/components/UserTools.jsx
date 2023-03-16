@@ -1,16 +1,16 @@
 import * as React from "react";
 import Logout from "@mui/icons-material/Logout";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import Search from "@mui/icons-material/Search";
-import ReviewsIcon from '@mui/icons-material/Reviews';
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import { useNavigate } from "react-router-dom";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
-const UserTools = ({ userData, setShowFavorites,setShowReviews }) => {
-const navigate=useNavigate()
+const UserTools = ({ userData, setShowFavorites, setShowReviews }) => {
+  const navigate = useNavigate();
   return (
     <div>
-      <div className="absolute z-20 flex-col items-center w-40 h-full overflow-hidden text-black bg-white ">
+      <div className="z-20 flex-col items-center w-40 h-full overflow-hidden text-black bg-white ">
         <a className="flex items-center w-full px-3 mt-3" href="#">
           <AcUnitIcon />
           <span className="ml-2 text-sm font-bold">
