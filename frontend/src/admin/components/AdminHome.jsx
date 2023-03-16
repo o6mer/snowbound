@@ -20,7 +20,7 @@ const AdminHome = () => {
     const getAllResorts = async () => {
       setIsLoading(true);
       await axios
-        .get("http://localhost:8000/api/resort/get")
+        .get(`${import.meta.env.VITE_BACKEND_URL}/resort/get`)
         .then((res) => {
           console.log(res.data);
           setAllResorts(res.data);
@@ -53,7 +53,7 @@ const AdminHome = () => {
   const deleteResort = (resortName) => {
     console.log(resortName);
     axios
-      .delete(`http://localhost:8000/api/resort/delete/${resortName}`)
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/resort/delete/${resortName}`)
       .then((res) => {
         alert("deleted");
         console.log(res);

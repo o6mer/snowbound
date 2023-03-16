@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
       try {
         const { data } = await axios.post(
-          `http://localhost:8000/api/user/profile/${userName}`
+          `${import.meta.env.VITE_BACKEND_URL}/user/profile/${userName}`
         );
         console.log([...data?.favorites.map((resort) => resort.resort_id)]);
 

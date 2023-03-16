@@ -24,7 +24,7 @@ export const useAuth = () => {
     if (!email || !password) return;
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/login",
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
         {
           email,
           password,
@@ -47,7 +47,7 @@ export const useAuth = () => {
       if (!email || !password || !username || !firstname || !lastname) return;
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/register",
+        `${import.meta.env.VITE_BACKEND_URL}/user/register`,
         {
           email,
           password,
@@ -67,9 +67,10 @@ export const useAuth = () => {
       console.log(err.message);
     }
   };
-const updateUser=async({user,valuesToUpdate:{email, password, username, firstname, lastname}})=>{
-
-}
+  const updateUser = async ({
+    user,
+    valuesToUpdate: { email, password, username, firstname, lastname },
+  }) => {};
   const auth = async () => {
     try {
       const savedToken = cookies.get("token");
@@ -77,7 +78,7 @@ const updateUser=async({user,valuesToUpdate:{email, password, username, firstnam
       if (!savedToken) return;
 
       const { data } = await axios.post(
-        `http://localhost:8000/api/user/auth`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/auth`,
         {},
         {
           headers: {
