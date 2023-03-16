@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import UserReviews from "./components/UserReviews";
+import UserReviews from "./components/userReviews";
 import "./Profile.css";
 import UserTools from "./components/UserTools";
 import axios from "axios";
