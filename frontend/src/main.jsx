@@ -16,8 +16,6 @@ import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
 import AboutPage from "./about/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
-import EditUser from "./profile/components/EditUser";
-import UserReviews from "./profile/components/UserReviews";
 import Snowfall from "react-snowfall";
 
 const router = createBrowserRouter([
