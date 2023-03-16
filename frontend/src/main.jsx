@@ -67,7 +67,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/fuck",
+    path: "/egg",
     element: <EasterEgg />,
     errorElement: <ErrorPage />,
   },
@@ -81,7 +81,6 @@ const router = createBrowserRouter([
     element: <ProfilePage />,
     errorElement: <ErrorPage />,
   },
-
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
