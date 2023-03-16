@@ -109,13 +109,11 @@ const ComparePage = () => {
     const queryNames = resortCompare.split("&");
     console.log(queryNames);
     axios
-      .post(`http://localhost:8000/api/resort/compare`, { names: queryNames })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/compare`, {
+        names: queryNames,
+      })
       .then((res) => {
         const resorts = res.data.resort;
-        // resorts.map((res) => {
-        //   delete res.image;
-        //   return res;
-        // });
         setCompareData([...resorts]);
         dummyResorts = [...resorts];
         console.log(res.data);

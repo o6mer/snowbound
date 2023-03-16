@@ -19,7 +19,9 @@ const FormModal = () => {
     e.preventDefault();
     console.log(email, "22", subject, "33", message);
     axios
-      .post("http://localhost:8000/api/user/thankyou", { emailme: email })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/user/thankyou`, {
+        emailme: email,
+      })
       .then((res) => {
         console.log(res.data);
       })

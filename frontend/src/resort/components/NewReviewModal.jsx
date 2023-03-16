@@ -96,7 +96,7 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/review/create",
+        `${import.meta.env.VITE_BACKEND_URL}/review/create`,
         formatedReview
       );
 

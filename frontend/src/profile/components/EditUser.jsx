@@ -50,7 +50,7 @@ const EditUser = ({ userData, setShowEdit }) => {
       if (!email || !password || !username || !firstname || !lastname) return;
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/update",
+        `${import.meta.env.VITE_BACKEND_URL}/user/update`,
         {
           userId: userData?.id,
           valuesToUpdate: {
@@ -120,7 +120,7 @@ const EditUser = ({ userData, setShowEdit }) => {
             <ArrowBackIcon />
             Back
           </button>
-        </span>{" "}        
+        </span>{" "}
         <span class="text-gray-400 text-sm"></span>
       </div>
       <div class="mr-8 mt-6 w-fit mx-auto">

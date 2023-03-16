@@ -16,18 +16,6 @@ const AdminResorts = ({ adminResorts, deleteResort }) => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteResortName, setDeleteResortName] = useState("");
-  // const deleteResort = (resortName) => {
-  //   axios
-  //     .delete(`http://localhost:8000/api/resort/${resortName}`)
-  //     .then((res) => {
-  //       alert("deleted");
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   // alert(resortName);
-  // };
   return (
     <>
       <div className=" flex flex-col gap-5 py-10">

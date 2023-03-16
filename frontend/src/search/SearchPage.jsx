@@ -26,7 +26,7 @@ const SearchPage = () => {
       if (resort === "none") {
         try {
           const { data } = await axios.get(
-            `http://localhost:8000/api/resort/find/country/${country}`
+            `${import.meta.env.VITE_BACKEND_URL}/resort/find/country/${country}`
           );
           if (!data) return;
           console.log(data);
@@ -39,7 +39,7 @@ const SearchPage = () => {
       } else {
         try {
           const { data } = await axios.get(
-            `http://localhost:8000/api/resort/find/${resort}`
+            `${import.meta.env.VITE_BACKEND_URL}/resort/find/${resort}`
           );
           if (!data) return;
 

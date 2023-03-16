@@ -32,7 +32,9 @@ export default function FindModal(props) {
   }, []);
   const getAllCountries = async (continent) => {
     await axios
-      .post("http://localhost:8000/api/resort/countrybycont", { continent })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/countrybycont`, {
+        continent,
+      })
       .then((res) => {
         console.log(res.data);
         setAllContries(res.data);
@@ -43,7 +45,7 @@ export default function FindModal(props) {
   };
   const getAllResorts = async (country) => {
     await axios
-      .get(`http://localhost:8000/api/resort/find/country/${country}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/resort/find/country/${country}`)
       .then((res) => {
         console.log(res.data);
         setAllResorts(res.data);

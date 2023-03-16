@@ -59,7 +59,7 @@ const EditAddResort = () => {
       setIsLoading(false);
     } else {
       axios
-        .get(`http://localhost:8000/api/resort/find/${resortName}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/resort/find/${resortName}`)
         .then((res) => {
           if (res.data) {
             setResort(res.data.resort);
@@ -95,7 +95,7 @@ const EditAddResort = () => {
     console.log(resortValues);
 
     axios
-      .post("http://localhost:8000/api/resort/update", {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/update`, {
         name: resortName,
         values: resortValues,
         images: imagesLinks,
@@ -120,7 +120,7 @@ const EditAddResort = () => {
       img: imagesLinks,
     });
     axios
-      .post("http://localhost:8000/api/resort/create", {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/resort/create`, {
         resort: resort,
         img: imagesLinks,
       })
@@ -295,7 +295,6 @@ const EditAddResort = () => {
                     label={"Beginner Friendly"}
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     type="number"
-
                     value={resort?.beginnerFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "beginnerFriendly")}
                   />
@@ -304,7 +303,6 @@ const EditAddResort = () => {
                     label={"intermediate Friendly"}
                     type="number"
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
-
                     value={resort?.intermediateFriendly || ""}
                     onChange={(e) =>
                       handleChangeInput(e, "intermediateFriendly")
@@ -314,7 +312,6 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"pro Friendly"}
                     type="number"
-
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.proFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "proFriendly")}
@@ -323,7 +320,6 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"kid Friendly"}
                     type="number"
-
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.kidFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "kidFriendly")}
@@ -332,7 +328,6 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"family Friendly"}
                     type="number"
-
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.familyFriendly || ""}
                     onChange={(e) => handleChangeInput(e, "familyFriendly")}
@@ -341,7 +336,6 @@ const EditAddResort = () => {
                     className="capitalize"
                     label={"lift Waiting Time"}
                     type="number"
-
                     InputProps={{ inputProps: { min: 1, max: 3 } }}
                     value={resort?.liftWaitingTime || ""}
                     onChange={(e) => handleChangeInput(e, "liftWaitingTime")}
@@ -445,10 +439,7 @@ const EditAddResort = () => {
                   >
                     Add Image
                   </Button>
-                  <div
-
-                    className="imagespreview  gap-4 max-h-[85vh] overflow-y-auto grid"
-                  >
+                  <div className="imagespreview  gap-4 max-h-[85vh] overflow-y-auto grid">
                     {resortImages?.map((image, index) => {
                       return (
                         <div
