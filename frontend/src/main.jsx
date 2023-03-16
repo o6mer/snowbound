@@ -14,7 +14,6 @@ import SignupPage from "./userAuth/SignupPage";
 import HomePage from "./home/HomePage";
 import EditPage from "./admin/components/EditPage";
 import ProtectedRoutes from "./general/ProtectedRoutes";
-import EasterEgg from "./general/easteregg";
 import AboutPage from "./about/AboutPage";
 import ProfilePage from "./profile/ProfilePage";
 import EditUser from "./profile/components/EditUser";
@@ -64,11 +63,6 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/egg",
-    element: <EasterEgg />,
     errorElement: <ErrorPage />,
   },
   {
