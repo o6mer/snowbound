@@ -74,7 +74,8 @@ const ProfilePage = () => {
                 alt=""
               />
             </div>
-            {info == "card"&&!showEdit ? (
+         
+            {info == "card" && !showEdit ? (
               <section className="w-64 mx-auto bg-white bg-opacity-80 rounded-2xl px-8 py-6 shadow-2xl z-10">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm"></span>
@@ -132,7 +133,6 @@ const ProfilePage = () => {
                   My reviews
                 </a>
               </section>
-              
             ) : showEdit ? (
               <EditUser userData={userData} setShowEdit={setShowEdit} />
             ) : info == "reviews" ? (

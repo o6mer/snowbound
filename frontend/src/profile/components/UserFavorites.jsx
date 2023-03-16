@@ -53,18 +53,27 @@ const UserFavorites = ({ favorites }) => {
      ) : resorts?.length ? (
        <>
          <Divider />
-         <section className="">
-           <p className="text-center text-2xl font-bold">
-             Your favorites resorts
+         <section className="w-[70%] ">
+           <p className="absolute top-20 right-[40%] text-center text-4xl font-bold z-[5]">
+             favorite resorts
            </p>
-    <div className="mt-20 ml-32  grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-1 content-center justify-items-center p-[5vw]">
+           <Carousel
+             swipeable={true}
+             draggable={true}
+             responsive={responsive}
+             keyBoardControl={true}
+             containerClass="carousel-container"
+             removeArrowOnDeviceType={["tablet", "mobile"]}
+             dotListClass="custom-dot-list-style"
+             itemClass="carousel-item-padding-40-px"
+           >
              {resorts?.map((resort) => (
                <RecomendedResorts
                  resortData={resort}
                  key={`${resort?.name}from${resort?.country}`}
                />
              ))}
-            </div>
+           </Carousel>
          </section>
        </>
      ) : null}
