@@ -13,7 +13,7 @@ const ResortMoreToDo = ({ resortData }) => {
 
   return (
     <section className="flex flex-col w-full justify-center items-center">
-      <div className="flex gap-2 p-4">
+      <div className="flex gap-2 p-4  h-full flex-wrap">
         <Button
           size="large"
           variant={selected === "hotels" ? "contained" : "outlined"}

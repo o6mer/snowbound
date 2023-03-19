@@ -42,7 +42,7 @@ const ResortReviews = ({ resortData }) => {
           Add Review
         </Button>
       </div>
-      <ul className="flex flex-col gap-2 overflow-y-scroll  h-[50vh] ">
+      <ul className="flex flex-col gap-2 overflow-y-auto  max-h-[50vh] ">
         {reviews?.length ? (
           reviews
             ?.sort((a, b) => {

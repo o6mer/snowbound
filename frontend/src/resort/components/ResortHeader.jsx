@@ -12,7 +12,7 @@ const ResortHeader = ({ resortData }) => {
         />
         <FavoriteButton resortData={resortData} />
       </div>
-      <div className="flex flex-col lg:flex-row items-center gap-8">
+      <div className="flex flex-col lg:flex-row items-center gap-8 h-full">
         <div className="flex flex-col md:max-w-[60%] gap-2   md:gap-10 justify-between">
           <header className="text-4xl font-bold py-4 ">
             {resortData?.name}
@@ -20,12 +20,10 @@ const ResortHeader = ({ resortData }) => {
           <p className="text-xl">{resortData?.description}</p>
         </div>
 
-        <div className="flex flex-col items-center-center">
+        <div className="flex flex-col items-center-center grow h-full">
           <p className="text-center text-lg font-bold">Live Cam</p>
           <iframe
-            className="rounded-lg"
-            width="560"
-            height="315"
+            className="rounded-lg flex flex-grow h-full"
             src={
               resortData?.livecam + "?rel=1;autoplay=1" ||
               "//www.youtube.com/embed/EmwRY2ZVwwk?rel=0;autoplay=1"
