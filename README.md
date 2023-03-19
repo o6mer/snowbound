@@ -29,7 +29,7 @@ You can access the live version through the link above.
 if you want to run it localy:
 1. clone the repo.
 2. run `cd ./frontend` and then `npm i && npm run dev`
-3. in a different teminal run `cd ./backend` and then `npm i && npm run dev
+3. in a different teminal run `cd ./backend` and then `npm i && npm run dev`
 4. open `http://localhost:5173` in the browser.
 
 ## Contributing
