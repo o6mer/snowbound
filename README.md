@@ -21,7 +21,6 @@ SnowBound is a website aimed at providing users with information on ski resorts 
 * Node.js
 * PostgreSQL
 * Express
-* Mongoose
 * MUI
 * tailwind
 
