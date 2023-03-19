@@ -11,6 +11,7 @@ https://snowbound.netlify.app
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Contributing](#contributing)
 
 ## General Info
 SnowBound is a website aimed at providing users with information on ski resorts around the world. Whether you're a beginner or an experienced skier, Ski Info has all the information you need to plan your next ski trip. From lift ticket prices to trail maps, Ski Info has it all.
