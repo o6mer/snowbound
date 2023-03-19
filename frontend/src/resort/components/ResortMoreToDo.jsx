@@ -12,46 +12,50 @@ const ResortMoreToDo = ({ resortData }) => {
   };
 
   return (
-    <section className="flex flex-col justify-center items-center w-screen">
-      <div className="flex gap-2 p-4  h-full overflow-x-auto w-full">
-        <Button
-          size="large"
-          variant={selected === "hotels" ? "contained" : "outlined"}
+    <section className="flex flex-col justify-center items-center w-full">
+      <div className="flex gap-2 p-4 overflow-x-scroll w-full">
+        <button
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+            selected === "hotels" && "bg-blue-500 text-white"
+          }`}
           onClick={(e) => {
             handleSelection("hotels");
           }}
         >
           Hotels
-        </Button>
-        <Button
-          size="large"
-          variant={selected === "restaurants" ? "contained" : "outlined"}
+        </button>
+        <button
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+            selected === "restaurants" && "bg-blue-500 text-white"
+          }`}
           onClick={(e) => {
             handleSelection("restaurants");
           }}
         >
           Restaurants
-        </Button>
-        <Button
-          size="large"
-          variant={selected === "ski-equipment" ? "contained" : "outlined"}
+        </button>
+        <button
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+            selected === "ski-equipment" && "bg-blue-500 text-white"
+          }`}
           category="equipment"
           onClick={(e) => {
             handleSelection("ski-equipment");
           }}
         >
           Equipment
-        </Button>
-        <Button
-          size="large"
-          variant={selected === "nightlife" ? "contained" : "outlined"}
+        </button>
+        <buttton
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+            selected === "nightlife" && "bg-blue-500 text-white"
+          }`}
           category="nightlife"
           onClick={(e) => {
             handleSelection("nightlife");
           }}
         >
           Nightlife
-        </Button>
+        </buttton>
       </div>
       <MapContainer
         location={resortData?.location}
