@@ -67,7 +67,6 @@ const ResortMoreResorts = ({ resortData }) => {
               responsive={responsive}
               keyBoardControl={true}
               containerClass="carousel-container"
-              removeArrowOnDeviceType={["tablet", "mobile"]}
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >

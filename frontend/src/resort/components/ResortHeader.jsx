@@ -23,11 +23,8 @@ const ResortHeader = ({ resortData }) => {
         <div className="flex flex-col items-center-center grow h-full">
           <p className="text-center text-lg font-bold">Live Cam</p>
           <iframe
-            className="rounded-lg flex flex-grow h-full"
-            src={
-              resortData?.livecam + "?rel=1;autoplay=1" ||
-              "//www.youtube.com/embed/EmwRY2ZVwwk?rel=0;autoplay=1"
-            }
+            className="rounded-lg flex flex-grow h-[40vh]"
+            src={resortData?.livecam}
           ></iframe>
         </div>
       </div>
