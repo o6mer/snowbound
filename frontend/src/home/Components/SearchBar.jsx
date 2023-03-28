@@ -16,7 +16,6 @@ export default function SearchBar({ handleSearch, isToast }) {
       await axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/resort/get`)
         .then((res) => {
-          console.log(res.data);
           setAllResorts(res.data);
         })
         .catch((err) => {
@@ -32,7 +31,6 @@ export default function SearchBar({ handleSearch, isToast }) {
   };
   const showResort = (e) => {
     e.preventDefault();
-    console.log(resortName);
 
     if (allResorts.find((resort) => resort.name === resortName)) {
       navigate(`/resort/${resortName}`);
@@ -73,11 +71,7 @@ export default function SearchBar({ handleSearch, isToast }) {
           }}
           renderInput={(params) =>
             !toast ? (
-              <TextField
-                {...params}
-                onChange={(e) => console.log(params)}
-                label="Search for a resort..."
-              />
+              <TextField {...params} label="Search for a resort..." />
             ) : (
               <TextField
                 onClick={closeToast}

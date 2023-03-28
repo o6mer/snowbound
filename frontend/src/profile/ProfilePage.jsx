@@ -35,15 +35,12 @@ const ProfilePage = () => {
         const { data } = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/api/user/profile/${userName}`
         );
-        console.log([...data?.favorites.map((resort) => resort.resort_id)]);
 
         setUserFavorites([
           ...data?.favorites.map((resort) => resort.resort_id),
         ]);
         setUserData(data.info[0]);
         setUserReviews(data.reviews);
-        console.log(userData);
-        console.log(userReviews);
         setIsLoading(false);
       } catch (err) {
         console.log(err.meessage);

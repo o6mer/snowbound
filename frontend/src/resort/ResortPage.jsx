@@ -36,8 +36,6 @@ const ResortPage = () => {
 
         if (!data.resort || !data.images) return setIsLoading(false);
 
-        console.log(data);
-
         setResortData({
           ...data.resort,
           images: data.images.map((picture) => picture.link),

@@ -21,7 +21,6 @@ const HomePage = () => {
   useAuth();
 
   useEffect(() => {
-    console.log(country);
     const fetchData = async () => {
       setIsLoading(true);
       try {
@@ -31,7 +30,6 @@ const HomePage = () => {
 
         if (!data) return;
         setIsLoading(false);
-        console.log(data);
         setResortData(data);
       } catch (err) {
         console.log(err.meessage);
@@ -39,7 +37,6 @@ const HomePage = () => {
       }
     };
     fetchData();
-    console.log(resortData);
   }, []);
   return (
     <main className="h-full">

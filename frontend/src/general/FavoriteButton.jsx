@@ -35,7 +35,6 @@ const FavoriteButton = ({ resortData }) => {
         username: user?.username,
       })
       .then((res) => {
-        console.log(res.data);
         setUser((prev) => {
           return { ...prev, favorite: [...prev.favorite, res.data[0]] };
         });
@@ -45,12 +44,10 @@ const FavoriteButton = ({ resortData }) => {
       });
   };
   const filterFavorites = (id) => {
-    console.log(id);
     const temp = { ...user };
     temp.favorite = temp.favorite.filter((fav) => {
       return fav.id !== id;
     });
-    console.log(temp);
     // setIsFavorite(false);
     setUser({ ...temp });
   };
@@ -70,7 +67,6 @@ const FavoriteButton = ({ resortData }) => {
         id: fav?.id,
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.message == "DELETED") {
           filterFavorites(fav.id);
         }

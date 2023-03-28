@@ -35,9 +35,7 @@ const UserFavorites = ({ favorites }) => {
           `${import.meta.env.VITE_BACKEND_URL}/api/resort/compare`,
           { names: favorites }
         );
-        console.log(data.resort);
         setResorts(data.resort);
-        console.log(resorts);
       } catch (err) {
         console.log(err);
       }

@@ -21,7 +21,6 @@ export default function CompareModal(props) {
       await axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/resort/get`)
         .then((res) => {
-          console.log(res.data);
           setAllResorts(res.data);
         })
         .catch((err) => {

@@ -273,7 +273,6 @@ function Navbar() {
               </div>
             </div>
             <div className="-mr-2 flex xl:hidden">
-              {console.log(isOpen)}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"

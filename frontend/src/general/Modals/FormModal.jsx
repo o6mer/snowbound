@@ -17,14 +17,11 @@ const FormModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, "22", subject, "33", message);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/user/thankyou`, {
         emailme: email,
       })
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
       });

@@ -69,8 +69,6 @@ const EditAddResort = () => {
             setResortImages(res.data.images);
             setIsNewResort(false);
             setIsLoading(false);
-
-            console.log(res.data);
           }
         })
         .catch((err) => {
@@ -93,8 +91,6 @@ const EditAddResort = () => {
     const imagesLinks = resortImages.map((image) => {
       return image.link;
     });
-    console.log(imagesLinks);
-    console.log(resortValues);
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/resort/update`, {
@@ -128,7 +124,6 @@ const EditAddResort = () => {
       })
       .then((res) => {
         navigate("/admin");
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -434,7 +429,6 @@ const EditAddResort = () => {
                     onClick={() => {
                       const temp = resortImages;
                       temp.push({ link: "" });
-                      console.log(temp);
                       setResortImages([...temp]);
                       // setResort({ ...temp });
                     }}

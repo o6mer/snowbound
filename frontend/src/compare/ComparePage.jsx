@@ -105,9 +105,7 @@ const ComparePage = () => {
   const { resortCompare } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    // console.log(query);
     const queryNames = resortCompare.split("&");
-    console.log(queryNames);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/resort/compare`, {
         names: queryNames,
@@ -116,7 +114,6 @@ const ComparePage = () => {
         const resorts = res.data.resort;
         setCompareData([...resorts]);
         dummyResorts = [...resorts];
-        console.log(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -142,7 +139,6 @@ const ComparePage = () => {
         return obj;
       });
 
-      console.log(temp);
       setCompareData([...temp]);
       return temp;
     }

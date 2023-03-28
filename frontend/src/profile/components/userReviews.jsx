@@ -3,7 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 import Review from "../../general/Review";
 const userReviews = ({ userReviews }) => {
-  console.log(userReviews);
   return (
     <div className="flex flex-col justify-center items-center gap-2 overflow-y-scroll  rounded-md bg-white bg-opacity-90">
       {userReviews?.length ? (

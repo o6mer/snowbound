@@ -36,7 +36,6 @@ export default function FindModal(props) {
         continent,
       })
       .then((res) => {
-        console.log(res.data);
         setAllContries(res.data);
       })
       .catch((err) => {
@@ -49,7 +48,6 @@ export default function FindModal(props) {
         `${import.meta.env.VITE_BACKEND_URL}/api/resort/find/country/${country}`
       )
       .then((res) => {
-        console.log(res.data);
         setAllResorts(res.data);
       })
       .catch((err) => {

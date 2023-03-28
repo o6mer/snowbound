@@ -32,8 +32,6 @@ const MapContainer = ({ location, name, category }) => {
 
         if (!data) return;
 
-        console.log({ data });
-
         setSelected();
         setPlaces(data.results);
         setIsloading(false);
@@ -149,7 +147,6 @@ const PlaceInfowWindow = ({ placeData }) => {
 
         if (!data) return;
 
-        console.log({ data });
         setPlaceDetails(data.result);
       } catch (err) {
         console.log(err);

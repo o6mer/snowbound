@@ -76,8 +76,6 @@ const NewReviewModal = ({ open, setOpen, resortData }) => {
         star: !reviewData.star,
       });
 
-    console.log("submittttt");
-
     try {
       setIsSubmitLoading(true);
 

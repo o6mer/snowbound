@@ -36,7 +36,6 @@ const CompareFilter = ({
       target: { value },
     } = event;
     const tempArr = typeof value === "string" ? value.split(",") : value;
-    console.log(tempArr);
     setFilterKeys(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
@@ -47,7 +46,6 @@ const CompareFilter = ({
     const temp = filterKeys.filter((key, index) => {
       return index !== i;
     });
-    console.log(temp);
     setFilterKeys([...temp]);
     getFilterResorts(temp);
   };

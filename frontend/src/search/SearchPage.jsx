@@ -20,7 +20,6 @@ const SearchPage = () => {
   useAuth();
 
   useEffect(() => {
-    console.log(country);
     const fetchData = async () => {
       setIsLoading(true);
       if (resort === "none") {
@@ -31,7 +30,6 @@ const SearchPage = () => {
             }/api/resort/find/country/${country}`
           );
           if (!data) return;
-          console.log(data);
           setResortData(data);
           setIsLoading(false);
         } catch (err) {
@@ -45,7 +43,6 @@ const SearchPage = () => {
           );
           if (!data) return;
 
-          console.log(data);
           setResortData([data.resort]);
           setIsLoading(false);
         } catch (err) {

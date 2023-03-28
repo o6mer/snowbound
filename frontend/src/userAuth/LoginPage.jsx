@@ -37,8 +37,6 @@ const LoginPage = (props) => {
     if (!user.email || !user.password)
       return setIsError({ email: !user.email, password: !user.password });
 
-    console.log("subbbbbbbbmited");
-
     try {
       setIsLoading(true);
       await login({ ...user });

@@ -22,7 +22,6 @@ const AdminHome = () => {
       await axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/resort/get`)
         .then((res) => {
-          console.log(res.data);
           setAllResorts(res.data);
           //   console.log(allResorts, " hiii");
           setAdminResorts(res.data);
@@ -36,13 +35,10 @@ const AdminHome = () => {
   }, []);
 
   const handleSearch = (e, resortName) => {
-    console.log(resortName);
-    console.log(allResorts);
     const filterResort = allResorts.filter((res) => {
       return res.name === resortName;
     });
     if (resortName) {
-      console.log(filterResort);
       setAdminResorts(filterResort);
       setIsToast(false);
     } else {
@@ -51,7 +47,6 @@ const AdminHome = () => {
     }
   };
   const deleteResort = (resortName) => {
-    console.log(resortName);
     axios
       .delete(
         `${

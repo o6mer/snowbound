@@ -12,10 +12,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 const SvgPaths = () => {
   const ref = useRef();
   //   const lineLength = document.getElementsByClassName("theLine");
-  //   console.log(document.getEle;
-  console.log(ref);
   const length = ref.current?.getTotalLength();
-  console.log(length);
 
   gsap.registerPlugin(
     ScrollTrigger,
@@ -26,7 +23,6 @@ const SvgPaths = () => {
   let prevdirection = 0;
   function callback() {
     let scale = gsap.quickTo(".skiIcon", "scaleX");
-    console.log(this.parent.scrollTrigger.direction);
     if (this.parent.scrollTrigger.direction !== prevdirection) {
       scale(this.parent.scrollTrigger.direction === 1 ? 0.1 : -0.1);
       prevdirection = this.parent.scrollTrigger.direction;
@@ -91,7 +87,6 @@ const SvgPaths = () => {
           callbackScope: this,
           onUpdate: callback,
           //    (thiss) => {
-          //     console.log(thiss);
           // if (prevDirection !== self.direction) {
           //   // only run this when we're changing direction
           //   rotateTo(self.direction === 1 ? 0 : -180);
