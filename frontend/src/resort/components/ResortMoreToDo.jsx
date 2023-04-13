@@ -13,9 +13,9 @@ const ResortMoreToDo = ({ resortData }) => {
 
   return (
     <section className="flex flex-col justify-center items-center w-full">
-      <div className="flex gap-2 p-4 overflow-x-scroll w-full">
+      <div className="flex gap-2 p-4 overflow-x-scroll w-full justify-center">
         <button
-          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all hover:bg-blue-500 hover:text-white ${
             selected === "hotels" && "bg-blue-500 text-white"
           }`}
           onClick={(e) => {
@@ -25,7 +25,7 @@ const ResortMoreToDo = ({ resortData }) => {
           Hotels
         </button>
         <button
-          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all  hover:bg-blue-500 hover:text-white  ${
             selected === "restaurants" && "bg-blue-500 text-white"
           }`}
           onClick={(e) => {
@@ -35,7 +35,7 @@ const ResortMoreToDo = ({ resortData }) => {
           Restaurants
         </button>
         <button
-          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all hover:bg-blue-500 hover:text-white   ${
             selected === "ski-equipment" && "bg-blue-500 text-white"
           }`}
           category="equipment"
@@ -46,7 +46,7 @@ const ResortMoreToDo = ({ resortData }) => {
           Equipment
         </button>
         <buttton
-          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all ${
+          className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all hover:bg-blue-500 hover:text-white  ${
             selected === "nightlife" && "bg-blue-500 text-white"
           }`}
           category="nightlife"
