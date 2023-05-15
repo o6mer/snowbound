@@ -28,6 +28,17 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import CountryNav from "./CountryNav";
+
+const COUNTRIES = [
+  "France",
+  "Switzerland",
+  "Italy",
+  "Bulgaria",
+  "Austria",
+  "Canada",
+];
+
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -104,74 +115,16 @@ function Navbar() {
                       Admin
                     </NavLink>
                   )}
-                  <a
-                    href="/search/Europe/France/none"
-                    className={`${
-                      country === "France" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    France
-                  </a>
-                  <a
-                    href="/search/Europe/Switzerland/none"
-                    className={`${
-                      country === "Switzerland" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    Switzerland
-                  </a>
-
-                  <a
-                    href="/search/Europe/Italy/none"
-                    className={`${
-                      country === "Italy" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    Italy
-                  </a>
-                  <a
-                    href="/search/Europe/Bulgaria/none"
-                    className={`${
-                      country === "Bulgaria" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    Bulgaria
-                  </a>
-                  <a
-                    href="/search/Europe/Austria/none"
-                    className={`${
-                      country === "Austria" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    Austria
-                  </a>
-                  <a
-                    href="/search/North America/Canada/none"
-                    className={`${
-                      country === "Canada" && "bg-sky-400 text-white"
-                    } transition-all hover:bg-sky-400 
-                    hover:text-white
-                    focus:bg-sky-400 
-                   focus:outline-none focus:ring focus:ring-white-300  px-3 py-2 rounded-md font-medium`}
-                  >
-                    Canada
-                  </a>
-
+                  {COUNTRIES.map((countryName) => (
+                    <CountryNav
+                      selectedCountry={country}
+                      name={countryName}
+                      continent={
+                        (countryName === "Canada" && "North America") ||
+                        undefined
+                      }
+                    />
+                  ))}
                   {!user ? (
                     <div className="flex items-center absolute right-0">
                       <div className="flex items-center justify-center mr-2">
