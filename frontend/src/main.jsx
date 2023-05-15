@@ -16,7 +16,7 @@ import EditPage from "./components/admin/components/EditPage";
 import ProtectedRoutes from "./components/general/ProtectedRoutes";
 import AboutPage from "./components/about/AboutPage";
 import ProfilePage from "./components/profile/ProfilePage";
-import Snowfall from "react-snowfall";
+import SnowFall from "./components/general/SnowFall";
 
 const router = createBrowserRouter([
   {
@@ -77,14 +77,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserContextProvider>
-      <Snowfall
-        style={{
-          zIndex: "999",
-          position: "fixed",
-          width: "100%",
-          height: "100%",
-        }}
-      />
+      <SnowFall />
       <RouterProvider router={router} />
     </UserContextProvider>
   </React.StrictMode>

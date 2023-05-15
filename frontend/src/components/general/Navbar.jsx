@@ -24,6 +24,10 @@ import Flag from "@mui/icons-material/Flag";
 import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
 import Close from "@mui/icons-material/Close";
 import { TableRow } from "@mui/material";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 import CountryNav from "./CountryNav";
 
 const COUNTRIES = [
@@ -42,7 +46,8 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const { user, openLogin, setOpenLogin } = useContext(UserContext);
+  const { user, openLogin, setOpenLogin, isSnowing, setIsSnowing } =
+    useContext(UserContext);
   const { logout } = useAuth();
 
   const { country } = useParams();
@@ -121,9 +126,17 @@ function Navbar() {
                     />
                   ))}
                   {!user ? (
-                    <div>
+                    <div className="flex items-center absolute right-0">
+                      <div className="flex items-center justify-center mr-2">
+                        <Switch
+                          checked={isSnowing}
+                          onChange={(e) => setIsSnowing(e.target.checked)}
+                        />
+                        <AcUnitIcon />
+                      </div>
+
                       <NavLink
-                        className="absolute top-2 right-2 transition-all hover:bg-sky-400 
+                        className=" transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                         onClick={handleOpenModal}
@@ -278,13 +291,22 @@ function Navbar() {
                       data-te-sidenav-position="absolute"
                       data-te-sidenav-accordion="true"
                     >
-                      <a
-                        class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
-                        data-te-ripple-init
-                        data-te-ripple-color="primary"
-                      >
-                        <ArrowForwardIosIcon style={{ marginRight: "163px" }} />
-                      </a>
+                      <div className="flex justify-between items-center px-4">
+                        <a
+                          class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
+                          data-te-ripple-init
+                          data-te-ripple-color="primary"
+                        >
+                          <ArrowForwardIosIcon />
+                        </a>
+                        <div className="flex items-center justify-center ">
+                          <Switch
+                            checked={isSnowing}
+                            onChange={(e) => setIsSnowing(e.target.checked)}
+                          />
+                          <AcUnitIcon />
+                        </div>
+                      </div>
                       <ul
                         class="relative m-0 list-none px-[0.2rem] pb-12"
                         data-te-sidenav-menu-ref

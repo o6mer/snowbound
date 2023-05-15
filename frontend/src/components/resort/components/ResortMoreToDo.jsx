@@ -13,7 +13,7 @@ const ResortMoreToDo = ({ resortData }) => {
 
   return (
     <section className="flex flex-col justify-center items-center w-full">
-      <div className="flex gap-2 p-4 overflow-x-scroll w-full justify-center">
+      <div className="flex gap-2 p-4 overflow-x-auto w-full justify-start md:justify-center">
         <button
           className={`border-blue-500 border-2 px-2 py-1 rounded font-bold transition-all hover:bg-blue-500 hover:text-white ${
             selected === "hotels" && "bg-blue-500 text-white"
