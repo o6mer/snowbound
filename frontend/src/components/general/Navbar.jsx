@@ -126,7 +126,7 @@ function Navbar() {
                     />
                   ))}
                   {!user ? (
-                    <div className="flex items-center absolute right-0">
+                    <div className="flex items-center absolute right-8">
                       <div className="flex items-center justify-center mr-2">
                         <Switch
                           checked={isSnowing}
@@ -145,7 +145,14 @@ function Navbar() {
                       </NavLink>
                     </div>
                   ) : (
-                    <div className="absolute top-3 left-[93vw]">
+                    <div className="absolute right-8 flex items-center">
+                      <div className="flex items-center justify-center mr-2">
+                        <Switch
+                          checked={isSnowing}
+                          onChange={(e) => setIsSnowing(e.target.checked)}
+                        />
+                        <AcUnitIcon />
+                      </div>
                       <Tooltip title="Account settings">
                         <IconButton
                           onClick={handleClick}
