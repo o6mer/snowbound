@@ -7,9 +7,14 @@ const SnowFall = () => {
 
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem("isSnowing"));
+    console.log(savedState);
+    setIsSnowing(
+      savedState === null || savedState === undefined ? true : savedState
+    );
+  }, []);
 
-    if (savedState !== undefined || savedState !== null)
-      return setIsSnowing(savedState);
+  useEffect(() => {
+    if (isSnowing === undefined || isSnowing === null) return;
 
     localStorage.setItem("isSnowing", isSnowing);
   }, [isSnowing]);

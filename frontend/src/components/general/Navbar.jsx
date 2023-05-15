@@ -176,7 +176,6 @@ function Navbar() {
                     <div className="flex items-center absolute right-0">
                       <div className="flex items-center justify-center mr-2">
                         <Switch
-                          defaultChecked
                           checked={isSnowing}
                           onChange={(e) => setIsSnowing(e.target.checked)}
                         />

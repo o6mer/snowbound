@@ -6,7 +6,7 @@ const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
   const [openLogin, setOpenLogin] = useState(false);
-  const [isSnowing, setIsSnowing] = useState(true);
+  const [isSnowing, setIsSnowing] = useState();
 
   return (
     <UserContext.Provider
