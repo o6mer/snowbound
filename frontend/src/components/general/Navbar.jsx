@@ -24,7 +24,10 @@ import Flag from "@mui/icons-material/Flag";
 import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
 import Close from "@mui/icons-material/Close";
 import { TableRow } from "@mui/material";
-
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +35,8 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const { user, openLogin, setOpenLogin } = useContext(UserContext);
+  const { user, openLogin, setOpenLogin, isSnowing, setIsSnowing } =
+    useContext(UserContext);
   const { logout } = useAuth();
 
   const { country } = useParams();
@@ -169,9 +173,18 @@ function Navbar() {
                   </a>
 
                   {!user ? (
-                    <div>
+                    <div className="flex items-center absolute right-0">
+                      <div className="flex items-center justify-center mr-2">
+                        <Switch
+                          defaultChecked
+                          checked={isSnowing}
+                          onChange={(e) => setIsSnowing(e.target.checked)}
+                        />
+                        <AcUnitIcon />
+                      </div>
+
                       <NavLink
-                        className="absolute top-2 right-2 transition-all hover:bg-sky-400 
+                        className=" transition-all hover:bg-sky-400 
                     hover:text-white
                     focus:bg-sky-400   focus:outline-none focus:ring focus:ring-white-300 px-3 py-2 rounded-md  font-medium"
                         onClick={handleOpenModal}
