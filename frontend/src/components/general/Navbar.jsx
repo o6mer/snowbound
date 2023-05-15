@@ -338,13 +338,22 @@ function Navbar() {
                       data-te-sidenav-position="absolute"
                       data-te-sidenav-accordion="true"
                     >
-                      <a
-                        class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
-                        data-te-ripple-init
-                        data-te-ripple-color="primary"
-                      >
-                        <ArrowForwardIosIcon style={{ marginRight: "163px" }} />
-                      </a>
+                      <div className="flex justify-between items-center px-4">
+                        <a
+                          class="mb-3 flex items-center justify-center border-b-2 border-solid border-gray-100 py-6 outline-none"
+                          data-te-ripple-init
+                          data-te-ripple-color="primary"
+                        >
+                          <ArrowForwardIosIcon />
+                        </a>
+                        <div className="flex items-center justify-center ">
+                          <Switch
+                            checked={isSnowing}
+                            onChange={(e) => setIsSnowing(e.target.checked)}
+                          />
+                          <AcUnitIcon />
+                        </div>
+                      </div>
                       <ul
                         class="relative m-0 list-none px-[0.2rem] pb-12"
                         data-te-sidenav-menu-ref
